@@ -9,8 +9,52 @@ export class Department extends Component {
             modalTitle: "",
             DepartmentName: "",
             DepartmentId: 0,
+
+            DepartmentIdFilter: "",
+            DepartmentNameFilter: "",
+            departmentsWithoutFilter: []
         }
 
+    }
+    FilterFn() {
+        var DepartmentIdFilter = this.state.DepartmentIdFilter;
+        var DepartmentNameFilter = this.state.DepartmentNameFilter;
+        var filteredData = this.state.departmentsWithoutFilter.filter(
+            function (element) {
+                return element.DepartmentId.toString().toLowerCase().includes(
+                    DepartmentIdFilter.toString().trim().toLowerCase()
+                ) && element.DepartmentName.toString().toLowerCase().includes(
+                    DepartmentNameFilter.toString().trim().toLowerCase()
+                )
+            }
+        );
+        this.setState({
+            departments: filteredData
+        }
+        );
+    }
+    sortResults(property, ascending) {
+        var sortedData = this.state.departmentsWithoutFilter.sort(
+            function (a, b) {
+                if (ascending) {
+                    return (a[property] > b[property]) ? 1 : (a[property] < b[property]) ? -1 : 0;
+                } else {
+                    return (b[property] > a[property]) ? 1 : (b[property] < a[property]) ? -1 : 0;
+                }
+            });
+        this.setState({ departments: sortedData });
+
+    }
+
+    changeDepartmentIdFilter = (event) => {
+        // eslint-disable-next-line 
+        this.state.DepartmentIdFilter = event.target.value;
+        this.FilterFn();
+    }
+    changeDepartmentNameFilter = (event) => {
+        // eslint-disable-next-line 
+        this.state.DepartmentNameFilter = event.target.value;
+        this.FilterFn();
     }
 
     refreshList() {
@@ -19,7 +63,8 @@ export class Department extends Component {
             .then(data => {
                 this.setState(
                     {
-                        departments: data
+                        departments: data,
+                        departmentsWithoutFilter: data
                     }
                 );
             });
@@ -126,7 +171,7 @@ export class Department extends Component {
                     onClick={() => this.addClick()}>
                     Add Department
                 </button>
-                
+
 
 
 
@@ -134,10 +179,61 @@ export class Department extends Component {
                     <thead>
                         <tr>
                             <th>
+                                <div className="d-flex flex-row">
+                                    <input className="form-control m-2"
+                                        onChange={this.changeDepartmentIdFilter}
+                                        placeholder="Search by the department ID" />
+                                    <button type="button" className="btn btn-light"
+                                        onClick={() => this.sortResults('DepartmentId', true)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0" />
+                                        </svg>
+                                    </button>
+
+                                    {/*Spacer div*/}
+                                    <div style={{ width: '10px', display: 'inline-block' }}></div>
+                                    {/*Spacer div*/}
+
+
+                                    <button type="button" className="btn btn-light"
+                                        onClick={() => this.sortResults('DepartmentId', false)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0" />
+                                        </svg>
+                                    </button>
+
+                                </div>
                                 Department Id
                             </th>
                             <th>
+                                <div className="d-flex flex-row">
+
+                                    <input className="form-control m-2"
+                                        style={{ marginLeft: '100px' }}
+                                        onChange={this.changeDepartmentNameFilter}
+                                        placeholder="Filter by the department name" />
+                                    <button type="button" className="btn btn-light"
+                                        onClick={() => this.sortResults('DepartmentName', true)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0" />
+                                        </svg>
+                                    </button>
+
+                                    
+                                    {/*Spacer div*/}
+                                    <div style={{ width: '10px', display: 'inline-block' }}></div>
+                                    {/*Spacer div*/}
+
+
+                                    <button type="button" className="btn btn-light"
+                                        onClick={() => this.sortResults('DepartmentName', false)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
+                                            <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0" />
+                                        </svg>
+                                    </button>
+                                </div>
                                 Department Name
+
                             </th>
                             <th>
                                 Options
