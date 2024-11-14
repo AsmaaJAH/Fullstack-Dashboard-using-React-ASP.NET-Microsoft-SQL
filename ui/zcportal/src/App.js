@@ -1,7 +1,7 @@
 import './App.css';
 import { Home } from './components/Home';
-import { Employee } from './components/Employee';
-import { Department } from './components/Department';
+import { OnboardingInternet } from './components/OnboardingInternet';
+import { FAQ } from './components/FAQ';
 import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
 
 function App() {
@@ -11,19 +11,23 @@ function App() {
         <div className="row">
           {/* Left Column Menu */}
           <div className="col-md-3 col-lg-2 sidebar">
-            <h3 className="text-center mt-3">Zewail City Portal</h3>
+          <div className="text-center mt-3">
+              <img src="/logo.jpg" alt="Zewail City Logo" className="sidebar-logo" />
+            </div>
+            <h3 className="text-center ">ZC Portal</h3>
             <nav className="nav flex-column">
               <NavLink className="nav-link" to="/home">Home</NavLink>
-              <NavLink className="nav-link" to="/department">Department</NavLink>
-              <NavLink className="nav-link" to="/employee">Employee</NavLink>
+              <NavLink className="nav-link" to="/OnboardingInternet">Onboarding internet</NavLink>
+              <NavLink className="nav-link" to="/faq">FAQ</NavLink>
             </nav>
           </div>
           {/* Main Content Area */}
           <div className="col-md-9 col-lg-10 content">
             <Routes>
               <Route path='/home' element={<Home />} />
-              <Route path='/department' element={<Department />} />
-              <Route path='/employee' element={<Employee />} />
+              <Route path='/OnboardingInternet' element={<OnboardingInternet />} />
+              <Route path='/faq' element={<FAQ />} />
+
             </Routes>
           </div>
         </div>

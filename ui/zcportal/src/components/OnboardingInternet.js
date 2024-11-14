@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { variables } from './Variables.js';
 
-export class Department extends Component {
+export class OnboardingInternet extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +46,7 @@ export class Department extends Component {
 
     }
 
-    changeDepartmentIdFilter = (event) => {
+    changeQuestionIdFilter = (event) => {
         // eslint-disable-next-line 
         this.state.DepartmentIdFilter = event.target.value;
         this.FilterFn();
@@ -81,7 +81,7 @@ export class Department extends Component {
     }
     addClick() {
         this.setState({
-            modalTitle: "Add Department",
+            modalTitle: "Add",
             DepartmentId: 0,
             DepartmentName: ""
         });
@@ -166,10 +166,15 @@ export class Department extends Component {
         return (
             <div>
 
-                <button type="button" className="btn btn-primary  m-3 float-end"
+                <button type="button" className="btn  m-3 float-end"
+                    style={{ backgroundColor: '#00b3d1', paddingRight: '15px', color: 'white', fontWeight: 'bold' }}
                     data-bs-toggle="modal" data-bs-target="#exampleModal"
                     onClick={() => this.addClick()}>
-                    Add Department
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" fill="white" stroke="white"
+                        strokeWidth="0.5" className="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg>
+                    add
                 </button>
 
 
@@ -181,8 +186,8 @@ export class Department extends Component {
                             <th>
                                 <div className="d-flex flex-row">
                                     <input className="form-control m-2"
-                                        onChange={this.changeDepartmentIdFilter}
-                                        placeholder="Search by the department ID" />
+                                        onChange={this.changeQuestionIdFilter}
+                                        placeholder="Search by the question Number" />
                                     <button type="button" className="btn btn-light"
                                         onClick={() => this.sortResults('DepartmentId', true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
@@ -203,7 +208,7 @@ export class Department extends Component {
                                     </button>
 
                                 </div>
-                                Department Id
+                                Question Serial Number
                             </th>
                             <th>
                                 <div className="d-flex flex-row">
@@ -211,7 +216,7 @@ export class Department extends Component {
                                     <input className="form-control m-2"
                                         style={{ marginLeft: '100px' }}
                                         onChange={this.changeDepartmentNameFilter}
-                                        placeholder="Filter by the department name" />
+                                        placeholder="Search by the question title" />
                                     <button type="button" className="btn btn-light"
                                         onClick={() => this.sortResults('DepartmentName', true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
@@ -219,7 +224,7 @@ export class Department extends Component {
                                         </svg>
                                     </button>
 
-                                    
+
                                     {/*Spacer div*/}
                                     <div style={{ width: '10px', display: 'inline-block' }}></div>
                                     {/*Spacer div*/}
@@ -232,7 +237,7 @@ export class Department extends Component {
                                         </svg>
                                     </button>
                                 </div>
-                                Department Name
+                                Question Title
 
                             </th>
                             <th>

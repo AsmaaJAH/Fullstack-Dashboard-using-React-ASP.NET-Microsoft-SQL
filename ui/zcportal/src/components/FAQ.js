@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { variables } from './Variables.js';
 
-export class Employee extends Component {
+export class FAQ extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -64,7 +64,7 @@ export class Employee extends Component {
 
     addClick() {
         this.setState({
-            modalTitle: "Add Employee",
+            modalTitle: "Add",
             EmployeeId: 0,
             EmployeeName: "",
             Department: "",
@@ -187,10 +187,15 @@ export class Employee extends Component {
         return (
             <div>
 
-                <button type="button" className="btn btn-primary  m-3 float-end"
+                <button type="button" className="btn  m-3 float-end"
+                    style={{ backgroundColor: '#00b3d1', paddingRight: '15px', color: 'white', fontWeight: 'bold' }}
                     data-bs-toggle="modal" data-bs-target="#exampleModal"
                     onClick={() => this.addClick()}>
-                    Add Employee
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" fill="white" stroke="white"
+                        strokeWidth="0.5" className="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg>
+                    add
                 </button>
 
 
@@ -296,8 +301,8 @@ export class Employee extends Component {
 
                                     </div>
                                     <div className="p-2 w-50 bd-highlight">
-                                        <img width="250px" height="250px" src={PhotoPath + PhotoFileName} alt='personal pic'/>
-                                        <input className="m-2 ms-5" type="file" onChange={this.imageUpload}/>
+                                        <img width="250px" height="250px" src={PhotoPath + PhotoFileName} alt='personal pic' />
+                                        <input className="m-2 ms-5" type="file" onChange={this.imageUpload} />
                                     </div>
 
                                 </div>
