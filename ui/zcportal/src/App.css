@@ -1,4 +1,5 @@
-.App {
+
+ .App {
   text-align: center;
 }
 
@@ -35,4 +36,33 @@
   to {
     transform: rotate(360deg);
   }
+} 
+
+
+
+
+/* Left sidebar styling */
+.sidebar {
+  background-color: #00b3d1; /* Background color */
+  color: white; /* Text color */
+  min-height: 100vh;
+  padding-top: 20px;
+}
+
+.sidebar .nav-link {
+  color: white; /* Text color for links */
+  font-size: 1.1em;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #009ab5;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Content area */
+.content {
+  padding: 20px;
 }
