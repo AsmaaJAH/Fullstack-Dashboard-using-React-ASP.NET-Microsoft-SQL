@@ -64,7 +64,7 @@ export class FAQ extends Component {
 
     addClick() {
         this.setState({
-            modalTitle: "Add",
+            modalTitle: "Add FAQ",
             EmployeeId: 0,
             EmployeeName: "",
             Department: "",
@@ -205,16 +205,16 @@ export class FAQ extends Component {
                     <thead>
                         <tr>
                             <th>
-                                Employee ID
+                                No.
                             </th>
                             <th>
-                                Employee Name
+                                Question Title
                             </th>
                             <th>
-                                Department
+                                Answer
                             </th>
                             <th>
-                                Date of Joining
+                                FAQ Posting Date
                             </th>
                             <th>
                                 Options
@@ -268,16 +268,15 @@ export class FAQ extends Component {
                                     <div className="p-2 w-50 bd-highlight">
 
                                         <div className="input-group mb-3">
-                                            <span className="input-group-text">Employee Name</span>
+                                            <span className="input-group-text">Question Title</span>
                                             <input type="text" className="form-control"
                                                 value={EmployeeName}
                                                 onChange={this.changeEmployeeName} />
                                         </div>
 
 
-
                                         <div className="input-group mb-3">
-                                            <span className="input-group-text">Department</span>
+                                            <span className="input-group-text">Answer</span>
                                             <select className="form-select"
                                                 onChange={this.changeDepartment}
                                                 value={Department}>
@@ -291,7 +290,7 @@ export class FAQ extends Component {
 
 
                                         <div className="input-group mb-3">
-                                            <span className="input-group-text">Date Of Joining</span>
+                                            <span className="input-group-text">FAQ Posting Date	</span>
                                             <input type="date" className="form-control"
                                                 value={DateOfJoining}
                                                 onChange={this.changeDateOfJoining} />

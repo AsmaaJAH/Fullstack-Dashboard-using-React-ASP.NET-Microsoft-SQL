@@ -62,7 +62,8 @@
   text-align: left;
 }
 
-.sidebar .nav-link:hover {
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
   background-color: #009ab5;
   color: white;
   border-radius: 5px;

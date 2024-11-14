@@ -81,14 +81,14 @@ export class OnboardingInternet extends Component {
     }
     addClick() {
         this.setState({
-            modalTitle: "Add",
+            modalTitle: "Add Question",
             DepartmentId: 0,
             DepartmentName: ""
         });
     }
     editClick(dep) {
         this.setState({
-            modalTitle: "Edit Department",
+            modalTitle: "Edit Question",
             DepartmentId: dep.DepartmentId,
             DepartmentName: dep.DepartmentName
         });
@@ -187,7 +187,7 @@ export class OnboardingInternet extends Component {
                                 <div className="d-flex flex-row">
                                     <input className="form-control m-2"
                                         onChange={this.changeQuestionIdFilter}
-                                        placeholder="Search by the question Number" />
+                                        placeholder="Search by the question number" />
                                     <button type="button" className="btn btn-light"
                                         onClick={() => this.sortResults('DepartmentId', true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
@@ -291,7 +291,7 @@ export class OnboardingInternet extends Component {
                             </div>
                             <div className="modal-body">
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">Department Name</span>
+                                    <span className="input-group-text">Question Title</span>
                                     <input type="text" className="form-control"
                                         value={DepartmentName}
                                         onChange={this.changeDepartmentName}
