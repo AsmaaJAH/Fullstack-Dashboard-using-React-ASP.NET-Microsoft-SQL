@@ -5,13 +5,13 @@ export class FAQ extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            departments: [],
-            employees: [],
+            InternetQuestions: [],
+            FAQs: [],
             modalTitle: "",
-            EmployeeName: "",
-            EmployeeId: 0,
-            Department: "",
-            DateOfJoining: "",
+            QuestionTitle: "",
+            Id: 0,
+            Answer: "",
+            PostingDate: "",
             PhotoFileName: "anonymous.png",
             PhotoPath: variables.PHOTO_URL,
         }
@@ -19,23 +19,22 @@ export class FAQ extends Component {
     }
 
     refreshList() {
-        fetch(variables.API_URL + 'Employee')
+        fetch(variables.API_URL + 'FAQ')
             .then(response => response.json())
             .then(data => {
                 this.setState(
                     {
-                        employees: data
+                        FAQs: data
                     }
                 );
             });
 
-
-        fetch(variables.API_URL + 'Department')
+        fetch(variables.API_URL + 'OnBoardingInternet')
             .then(response => response.json())
             .then(data => {
                 this.setState(
                     {
-                        departments: data
+                        InternetQuestions: data
                     }
                 );
             });
@@ -45,55 +44,54 @@ export class FAQ extends Component {
         this.refreshList();
 
     }
-    changeEmployeeName = (event) => {
+    changeQuestionTitle = (event) => {
         this.setState({
-            EmployeeName: event.target.value
+            QuestionTitle: event.target.value
         });
     }
-    changeDepartment = (event) => {
+    changeAnswer = (event) => {
         this.setState({
-            Department: event.target.value
+            Answer: event.target.value
         });
     }
-    changeDateOfJoining = (event) => {
+    changePostingDate = (event) => {
         this.setState({
-            DateOfJoining: event.target.value
+            PostingDate: event.target.value
         });
     }
-
 
     addClick() {
         this.setState({
             modalTitle: "Add FAQ",
-            EmployeeId: 0,
-            EmployeeName: "",
-            Department: "",
-            DateOfJoining: "",
+            Id: 0,
+            QuestionTitle: "",
+            Answer: "",
+            PostingDate: "",
             PhotoFileName: "anonymous.png",
         });
     }
-    editClick(emp) {
+    editClick(question) {
         this.setState({
-            modalTitle: "Edit Employee",
-            EmployeeId: emp.EmployeeId,
-            EmployeeName: emp.EmployeeName,
-            Department: emp.Department,
-            DateOfJoining: emp.DateOfJoining,
-            PhotoFileName: emp.PhotoFileName,
+            modalTitle: "Edit FAQ",
+            Id: question.Id,
+            QuestionTitle: question.QuestionTitle,
+            Answer: question.Answer,
+            PostingDate: question.PostingDate,
+            PhotoFileName: question.PhotoFileName,
         });
     }
 
     createClick() {
-        fetch(variables.API_URL + 'Employee', {
+        fetch(variables.API_URL + 'FAQ', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                EmployeeName: this.state.EmployeeName,
-                Department: this.state.Department,
-                DateOfJoining: this.state.DateOfJoining,
+                QuestionTitle: this.state.QuestionTitle,
+                Answer: this.state.Answer,
+                PostingDate: this.state.PostingDate,
                 PhotoFileName: this.state.PhotoFileName,
             })
         })
@@ -107,17 +105,17 @@ export class FAQ extends Component {
 
     }
     updateClick() {
-        fetch(variables.API_URL + 'Employee', {
+        fetch(variables.API_URL + 'FAQ', {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                EmployeeId: this.state.EmployeeId,
-                EmployeeName: this.state.EmployeeName,
-                Department: this.state.Department,
-                DateOfJoining: this.state.DateOfJoining,
+                Id: this.state.Id,
+                QuestionTitle: this.state.QuestionTitle,
+                Answer: this.state.Answer,
+                PostingDate: this.state.PostingDate,
                 PhotoFileName: this.state.PhotoFileName,
             })
         })
@@ -131,8 +129,8 @@ export class FAQ extends Component {
     }
 
     deleteClick(id) {
-        if (window.confirm('Are you sure you wanna delete this Department?')) {
-            fetch(variables.API_URL + 'Employee/' + id, {
+        if (window.confirm('Are you sure you wanna delete this FAQ ?')) {
+            fetch(variables.API_URL + 'FAQ/' + id, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
@@ -155,7 +153,7 @@ export class FAQ extends Component {
             const formData = new FormData();
             formData.append("file", event.target.files[0], event.target.files[0].name);
 
-            fetch(variables.API_URL + 'Employee/SaveFile', {
+            fetch(variables.API_URL + 'FAQ/SaveFile', {
                 method: 'POST',
                 body: formData
             })
@@ -173,13 +171,13 @@ export class FAQ extends Component {
     }
     render() {
         const {
-            departments,
-            employees,
+            InternetQuestions: InternetQuestions,
+            FAQs: FAQs,
             modalTitle,
-            EmployeeId,
-            EmployeeName,
-            Department,
-            DateOfJoining,
+            Id: Id,
+            QuestionTitle: QuestionTitle,
+            Answer: Answer,
+            PostingDate: PostingDate,
             PhotoPath,
             PhotoFileName,
 
@@ -197,7 +195,6 @@ export class FAQ extends Component {
                     </svg>
                     add
                 </button>
-
 
 
 
@@ -222,18 +219,18 @@ export class FAQ extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.map(emp =>
+                        {FAQs.map(question =>
 
-                            <tr key={emp.EmployeeId}>
-                                <td>{emp.EmployeeId}</td>
-                                <td>{emp.EmployeeName}</td>
-                                <td>{emp.Department}</td>
-                                <td>{emp.DateOfJoining}</td>
+                            <tr key={question.Id}>
+                                <td>{question.Id}</td>
+                                <td>{question.QuestionTitle}</td>
+                                <td>{question.Answer}</td>
+                                <td>{question.PostingDate}</td>
                                 <td>
                                     <button type='button'
                                         className='btn btn-light mr-1'
                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        onClick={() => this.editClick(emp)}>
+                                        onClick={() => this.editClick(question)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                             <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -244,7 +241,7 @@ export class FAQ extends Component {
 
                                     <button type='button'
                                         className='btn btn-light mr-1'
-                                        onClick={() => this.deleteClick(emp.EmployeeId)}
+                                        onClick={() => this.deleteClick(question.Id)}
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
@@ -270,32 +267,29 @@ export class FAQ extends Component {
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Question Title</span>
                                             <input type="text" className="form-control"
-                                                value={EmployeeName}
-                                                onChange={this.changeEmployeeName} />
+                                                value={QuestionTitle}
+                                                onChange={this.changeQuestionTitle} />
                                         </div>
-
 
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Answer</span>
                                             <select className="form-select"
-                                                onChange={this.changeDepartment}
-                                                value={Department}>
-                                                {departments.map(dep =>
-                                                    <option key={dep.DepartmentId} value={dep.DepartmentName}>
-                                                        {dep.DepartmentName}
+                                                onChange={this.changeAnswer}
+                                                value={Answer}>
+                                                {InternetQuestions.map(internetQuestion =>
+                                                    <option key={internetQuestion.QuestionSerialNumber} value={internetQuestion.QuestionTitle}>
+                                                        {internetQuestion.QuestionTitle}
                                                     </option>)}
                                             </select>
                                         </div>
 
 
-
                                         <div className="input-group mb-3">
-                                            <span className="input-group-text">FAQ Posting Date	</span>
+                                            <span className="input-group-text">FAQ Posting Date </span>
                                             <input type="date" className="form-control"
-                                                value={DateOfJoining}
-                                                onChange={this.changeDateOfJoining} />
+                                                value={PostingDate}
+                                                onChange={this.changePostingDate} />
                                         </div>
-
 
 
                                     </div>
@@ -307,7 +301,7 @@ export class FAQ extends Component {
                                 </div>
                             </div>
                             {
-                                EmployeeId === 0 ?
+                                Id === 0 ?
                                     <button type='button'
                                         className='btn btn-primary float-start w-50 mb-3 ms-3'
                                         onClick={() => this.createClick()}>
@@ -316,7 +310,7 @@ export class FAQ extends Component {
                                     : null
                             }
                             {
-                                EmployeeId !== 0 ?
+                                Id !== 0 ?
                                     <button type='button'
                                         className='btn btn-primary float-start w-50 mb-3 ms-3'
                                         onClick={() => this.updateClick()}>
@@ -331,3 +325,4 @@ export class FAQ extends Component {
         )
     }
 }    
+   
