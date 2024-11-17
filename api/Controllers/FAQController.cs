@@ -36,7 +36,7 @@ namespace zcportal.Controllers
         {
             string query = @"
                             select Id, QuestionTitle,Answer,
-                            convert(varchar(10),PostingDate,120) as PostingDate, photoFileName
+                            convert(varchar(10),PostingDate,120) as PostingDate, PhotoFileName
                             from
                             dbo.FAQ
                             ";
@@ -68,8 +68,8 @@ namespace zcportal.Controllers
         {
             string query = @"
                            insert into dbo.FAQ
-                           (QuestionTitle,Answer,PostingDate,photoFileName)
-                    values (@QuestionTitle,@Answer,@PostingDate,@photoFileName)
+                           (QuestionTitle,Answer,PostingDate,PhotoFileName)
+                    values (@QuestionTitle,@Answer,@PostingDate,@PhotoFileName)
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
@@ -84,7 +84,7 @@ namespace zcportal.Controllers
                     myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
                     myCommand.Parameters.AddWithValue("@Answer", question.Answer);
                     myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
-                    myCommand.Parameters.AddWithValue("@photoFileName", question.PhotoFileName);
+                    myCommand.Parameters.AddWithValue("@PhotoFileName", question.PhotoFileName);
 
 
                     myReader = myCommand.ExecuteReader();
@@ -110,7 +110,7 @@ namespace zcportal.Controllers
                                set  QuestionTitle= @QuestionTitle,
                                 Answer=@Answer,
                                PostingDate=@PostingDate,
-                               photoFileName=@photoFileName
+                               PhotoFileName=@PhotoFileName
                                 where Id=@Id";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
@@ -126,7 +126,7 @@ namespace zcportal.Controllers
                     myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
                     myCommand.Parameters.AddWithValue("@Answer", question.Answer);
                     myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
-                    myCommand.Parameters.AddWithValue("@photoFileName", question.PhotoFileName);
+                    myCommand.Parameters.AddWithValue("@PhotoFileName", question.PhotoFileName);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);

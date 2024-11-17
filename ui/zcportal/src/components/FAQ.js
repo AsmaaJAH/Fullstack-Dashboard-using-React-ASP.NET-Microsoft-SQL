@@ -172,7 +172,7 @@ export class FAQ extends Component {
     render() {
 
         const {
-             InternetQuestions,
+            InternetQuestions,
             FAQs,
             modalTitle,
             Id,
