@@ -14,7 +14,7 @@ Id int identity(1,1),
 QuestionTitle nvarchar(500), 
 Answer nvarchar(500),
 PostingDate	 datetime,
-photoFileName nvarchar(500)
+PhotoFileName nvarchar(500)
 )
 
 insert into dbo.FAQ values ('how to do something?', 'IT', GETDATE(), 'anonymous.png')

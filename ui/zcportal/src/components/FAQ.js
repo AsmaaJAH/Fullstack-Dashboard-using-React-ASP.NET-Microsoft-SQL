@@ -12,7 +12,7 @@ export class FAQ extends Component {
             Id: 0,
             Answer: "",
             PostingDate: "",
-            PhotoFileName: "anonymous.png",
+            PhotoFileName: "anonymous.PNG",
             PhotoPath: variables.PHOTO_URL,
         }
 
@@ -67,7 +67,7 @@ export class FAQ extends Component {
             QuestionTitle: "",
             Answer: "",
             PostingDate: "",
-            PhotoFileName: "anonymous.png",
+            PhotoFileName: "anonymous.PNG",
         });
     }
     editClick(question) {
@@ -170,14 +170,15 @@ export class FAQ extends Component {
         }
     }
     render() {
+
         const {
-            InternetQuestions: InternetQuestions,
-            FAQs: FAQs,
+            InternetQuestions,
+            FAQs,
             modalTitle,
-            Id: Id,
-            QuestionTitle: QuestionTitle,
-            Answer: Answer,
-            PostingDate: PostingDate,
+            Id,
+            QuestionTitle,
+            Answer,
+            PostingDate,
             PhotoPath,
             PhotoFileName,
 
@@ -294,7 +295,7 @@ export class FAQ extends Component {
 
                                     </div>
                                     <div className="p-2 w-50 bd-highlight">
-                                        <img width="250px" height="250px" src={PhotoPath + PhotoFileName} alt='personal pic' />
+                                        <img width="250px" height="250px" src={PhotoPath + PhotoFileName} alt='your pic' />
                                         <input className="m-2 ms-5" type="file" onChange={this.imageUpload} />
                                     </div>
 
