@@ -84,7 +84,7 @@ namespace zcportal.Controllers
                     myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
                     myCommand.Parameters.AddWithValue("@Answer", question.Answer);
                     myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
-                    myCommand.Parameters.AddWithValue("@photoFileName", question.photoFileName);
+                    myCommand.Parameters.AddWithValue("@photoFileName", question.PhotoFileName);
 
 
                     myReader = myCommand.ExecuteReader();
@@ -126,7 +126,7 @@ namespace zcportal.Controllers
                     myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
                     myCommand.Parameters.AddWithValue("@Answer", question.Answer);
                     myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
-                    myCommand.Parameters.AddWithValue("@photoFileName", question.photoFileName);
+                    myCommand.Parameters.AddWithValue("@photoFileName", question.PhotoFileName);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);

@@ -179,7 +179,7 @@ export class FAQ extends Component {
             Answer: Answer,
             PostingDate: PostingDate,
             PhotoPath,
-            PhotoFileName,
+            PhotoFileName: PhotoFileName,
 
         } = this.state;
         return (
