@@ -36,7 +36,7 @@ namespace zcportal.Controllers
         {
             string query = @"
                             select Id, QuestionTitle,Answer,
-                            convert(varchar(10),DateOfJoining,120) as PostingDate, photoFileName
+                            convert(varchar(10),PostingDate,120) as PostingDate, photoFileName
                             from
                             dbo.FAQ
                             ";

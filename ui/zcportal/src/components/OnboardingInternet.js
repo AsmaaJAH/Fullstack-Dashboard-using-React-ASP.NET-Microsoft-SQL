@@ -5,31 +5,31 @@ export class OnboardingInternet extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            departments: [],
+            InternetQuestions: [],
             modalTitle: "",
-            DepartmentName: "",
-            DepartmentId: 0,
+            QuestionTitle: "",
+            QuestionSerialNumber: 0,
 
-            DepartmentIdFilter: "",
-            DepartmentNameFilter: "",
+            QuestionSerialNumberFilter: "",
+            QuestionTitleFilter: "",
             departmentsWithoutFilter: []
         }
 
     }
     FilterFn() {
-        var DepartmentIdFilter = this.state.DepartmentIdFilter;
-        var DepartmentNameFilter = this.state.DepartmentNameFilter;
+        var QuestionSerialNumberFilter = this.state.QuestionSerialNumberFilter;
+        var QuestionTitleFilter = this.state.QuestionTitleFilter;
         var filteredData = this.state.departmentsWithoutFilter.filter(
             function (element) {
-                return element.DepartmentId.toString().toLowerCase().includes(
-                    DepartmentIdFilter.toString().trim().toLowerCase()
-                ) && element.DepartmentName.toString().toLowerCase().includes(
-                    DepartmentNameFilter.toString().trim().toLowerCase()
+                return element.QuestionSerialNumber.toString().toLowerCase().includes(
+                    QuestionSerialNumberFilter.toString().trim().toLowerCase()
+                ) && element.QuestionTitle.toString().toLowerCase().includes(
+                    QuestionTitleFilter.toString().trim().toLowerCase()
                 )
             }
         );
         this.setState({
-            departments: filteredData
+            InternetQuestions: filteredData
         }
         );
     }
@@ -42,28 +42,28 @@ export class OnboardingInternet extends Component {
                     return (b[property] > a[property]) ? 1 : (b[property] < a[property]) ? -1 : 0;
                 }
             });
-        this.setState({ departments: sortedData });
+        this.setState({ InternetQuestions: sortedData });
 
     }
 
     changeQuestionIdFilter = (event) => {
         // eslint-disable-next-line 
-        this.state.DepartmentIdFilter = event.target.value;
+        this.state.QuestionSerialNumberFilter = event.target.value;
         this.FilterFn();
     }
-    changeDepartmentNameFilter = (event) => {
+    changeQuestionTitleFilter = (event) => {
         // eslint-disable-next-line 
-        this.state.DepartmentNameFilter = event.target.value;
+        this.state.QuestionTitleFilter = event.target.value;
         this.FilterFn();
     }
 
     refreshList() {
-        fetch(variables.API_URL + 'Department')
+        fetch(variables.API_URL + 'OnBoardingInternet')
             .then(response => response.json())
             .then(data => {
                 this.setState(
                     {
-                        departments: data,
+                        InternetQuestions: data,
                         departmentsWithoutFilter: data
                     }
                 );
@@ -74,35 +74,35 @@ export class OnboardingInternet extends Component {
         this.refreshList();
 
     }
-    changeDepartmentName = (e) => {
+    changeQuestionTitle = (e) => {
         this.setState({
-            DepartmentName: e.target.value
+            QuestionTitle: e.target.value
         });
     }
     addClick() {
         this.setState({
             modalTitle: "Add Question",
-            DepartmentId: 0,
-            DepartmentName: ""
+            QuestionSerialNumber: 0,
+            QuestionTitle: ""
         });
     }
-    editClick(dep) {
+    editClick(question) {
         this.setState({
             modalTitle: "Edit Question",
-            DepartmentId: dep.DepartmentId,
-            DepartmentName: dep.DepartmentName
+            QuestionSerialNumber: question.QuestionSerialNumber,
+            QuestionTitle: question.QuestionTitle
         });
     }
 
     createClick() {
-        fetch(variables.API_URL + 'Department', {
+        fetch(variables.API_URL + 'OnBoardingInternet', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                DepartmentName: this.state.DepartmentName
+                QuestionTitle: this.state.QuestionTitle
             })
         })
             .then(res => res.json())
@@ -115,15 +115,15 @@ export class OnboardingInternet extends Component {
 
     }
     updateClick() {
-        fetch(variables.API_URL + 'Department', {
+        fetch(variables.API_URL + 'OnBoardingInternet', {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                DepartmentId: this.state.DepartmentId,
-                DepartmentName: this.state.DepartmentName
+                QuestionSerialNumber: this.state.QuestionSerialNumber,
+                QuestionTitle: this.state.QuestionTitle
             })
         })
             .then(res => res.json())
@@ -137,7 +137,7 @@ export class OnboardingInternet extends Component {
 
     deleteClick(id) {
         if (window.confirm('Are you sure you wanna delete this Department?')) {
-            fetch(variables.API_URL + 'Department/' + id, {
+            fetch(variables.API_URL + 'OnBoardingInternet/' + id, {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
@@ -157,10 +157,10 @@ export class OnboardingInternet extends Component {
 
     render() {
         const {
-            departments,
+            InternetQuestions: InternetQuestions,
             modalTitle,
-            DepartmentId,
-            DepartmentName,
+            QuestionSerialNumber: QuestionSerialNumber,
+            QuestionTitle: QuestionTitle,
 
         } = this.state;
         return (
@@ -189,7 +189,7 @@ export class OnboardingInternet extends Component {
                                         onChange={this.changeQuestionIdFilter}
                                         placeholder="Search by the question number" />
                                     <button type="button" className="btn btn-light"
-                                        onClick={() => this.sortResults('DepartmentId', true)}>
+                                        onClick={() => this.sortResults('QuestionSerialNumber', true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0" />
                                         </svg>
@@ -201,7 +201,7 @@ export class OnboardingInternet extends Component {
 
 
                                     <button type="button" className="btn btn-light"
-                                        onClick={() => this.sortResults('DepartmentId', false)}>
+                                        onClick={() => this.sortResults('QuestionSerialNumber', false)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0" />
                                         </svg>
@@ -215,10 +215,10 @@ export class OnboardingInternet extends Component {
 
                                     <input className="form-control m-2"
                                         style={{ marginLeft: '100px' }}
-                                        onChange={this.changeDepartmentNameFilter}
+                                        onChange={this.changeQuestionTitleFilter}
                                         placeholder="Search by the question title" />
                                     <button type="button" className="btn btn-light"
-                                        onClick={() => this.sortResults('DepartmentName', true)}>
+                                        onClick={() => this.sortResults('QuestionTitle', true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0" />
                                         </svg>
@@ -231,7 +231,7 @@ export class OnboardingInternet extends Component {
 
 
                                     <button type="button" className="btn btn-light"
-                                        onClick={() => this.sortResults('DepartmentName', false)}>
+                                        onClick={() => this.sortResults('QuestionTitle', false)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0" />
                                         </svg>
@@ -246,20 +246,20 @@ export class OnboardingInternet extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {departments.map(dep =>
+                        {InternetQuestions.map(question =>
 
-                            <tr key={dep.DepartmentId}>
+                            <tr key={question.QuestionSerialNumber}>
                                 <td>
-                                    {dep.DepartmentId}
+                                    {question.QuestionSerialNumber}
                                 </td>
                                 <td>
-                                    {dep.DepartmentName}
+                                    {question.QuestionTitle}
                                 </td>
                                 <td>
                                     <button type='button'
                                         className='btn btn-light mr-1'
                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        onClick={() => this.editClick(dep)}>
+                                        onClick={() => this.editClick(question)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                             <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -270,7 +270,7 @@ export class OnboardingInternet extends Component {
 
                                     <button type='button'
                                         className='btn btn-light mr-1'
-                                        onClick={() => this.deleteClick(dep.DepartmentId)}
+                                        onClick={() => this.deleteClick(question.QuestionSerialNumber)}
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
@@ -293,12 +293,12 @@ export class OnboardingInternet extends Component {
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Question Title</span>
                                     <input type="text" className="form-control"
-                                        value={DepartmentName}
-                                        onChange={this.changeDepartmentName}
+                                        value={QuestionTitle}
+                                        onChange={this.changeQuestionTitle}
                                     />
                                 </div>
                                 {
-                                    DepartmentId === 0 ?
+                                    QuestionSerialNumber === 0 ?
                                         <button type='button'
                                             className='btn btn-primary float-start'
                                             onClick={() => this.createClick()}>
@@ -307,7 +307,7 @@ export class OnboardingInternet extends Component {
                                         : null
                                 }
                                 {
-                                    DepartmentId !== 0 ?
+                                    QuestionSerialNumber !== 0 ?
                                         <button type='button'
                                             className='btn btn-primary float-start'
                                             onClick={() => this.updateClick()}>
