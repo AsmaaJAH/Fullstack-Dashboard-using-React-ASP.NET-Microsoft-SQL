@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace zcportal.Models
 {
-    public class Department
+    public class InternetQuestion
     {
-        public int DepartmentId { get; set; }
+        public int QuestionSerialNumber { get; set; }
 
-        public string DepartmentName { get; set; }
+        public string QuestionTitle { get; set; }
     }
 }

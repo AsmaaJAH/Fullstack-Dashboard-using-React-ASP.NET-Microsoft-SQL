@@ -19,52 +19,26 @@ namespace zcportal.Controllers
     [ApiController]
 
 
-    public class EmployeeController : ControllerBase
+    public class FAQController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
 
-        public EmployeeController(IConfiguration configuration, IWebHostEnvironment env)
+        public FAQController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _env = env;
         }
-        //[HttpGet]
-        //public JsonResult Get
-        //    ()
-        //{
-        //    //this line converts DateOfJoining into a yyyy-mm-dd formatted string with a length of 10.
-        //    string query = @"select EmployeeId , EmployeeName, Department 
-        //                    convert(varchar(10),DateOfJoining,120) as DateOfJoining,photoFileName
-        //                    from dbo.Employee";
-        //    DataTable table = new DataTable();
-        //    string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
-        //    SqlDataReader myReader;
-
-        //    using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-
-        //    {
-        //        myCon.Open();
-        //        using (SqlCommand myCommand = new SqlCommand(query, myCon))
-        //        {
-        //            myReader = myCommand.ExecuteReader();
-        //            table.Load(myReader);
-        //            myReader.Close();
-        //            myCon.Close();
-        //        }
-        //    }
-        //    return new JsonResult(table);
-
-        //}
+     
 
         [HttpGet]
         public JsonResult Get()
         {
             string query = @"
-                            select EmployeeId, EmployeeName,Department,
-                            convert(varchar(10),DateOfJoining,120) as DateOfJoining,PhotoFileName
+                            select Id, QuestionTitle,Answer,
+                            convert(varchar(10),DateOfJoining,120) as PostingDate, photoFileName
                             from
-                            dbo.Employee
+                            dbo.FAQ
                             ";
 
             DataTable table = new DataTable();
@@ -90,12 +64,12 @@ namespace zcportal.Controllers
 
         //---------------------------------------------------------------------------------------------------
         [HttpPost]
-        public JsonResult Post(Employee emp)
+        public JsonResult Post(FAQ question)
         {
             string query = @"
-                           insert into dbo.Employee
-                           (EmployeeName,Department,DateOfJoining,PhotoFileName)
-                    values (@EmployeeName,@Department,@DateOfJoining,@PhotoFileName)
+                           insert into dbo.FAQ
+                           (QuestionTitle,Answer,PostingDate,photoFileName)
+                    values (@QuestionTitle,@Answer,@PostingDate,@photoFileName)
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
@@ -107,10 +81,10 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@EmployeeName", emp.EmployeeName);
-                    myCommand.Parameters.AddWithValue("@Department", emp.Department);
-                    myCommand.Parameters.AddWithValue("@DateOfJoining", emp.DateOfJoining);
-                    myCommand.Parameters.AddWithValue("@PhotoFileName", emp.PhotoFileName);
+                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
+                    myCommand.Parameters.AddWithValue("@Answer", question.Answer);
+                    myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
+                    myCommand.Parameters.AddWithValue("@photoFileName", question.photoFileName);
 
 
                     myReader = myCommand.ExecuteReader();
@@ -128,16 +102,16 @@ namespace zcportal.Controllers
 
 
         [HttpPut]
-        public JsonResult Put(Employee emp)
+        public JsonResult Put(FAQ question)
 
         {
             // يعني، لما يكون عندك موظف رقمه في قاعدة البيانات هو 5 مثلاً، وتحط @EmployeeId = 5، فالكود هذا راح يروح ويحدث بيانات الموظف اللي رقمه 5 فقط، وما يغير شي في باقي الموظفين.
-            string query = @"update dbo.Employee
-                               set  EmployeeName= @EmployeeName,
-                                Department=@Department,
-                               DateOfJoining=@DateOfJoining,
-                               PhotoFileName=@PhotoFileName
-                                where EmployeeId=@EmployeeId";
+            string query = @"update dbo.FAQ
+                               set  QuestionTitle= @QuestionTitle,
+                                Answer=@Answer,
+                               PostingDate=@PostingDate,
+                               photoFileName=@photoFileName
+                                where Id=@Id";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -148,11 +122,11 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@EmployeeId", emp.EmployeeId);
-                    myCommand.Parameters.AddWithValue("@EmployeeName", emp.EmployeeName);
-                    myCommand.Parameters.AddWithValue("@Department", emp.Department);
-                    myCommand.Parameters.AddWithValue("@DateOfJoining", emp.DateOfJoining);
-                    myCommand.Parameters.AddWithValue("@PhotoFileName", emp.PhotoFileName);
+                    myCommand.Parameters.AddWithValue("@Id", question.Id);
+                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
+                    myCommand.Parameters.AddWithValue("@Answer", question.Answer);
+                    myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
+                    myCommand.Parameters.AddWithValue("@photoFileName", question.photoFileName);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -169,8 +143,8 @@ namespace zcportal.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                           delete from dbo.Employee
-                            where EmployeeId=@EmployeeId
+                           delete from dbo.FAQ
+                            where Id=@Id
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
@@ -180,7 +154,7 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@EmployeeId", id);
+                    myCommand.Parameters.AddWithValue("@Id", id);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);

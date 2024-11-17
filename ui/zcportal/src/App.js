@@ -2,7 +2,7 @@ import './App.css';
 import { Home } from './components/Home';
 import { OnboardingInternet } from './components/OnboardingInternet';
 import { FAQ } from './components/FAQ';
-import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom';
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           {/* Main Content Area */}
           <div className="col-md-9 col-lg-10 content">
             <Routes>
+              <Route path="/" element={<Navigate to="/home" />} />
               <Route path='/home' element={<Home />} />
               <Route path='/OnboardingInternet' element={<OnboardingInternet />} />
               <Route path='/faq' element={<FAQ />} />

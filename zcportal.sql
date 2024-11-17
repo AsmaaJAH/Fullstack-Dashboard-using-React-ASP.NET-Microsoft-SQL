@@ -1,23 +1,26 @@
-create table dbo.Department(
-DepartmentId int identity(1,1),
-DepartmentName nvarchar(500), 
+create table dbo.InternetQuestion(
+QuestionSerialNumber int identity(1,1),
+QuestionTitle nvarchar(500), 
 )
 
-insert into dbo.Department values ('IT')
-insert into dbo.Department values ('Support')
+insert into dbo.InternetQuestion values ('How to do connect to the internet??')
+insert into dbo.InternetQuestion values ('How to do onboarding?')
 
-select * from dbo.Department
+select * from dbo.InternetQuestion
 
 
-create table dbo.Employee(
-EmployeeId int identity(1,1),
-EmployeeName nvarchar(500), 
-Department nvarchar(500),
-DateOfJoining datetime,
+create table dbo.FAQ(
+Id int identity(1,1),
+QuestionTitle nvarchar(500), 
+Answer nvarchar(500),
+PostingDate	 datetime,
 photoFileName nvarchar(500)
 )
 
-insert into dbo.Employee values ('Bob', 'IT', GETDATE(), 'anonymous.png')
+insert into dbo.FAQ values ('how to do something?', 'IT', GETDATE(), 'anonymous.png')
+insert into dbo.FAQ values ('how to register a course?', 'IT', GETDATE(), 'anonymous.png')
 
 
-select * from dbo.Employee
+
+select * from dbo.FAQ
+

@@ -16,17 +16,17 @@ namespace zcportal.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController : ControllerBase //Controller
+    public class OnBoardingInternetController : ControllerBase //Controller
     {
         private readonly IConfiguration _configuration;
-        public DepartmentController(IConfiguration configuration)
+        public OnBoardingInternetController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select DepartmentId , DepartmentName from dbo.Department";
+            string query = @"select QuestionSerialNumber , QuestionTitle from dbo.InternetQuestion";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -51,9 +51,9 @@ namespace zcportal.Controllers
 
         //---------------------------------------------------------------------------------------------------
         [HttpPost]
-        public JsonResult Post(Department dep)
+        public JsonResult Post(InternetQuestion question)
         {
-            string query = @"insert into dbo.Department values (@DepartmentName)";
+            string query = @"insert into dbo.InternetQuestion values (@QuestionTitle)";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -64,7 +64,7 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@DepartmentName", dep.DepartmentName);
+                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -81,11 +81,11 @@ namespace zcportal.Controllers
 
 
         [HttpPut]
-        public JsonResult Put(Department dep)
+        public JsonResult Put(InternetQuestion question)
         {
-            string query = @"update dbo.Department 
-                               set  DepartmentName= @DepartmentName
-                                where DepartmentId=@DepartmentId";
+            string query = @"update dbo.InternetQuestion 
+                               set  QuestionTitle= @QuestionTitle
+                                where QuestionSerialNumber=@QuestionSerialNumber";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -96,9 +96,9 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@DepartmentId", dep.DepartmentId);
+                    myCommand.Parameters.AddWithValue("@QuestionSerialNumber", question.QuestionSerialNumber);
 
-                    myCommand.Parameters.AddWithValue("@DepartmentName", dep.DepartmentName);
+                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -114,8 +114,8 @@ namespace zcportal.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                           delete from dbo.Department
-                            where DepartmentId=@DepartmentId
+                           delete from dbo.InternetQuestion
+                            where QuestionSerialNumber=@QuestionSerialNumber
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
@@ -125,7 +125,7 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@DepartmentId", id);
+                    myCommand.Parameters.AddWithValue("@QuestionSerialNumber", id);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
