@@ -1,17 +1,21 @@
 create table dbo.InternetQuestion(
 QuestionSerialNumber int identity(1,1),
 QuestionTitle nvarchar(500), 
+DeviceType nvarchar(500)
+CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone'))
 )
-
+/*
 ALTER TABLE dbo.InternetQuestion
-ADD DeviceType nvarchar(500);
+ADD DeviceType nvarchar(500)
+CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone'));
+*/
 
 insert into dbo.InternetQuestion values ('How to do connect to the internet??')
 
 INSERT INTO dbo.InternetQuestion (QuestionTitle, DeviceType )
 VALUES ('How to do connect to Wifi??', 'windows');
 
-SET IDENTITY_INSERT dbo.InternetQuestion OFF;
+SET IDENTITY_INSERT dbo.InternetQuestion ON;
 
 INSERT INTO dbo.InternetQuestion (QuestionSerialNumber,QuestionTitle ,DeviceType )
 VALUES (1, 'How to connect to the internet?' , 'mac');

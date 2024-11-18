@@ -26,7 +26,7 @@ namespace zcportal.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select QuestionSerialNumber , QuestionTitle from dbo.InternetQuestion";
+            string query = @"select QuestionSerialNumber, DeviceType , QuestionTitle from dbo.InternetQuestion";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -53,7 +53,8 @@ namespace zcportal.Controllers
         [HttpPost]
         public JsonResult Post(InternetQuestion question)
         {
-            string query = @"insert into dbo.InternetQuestion values (@QuestionTitle)";
+            string query = @"insert into dbo.InternetQuestion (QuestionTitle,DeviceType)
+                    values (@QuestionTitle,@DeviceType)";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -65,6 +66,7 @@ namespace zcportal.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myCommand.Parameters.AddWithValue("@QuestionTitle", question.Instructions);
+                    myCommand.Parameters.AddWithValue("@DeviceType", question.DeviceType);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -85,7 +87,8 @@ namespace zcportal.Controllers
         {
             string query = @"update dbo.InternetQuestion 
                                set  QuestionTitle= @QuestionTitle
-                                where QuestionSerialNumber=@QuestionSerialNumber";
+                                    DeviceType = @DeviceType
+                              where QuestionSerialNumber=@QuestionSerialNumber";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -99,6 +102,8 @@ namespace zcportal.Controllers
                     myCommand.Parameters.AddWithValue("@QuestionSerialNumber", question.QuestionSerialNumber);
 
                     myCommand.Parameters.AddWithValue("@QuestionTitle", question.Instructions);
+                    myCommand.Parameters.AddWithValue("@DeviceType", question.DeviceType);
+
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -135,9 +140,5 @@ namespace zcportal.Controllers
             }
             return new JsonResult("Deleted Successfully");
         }
-
-
-    
-    
     }
 }
