@@ -64,7 +64,7 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
+                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.Instructions);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -98,7 +98,7 @@ namespace zcportal.Controllers
                 {
                     myCommand.Parameters.AddWithValue("@QuestionSerialNumber", question.QuestionSerialNumber);
 
-                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
+                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.Instructions);
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();

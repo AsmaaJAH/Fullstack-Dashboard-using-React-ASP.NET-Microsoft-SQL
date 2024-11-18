@@ -9,6 +9,8 @@ namespace zcportal.Models
     {
         public int QuestionSerialNumber { get; set; }
 
-        public string QuestionTitle { get; set; }
+        public string DeviceType { get; set; }
+
+        public string Instructions { get; set; }
     }
 }
