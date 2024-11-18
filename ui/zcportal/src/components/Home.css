@@ -1,0 +1,19 @@
+.banner {
+    background-color: #009ab5;
+    color: white;
+    padding: 20px;
+  }
+  
+  .service-card {
+    transition: transform 0.3s;
+  }
+  
+  .service-card:hover {
+    transform: scale(1.05);
+  }
+  
+
+ /*------------------------ create a circular gray shadow around the next and the previous buttons  --------------------------*/
+
+
+ /*------------------------create a horizontal avatar gray shadow around the indicator  --------------------------*/

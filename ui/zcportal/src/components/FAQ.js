@@ -304,6 +304,12 @@ export class FAQ extends Component {
                             {
                                 Id === 0 ?
                                     <button type='button'
+                                        style={{
+                                            backgroundColor: variables.PRIMARY_COLOR,
+                                            borderColor: variables.PRIMARY_COLOR,
+                                            color: 'white',
+                                            fontWeight: 'bold',
+                                        }}
                                         className='btn btn-primary float-start w-50 mb-3 ms-3'
                                         onClick={() => this.createClick()}>
                                         Create
@@ -313,6 +319,12 @@ export class FAQ extends Component {
                             {
                                 Id !== 0 ?
                                     <button type='button'
+                                        style={{
+                                            backgroundColor: variables.PRIMARY_COLOR,
+                                            borderColor: variables.PRIMARY_COLOR,
+                                            color: 'white',
+                                            fontWeight: 'bold',
+                                        }}
                                         className='btn btn-primary float-start w-50 mb-3 ms-3'
                                         onClick={() => this.updateClick()}>
                                         Update
@@ -325,5 +337,4 @@ export class FAQ extends Component {
             </div>
         )
     }
-}    
-   
+}

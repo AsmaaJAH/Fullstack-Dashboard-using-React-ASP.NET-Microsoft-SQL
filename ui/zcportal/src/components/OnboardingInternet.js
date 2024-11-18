@@ -300,6 +300,11 @@ export class OnboardingInternet extends Component {
                                 {
                                     QuestionSerialNumber === 0 ?
                                         <button type='button'
+                                            style={{
+                                                backgroundColor: variables.PRIMARY_COLOR,
+                                                borderColor: variables.PRIMARY_COLOR,
+                                                color: 'white',
+                                            }}
                                             className='btn btn-primary float-start'
                                             onClick={() => this.createClick()}>
                                             Create
@@ -309,6 +314,11 @@ export class OnboardingInternet extends Component {
                                 {
                                     QuestionSerialNumber !== 0 ?
                                         <button type='button'
+                                            style={{
+                                                backgroundColor: variables.PRIMARY_COLOR,
+                                                borderColor: variables.PRIMARY_COLOR,
+                                                color: 'white',
+                                            }}
                                             className='btn btn-primary float-start'
                                             onClick={() => this.updateClick()}>
                                             Update
