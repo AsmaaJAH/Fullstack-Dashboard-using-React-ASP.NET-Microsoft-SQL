@@ -1,11 +1,11 @@
 
 import React, { Component } from 'react';
-import './Home.css'; // Create this file for custom styling if needed
+import './Home.css';
 
 export class Home extends Component {
     render() {
         return (
-            <div className="container mt-4">
+            <div className="container">
                 {/* Banner Section */}
                 <div className="banner text-center py-4 mb-5" style={{ backgroundColor: '#009ab5', color: 'white' }}>
                     <h1>Welcome to the IT Portal</h1>

@@ -57,6 +57,7 @@
 .sidebar .nav-link {
   color: white; /* Text color for links */
   font-size: 1.1em;
+  font-weight: bold;
   padding: 10px;
   margin: 5px 0;
   text-align: left;

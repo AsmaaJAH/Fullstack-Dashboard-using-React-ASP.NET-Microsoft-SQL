@@ -14,7 +14,7 @@ function App() {
           <div className="text-center mt-3">
               <img src="/logo.jpg" alt="Zewail City Logo" className="sidebar-logo" />
             </div>
-            <h3 className="text-center ">ZC Portal</h3>
+            <h1 className="text-center ">ZC Portal</h1>
             <nav className="nav flex-column">
               <NavLink className="nav-link" to="/home">Home</NavLink>
               <NavLink className="nav-link" to="/OnboardingInternet">Onboarding Internet</NavLink>
