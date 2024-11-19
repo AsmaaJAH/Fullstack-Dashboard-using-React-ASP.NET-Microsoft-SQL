@@ -26,7 +26,7 @@ namespace zcportal.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select QuestionSerialNumber, DeviceType , QuestionTitle from dbo.InternetQuestion";
+            string query = @"select QuestionSerialNumber, DeviceType , Instructions from dbo.InternetQuestion";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -53,8 +53,8 @@ namespace zcportal.Controllers
         [HttpPost]
         public JsonResult Post(InternetQuestion question)
         {
-            string query = @"insert into dbo.InternetQuestion (QuestionTitle,DeviceType)
-                    values (@QuestionTitle,@DeviceType)";
+            string query = @"insert into dbo.InternetQuestion (Instructions,DeviceType)
+                    values (@Instructions,@DeviceType)";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -65,7 +65,7 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.Instructions);
+                    myCommand.Parameters.AddWithValue("@Instructions", question.Instructions);
                     myCommand.Parameters.AddWithValue("@DeviceType", question.DeviceType);
 
                     myReader = myCommand.ExecuteReader();
@@ -86,7 +86,7 @@ namespace zcportal.Controllers
         public JsonResult Put(InternetQuestion question)
         {
             string query = @"update dbo.InternetQuestion 
-                               set  QuestionTitle= @QuestionTitle
+                               set  Instructions= @Instructions,
                                     DeviceType = @DeviceType
                               where QuestionSerialNumber=@QuestionSerialNumber";
             DataTable table = new DataTable();
@@ -101,7 +101,7 @@ namespace zcportal.Controllers
                 {
                     myCommand.Parameters.AddWithValue("@QuestionSerialNumber", question.QuestionSerialNumber);
 
-                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.Instructions);
+                    myCommand.Parameters.AddWithValue("@Instructions", question.Instructions);
                     myCommand.Parameters.AddWithValue("@DeviceType", question.DeviceType);
 
                     myReader = myCommand.ExecuteReader();
