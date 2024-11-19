@@ -12,14 +12,11 @@ export class OnboardingInternet extends Component {
             modalTitle: "",
             Instructions: "",
             QuestionSerialNumber: 0,
-
+            DeviceType: "",
             QuestionSerialNumberFilter: "",
             InstructionsFilter: "",
             departmentsWithoutFilter: []
         }
-        // this.editClick= this.editClick.bind(this);
-        // this.deleteClick= this.deleteClick.bind(this);
-
     }
     FilterFn() {
         var QuestionSerialNumberFilter = this.state.QuestionSerialNumberFilter;
@@ -84,17 +81,24 @@ export class OnboardingInternet extends Component {
             Instructions: e.target.value
         });
     }
+    changeDeviceType = (event) => {
+        this.setState({
+            DeviceType: event.target.value
+        });
+    }
     addClick() {
         this.setState({
-            modalTitle: "Add Question",
+            modalTitle: "Add Instructions",
             QuestionSerialNumber: 0,
+            DeviceType: "",
             Instructions: ""
         });
     }
-    editClick= (question) => {
+    editClick = (question) => {
         this.setState({
-            modalTitle: "Edit Question",
+            modalTitle: "Edit Instructions",
             QuestionSerialNumber: question.QuestionSerialNumber,
+            DeviceType: question.DeviceType,
             Instructions: question.Instructions
         });
     }
@@ -107,7 +111,8 @@ export class OnboardingInternet extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                Instructions: this.state.Instructions
+                Instructions: this.state.Instructions,
+                DeviceType: this.state.DeviceType,
             })
         })
             .then(res => res.json())
@@ -128,7 +133,9 @@ export class OnboardingInternet extends Component {
             },
             body: JSON.stringify({
                 QuestionSerialNumber: this.state.QuestionSerialNumber,
-                Instructions: this.state.Instructions
+                Instructions: this.state.Instructions,
+                DeviceType: this.state.DeviceType,
+
             })
         })
             .then(res => res.json())
@@ -140,7 +147,7 @@ export class OnboardingInternet extends Component {
             })
     }
 
-    deleteClick=(id)=> {
+    deleteClick = (id) => {
         if (window.confirm('Are you sure you wanna delete this Department?')) {
             fetch(variables.API_URL + 'OnBoardingInternet/' + id, {
                 method: 'DELETE',
@@ -166,6 +173,8 @@ export class OnboardingInternet extends Component {
             modalTitle,
             QuestionSerialNumber: QuestionSerialNumber,
             Instructions: Instructions,
+            DeviceType: DeviceType,
+
 
         } = this.state;
         return (
@@ -179,7 +188,7 @@ export class OnboardingInternet extends Component {
                                 <div className="d-flex flex-row">
                                     <input className="form-control m-2"
                                         onChange={this.changeQuestionIdFilter}
-                                        placeholder="Search by the question number" />
+                                        placeholder="Search by serial number" />
                                     <button type="button" className="btn btn-light"
                                         onClick={() => this.sortResults('QuestionSerialNumber', true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
@@ -200,7 +209,10 @@ export class OnboardingInternet extends Component {
                                     </button>
 
                                 </div>
-                                Question Serial Number
+                                Instruction Serial Number
+                            </th>
+                            <th>
+                                Type
                             </th>
                             <th>
                                 <div className="d-flex flex-row">
@@ -208,7 +220,7 @@ export class OnboardingInternet extends Component {
                                     <input className="form-control m-2"
                                         style={{ marginLeft: '100px' }}
                                         onChange={this.changeInstructionsFilter}
-                                        placeholder="Search by the question title" />
+                                        placeholder="Search by the instructions title" />
                                     <button type="button" className="btn btn-light"
                                         onClick={() => this.sortResults('Instructions', true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
@@ -229,7 +241,7 @@ export class OnboardingInternet extends Component {
                                         </svg>
                                     </button>
                                 </div>
-                                Question Title
+                                Instructions
 
                             </th>
                             <th>
@@ -243,6 +255,9 @@ export class OnboardingInternet extends Component {
                             <tr key={question.QuestionSerialNumber}>
                                 <td>
                                     {question.QuestionSerialNumber}
+                                </td>
+                                <td>
+                                    {question.DeviceType}
                                 </td>
                                 <td>
                                     {question.Instructions}
@@ -266,12 +281,42 @@ export class OnboardingInternet extends Component {
                             </div>
                             <div className="modal-body">
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">Question Title</span>
+                                    <span className="input-group-text">Instructions</span>
                                     <input type="text" className="form-control"
                                         value={Instructions}
                                         onChange={this.changeInstructions}
                                     />
                                 </div>
+                                <div className="input-group mb-3">
+                                    <span className="input-group-text">Type</span>
+                                    <select className="form-select"
+                                        onChange={this.changeDeviceType}
+                                        value={DeviceType}>
+                                        {/* {InternetQuestions.map(internetQuestion =>
+                                            <option key={internetQuestion.QuestionSerialNumber} value={internetQuestion.Instructions}>
+                                                {internetQuestion.Instructions}
+                                            </option>)} */}
+                                            <option  value="android">
+                                                Android
+                                            </option>
+                                            <option  value="iphone">
+                                                iPhone
+                                            </option>
+                                            <option  value="windows">
+                                                Windows
+                                            </option>
+                                            <option  value="mac">
+                                                Mac
+                                            </option>
+                                            <option  value="troubleshooting">
+                                            Troubleshooting
+                                            </option>
+                                            <option  value="others">
+                                                Others
+                                            </option>
+                                    </select>
+                                </div>
+
                                 {
                                     QuestionSerialNumber === 0 ?
                                         <button type='button'

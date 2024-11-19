@@ -59,8 +59,8 @@ export class Home extends Component {
                         </div>
                         <div className="col-md-4">
                             <div className="service-card p-4 border shadow-sm">
-                                <h4>Backend Services</h4>
-                                <p>Search database & manage software.</p>
+                                <h4>Self-Service  </h4>
+                                <p>Academic support & Google classroom services.</p>
                             </div>
                         </div>
 
