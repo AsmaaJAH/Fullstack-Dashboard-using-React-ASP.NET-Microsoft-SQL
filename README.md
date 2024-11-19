@@ -3,9 +3,16 @@
 using React JS + .NET Core Web API + Microsoft SQL
 
 
-Simulation video of ZC portal initial version:
+Simulation videos of ZC portal initial version:
 
-https://drive.google.com/file/d/1690-oVWAIu_6MDFKLx49kzbH1rVZcUiK/view?usp=drive_link
+        functionality until now:
+
+        https://drive.google.com/file/d/1690-oVWAIu_6MDFKLx49kzbH1rVZcUiK/view?usp=drive_link
+
+
+        Homepage design:
+
+        https://drive.google.com/file/d/1H13DqKBp0g2Q9ybySKZNqOnvYkr52GD0/view?usp=drive_link
 
 
 Tutorial:
