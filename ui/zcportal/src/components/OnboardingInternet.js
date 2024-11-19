@@ -292,10 +292,6 @@ export class OnboardingInternet extends Component {
                                     <select className="form-select"
                                         onChange={this.changeDeviceType}
                                         value={DeviceType}>
-                                        {/* {InternetQuestions.map(internetQuestion =>
-                                            <option key={internetQuestion.QuestionSerialNumber} value={internetQuestion.Instructions}>
-                                                {internetQuestion.Instructions}
-                                            </option>)} */}
                                             <option  value="android">
                                                 Android
                                             </option>

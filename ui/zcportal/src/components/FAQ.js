@@ -188,6 +188,8 @@ export class FAQ extends Component {
         return (
             <div>
                 <AddButton addClick={() => this.addClick()} />
+                <h1 className="text-center mb-4">Frequently Asked Questions</h1>
+
                 <table className='table table-striped'>
                     <thead>
                         <tr>
