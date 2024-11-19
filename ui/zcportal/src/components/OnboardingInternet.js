@@ -7,24 +7,24 @@ export class OnboardingInternet extends Component {
         this.state = {
             InternetQuestions: [],
             modalTitle: "",
-            QuestionTitle: "",
+            Instructions: "",
             QuestionSerialNumber: 0,
 
             QuestionSerialNumberFilter: "",
-            QuestionTitleFilter: "",
+            InstructionsFilter: "",
             departmentsWithoutFilter: []
         }
 
     }
     FilterFn() {
         var QuestionSerialNumberFilter = this.state.QuestionSerialNumberFilter;
-        var QuestionTitleFilter = this.state.QuestionTitleFilter;
+        var InstructionsFilter = this.state.InstructionsFilter;
         var filteredData = this.state.departmentsWithoutFilter.filter(
             function (element) {
                 return element.QuestionSerialNumber.toString().toLowerCase().includes(
                     QuestionSerialNumberFilter.toString().trim().toLowerCase()
-                ) && element.QuestionTitle.toString().toLowerCase().includes(
-                    QuestionTitleFilter.toString().trim().toLowerCase()
+                ) && element.Instructions.toString().toLowerCase().includes(
+                    InstructionsFilter.toString().trim().toLowerCase()
                 )
             }
         );
@@ -51,9 +51,9 @@ export class OnboardingInternet extends Component {
         this.state.QuestionSerialNumberFilter = event.target.value;
         this.FilterFn();
     }
-    changeQuestionTitleFilter = (event) => {
+    changeInstructionsFilter = (event) => {
         // eslint-disable-next-line 
-        this.state.QuestionTitleFilter = event.target.value;
+        this.state.InstructionsFilter = event.target.value;
         this.FilterFn();
     }
 
@@ -74,23 +74,23 @@ export class OnboardingInternet extends Component {
         this.refreshList();
 
     }
-    changeQuestionTitle = (e) => {
+    changeInstructions = (e) => {
         this.setState({
-            QuestionTitle: e.target.value
+            Instructions: e.target.value
         });
     }
     addClick() {
         this.setState({
             modalTitle: "Add Question",
             QuestionSerialNumber: 0,
-            QuestionTitle: ""
+            Instructions: ""
         });
     }
     editClick(question) {
         this.setState({
             modalTitle: "Edit Question",
             QuestionSerialNumber: question.QuestionSerialNumber,
-            QuestionTitle: question.QuestionTitle
+            Instructions: question.Instructions
         });
     }
 
@@ -102,7 +102,7 @@ export class OnboardingInternet extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                QuestionTitle: this.state.QuestionTitle
+                Instructions: this.state.Instructions
             })
         })
             .then(res => res.json())
@@ -123,7 +123,7 @@ export class OnboardingInternet extends Component {
             },
             body: JSON.stringify({
                 QuestionSerialNumber: this.state.QuestionSerialNumber,
-                QuestionTitle: this.state.QuestionTitle
+                Instructions: this.state.Instructions
             })
         })
             .then(res => res.json())
@@ -160,7 +160,7 @@ export class OnboardingInternet extends Component {
             InternetQuestions: InternetQuestions,
             modalTitle,
             QuestionSerialNumber: QuestionSerialNumber,
-            QuestionTitle: QuestionTitle,
+            Instructions: Instructions,
 
         } = this.state;
         return (
@@ -215,10 +215,10 @@ export class OnboardingInternet extends Component {
 
                                     <input className="form-control m-2"
                                         style={{ marginLeft: '100px' }}
-                                        onChange={this.changeQuestionTitleFilter}
+                                        onChange={this.changeInstructionsFilter}
                                         placeholder="Search by the question title" />
                                     <button type="button" className="btn btn-light"
-                                        onClick={() => this.sortResults('QuestionTitle', true)}>
+                                        onClick={() => this.sortResults('Instructions', true)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0" />
                                         </svg>
@@ -231,7 +231,7 @@ export class OnboardingInternet extends Component {
 
 
                                     <button type="button" className="btn btn-light"
-                                        onClick={() => this.sortResults('QuestionTitle', false)}>
+                                        onClick={() => this.sortResults('Instructions', false)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                                             <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0" />
                                         </svg>
@@ -253,7 +253,7 @@ export class OnboardingInternet extends Component {
                                     {question.QuestionSerialNumber}
                                 </td>
                                 <td>
-                                    {question.QuestionTitle}
+                                    {question.Instructions}
                                 </td>
                                 <td>
                                     <button type='button'
@@ -293,8 +293,8 @@ export class OnboardingInternet extends Component {
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Question Title</span>
                                     <input type="text" className="form-control"
-                                        value={QuestionTitle}
-                                        onChange={this.changeQuestionTitle}
+                                        value={Instructions}
+                                        onChange={this.changeInstructions}
                                     />
                                 </div>
                                 {
