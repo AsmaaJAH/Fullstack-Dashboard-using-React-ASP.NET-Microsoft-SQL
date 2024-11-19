@@ -2,6 +2,7 @@ import './App.css';
 import { Home } from './components/Home';
 import { OnboardingInternet } from './components/OnboardingInternet';
 import { FAQ } from './components/FAQ';
+import { FAQTrail } from './components/FAQTrail';
 import { Announcements} from './components/Announcements';
 
 import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom';
@@ -22,6 +23,8 @@ function App() {
               <NavLink className="nav-link" to="/announcements">Announcements</NavLink>
               <NavLink className="nav-link" to="/OnboardingInternet">Onboarding Internet</NavLink>
               <NavLink className="nav-link" to="/faq">FAQ</NavLink>
+              <NavLink className="nav-link" to="/faqtrail">FAQ Trail</NavLink>
+
             </nav>
           </div>
           {/* Main Content Area */}
@@ -32,7 +35,7 @@ function App() {
               <Route path='/announcements' element={<Announcements />} />
               <Route path='/OnboardingInternet' element={<OnboardingInternet />} />
               <Route path='/faq' element={<FAQ />} />
-
+              <Route path='/faqtrail' element={<FAQTrail />} />
             </Routes>
           </div>
         </div>
