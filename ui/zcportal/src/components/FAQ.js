@@ -13,7 +13,6 @@ export class FAQ extends Component {
             QuestionTitle: "",
             Id: 0,
             Answer: "",
-            PostingDate: "",
         };
     }
 
@@ -59,7 +58,6 @@ export class FAQ extends Component {
             Id: 0,
             QuestionTitle: "",
             Answer: "",
-            PostingDate: "",
         });
     }
     editClick = (question) => {
@@ -68,7 +66,6 @@ export class FAQ extends Component {
             Id: question.Id,
             QuestionTitle: question.QuestionTitle,
             Answer: question.Answer,
-            PostingDate: "",
         });
     }
 
@@ -82,8 +79,6 @@ export class FAQ extends Component {
             body: JSON.stringify({
                 QuestionTitle: this.state.QuestionTitle,
                 Answer: this.state.Answer,
-                PostingDate: this.state.PostingDate,
-                PhotoFileName: "",
             })
         })
             .then(res => res.json())
@@ -106,8 +101,6 @@ export class FAQ extends Component {
                 Id: this.state.Id,
                 QuestionTitle: this.state.QuestionTitle,
                 Answer: this.state.Answer,
-                PostingDate: this.state.PostingDate,
-                PhotoFileName: "",
             })
         })
             .then(res => res.json())
@@ -146,7 +139,6 @@ export class FAQ extends Component {
             Id,
             QuestionTitle,
             Answer,
-            PostingDate,
 
         } = this.state;
         return (
