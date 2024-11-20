@@ -82,7 +82,7 @@ namespace zcportal.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myCommand.Parameters.AddWithValue("@Title", announcement.Title);
-                    myCommand.Parameters.AddWithValue("@Answer", announcement.Content);
+                    myCommand.Parameters.AddWithValue("@Content", announcement.Content);
                     myCommand.Parameters.AddWithValue("@PostingDate", announcement.PostingDate);
                     myCommand.Parameters.AddWithValue("@PhotoFileName", announcement.PhotoFileName);
 
