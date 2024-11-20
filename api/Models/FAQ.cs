@@ -11,7 +11,5 @@ namespace zcportal.Models
         public int Id { get; set; }
         public string QuestionTitle { get; set; }
         public string Answer { get; set; }
-        //public string PostingDate { get; set; }
-        //public string PhotoFileName { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 import './App.css';
 import { Home } from './components/Home';
 import { OnboardingInternet } from './components/OnboardingInternet';
-import { FAQTrail } from './components/FAQTrail';
 import { FAQ } from './components/FAQ';
 import { Announcements} from './components/Announcements';
 
@@ -23,7 +22,6 @@ function App() {
               <NavLink className="nav-link" to="/announcements">Announcements</NavLink>
               <NavLink className="nav-link" to="/OnboardingInternet">Onboarding Internet</NavLink>
               <NavLink className="nav-link" to="/faq">FAQ</NavLink>
-              <NavLink className="nav-link" to="/faqtrail">FAQ Trail</NavLink>
 
             </nav>
           </div>
@@ -35,7 +33,6 @@ function App() {
               <Route path='/announcements' element={<Announcements />} />
               <Route path='/OnboardingInternet' element={<OnboardingInternet />} />
               <Route path='/faq' element={<FAQ />} />
-              <Route path='/faqtrail' element={<FAQTrail />} />
             </Routes>
           </div>
         </div>

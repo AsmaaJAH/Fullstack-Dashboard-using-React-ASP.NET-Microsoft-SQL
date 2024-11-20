@@ -224,7 +224,7 @@ export class FAQ extends Component {
                                             borderColor: variables.PRIMARY_COLOR,
                                             color: "white",
                                             fontWeight: "bold",
-                                            width: "25%", // Make the button full width
+                                            width: "25%", 
 
                                         }}
                                         className="btn btn-primary"

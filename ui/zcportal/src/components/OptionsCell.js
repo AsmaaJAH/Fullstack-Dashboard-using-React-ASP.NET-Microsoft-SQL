@@ -6,7 +6,7 @@ export class OptionsCell extends Component {
 
         return (
             
-        <td>
+        <td >
             <button type='button'
                 className='btn btn-light mr-1'
                 data-bs-toggle="modal" data-bs-target="#exampleModal"

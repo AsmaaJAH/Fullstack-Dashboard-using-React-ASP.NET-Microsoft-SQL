@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,25 +18,26 @@ namespace zcportal.Controllers
     [ApiController]
 
 
-    public class FAQController : ControllerBase
+    public class AnnouncementController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
 
-        public FAQController(IConfiguration configuration, IWebHostEnvironment env)
+        public AnnouncementController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _env = env;
         }
-     
+
 
         [HttpGet]
         public JsonResult Get()
         {
             string query = @"
-                            select Id, QuestionTitle, Answer
+                            select Id, Title,Content,
+                            convert(varchar(10),PostingDate,120) as PostingDate, PhotoFileName
                             from
-                            dbo.FAQ
+                            dbo.Announcement
                             ";
 
             DataTable table = new DataTable();
@@ -63,13 +63,14 @@ namespace zcportal.Controllers
 
         //---------------------------------------------------------------------------------------------------
         [HttpPost]
-        public JsonResult Post(FAQ question)
+        public JsonResult Post(Announcement announcement)
         {
             string query = @"
-                           insert into dbo.FAQ
-                           (QuestionTitle,Answer)
-                    values (@QuestionTitle,@Answer)
+                           insert into dbo.Announcement
+                           (Title,Content,PostingDate,PhotoFileName)
+                    values (@Title,@Content,@PostingDate,@PhotoFileName)
                             ";
+            
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -80,8 +81,13 @@ namespace zcportal.Controllers
                 myCon.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
-                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
-                    myCommand.Parameters.AddWithValue("@Answer", question.Answer);
+                    myCommand.Parameters.AddWithValue("@Title", announcement.Title);
+                    myCommand.Parameters.AddWithValue("@Answer", announcement.Content);
+                    myCommand.Parameters.AddWithValue("@PostingDate", announcement.PostingDate);
+                    myCommand.Parameters.AddWithValue("@PhotoFileName", announcement.PhotoFileName);
+
+
+
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
                     myReader.Close();
@@ -97,13 +103,18 @@ namespace zcportal.Controllers
 
 
         [HttpPut]
-        public JsonResult Put(FAQ question)
+        public JsonResult Put(Announcement question)
 
         {
-            string query = @"update dbo.FAQ
-                               set  QuestionTitle= @QuestionTitle,
-                                Answer=@Answer
+            // يعني، لما يكون عندك موظف رقمه في قاعدة البيانات هو 5 مثلاً، وتحط @EmployeeId = 5، فالكود هذا راح يروح ويحدث بيانات الموظف اللي رقمه 5 فقط، وما يغير شي في باقي الموظفين.
+            string query = @"update dbo.Announcement
+                               set  Title= @Title,
+                                Content=@Content,
+                               PostingDate=@PostingDate,
+                               PhotoFileName=@PhotoFileName
                                 where Id=@Id";
+
+
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
@@ -116,8 +127,10 @@ namespace zcportal.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myCommand.Parameters.AddWithValue("@Id", question.Id);
-                    myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
-                    myCommand.Parameters.AddWithValue("@Answer", question.Answer);
+                    myCommand.Parameters.AddWithValue("@Title", question.Title);
+                    myCommand.Parameters.AddWithValue("@Content", question.Content);
+                    myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
+                    myCommand.Parameters.AddWithValue("@PhotoFileName", question.PhotoFileName);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -134,7 +147,7 @@ namespace zcportal.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                           delete from dbo.FAQ
+                           delete from dbo.Announcement
                             where Id=@Id
                             ";
             DataTable table = new DataTable();
@@ -156,6 +169,35 @@ namespace zcportal.Controllers
             return new JsonResult("Deleted Successfully");
         }
 
+
+        [Route("SaveFile")]
+        [HttpPost]
+        public JsonResult SaveFile()
+        {
+            try
+            {
+                var httpRequest = Request.Form;
+                var postedFile = httpRequest.Files[0];
+                string filename = postedFile.FileName;
+                var physicalPath = _env.ContentRootPath + "/Photos/" + filename;
+
+
+                using (var stream = new FileStream(physicalPath, FileMode.Create))
+                {
+                    postedFile.CopyTo(stream);
+
+                }
+
+
+                return new JsonResult(filename);
+
+            }
+            catch (Exception)
+            {
+                return new JsonResult("anonymous.png");
+
+            }
+        }
 
     }
 }
