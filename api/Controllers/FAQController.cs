@@ -34,9 +34,14 @@ namespace zcportal.Controllers
         [HttpGet]
         public JsonResult Get()
         {
+            //string query = @"
+            //                select Id, QuestionTitle,Answer,
+            //                convert(varchar(10),PostingDate,120) as PostingDate, PhotoFileName
+            //                from
+            //                dbo.FAQ
+            //                ";
             string query = @"
-                            select Id, QuestionTitle,Answer,
-                            convert(varchar(10),PostingDate,120) as PostingDate, PhotoFileName
+                            select Id, QuestionTitle, Answer
                             from
                             dbo.FAQ
                             ";
@@ -66,10 +71,15 @@ namespace zcportal.Controllers
         [HttpPost]
         public JsonResult Post(FAQ question)
         {
+            //string query = @"
+            //               insert into dbo.FAQ
+            //               (QuestionTitle,Answer,PostingDate,PhotoFileName)
+            //        values (@QuestionTitle,@Answer,@PostingDate,@PhotoFileName)
+            //                ";
             string query = @"
                            insert into dbo.FAQ
-                           (QuestionTitle,Answer,PostingDate,PhotoFileName)
-                    values (@QuestionTitle,@Answer,@PostingDate,@PhotoFileName)
+                           (QuestionTitle,Answer)
+                    values (@QuestionTitle,@Answer)
                             ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
@@ -83,8 +93,9 @@ namespace zcportal.Controllers
                 {
                     myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
                     myCommand.Parameters.AddWithValue("@Answer", question.Answer);
-                    myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
-                    myCommand.Parameters.AddWithValue("@PhotoFileName", question.PhotoFileName);
+                    //myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
+                    //myCommand.Parameters.AddWithValue("@PhotoFileName", question.PhotoFileName);
+
 
 
                     myReader = myCommand.ExecuteReader();
@@ -106,12 +117,18 @@ namespace zcportal.Controllers
 
         {
             // يعني، لما يكون عندك موظف رقمه في قاعدة البيانات هو 5 مثلاً، وتحط @EmployeeId = 5، فالكود هذا راح يروح ويحدث بيانات الموظف اللي رقمه 5 فقط، وما يغير شي في باقي الموظفين.
+            //string query = @"update dbo.FAQ
+            //                   set  QuestionTitle= @QuestionTitle,
+            //                    Answer=@Answer,
+            //                   PostingDate=@PostingDate,
+            //                   PhotoFileName=@PhotoFileName
+            //                    where Id=@Id";
+
             string query = @"update dbo.FAQ
                                set  QuestionTitle= @QuestionTitle,
-                                Answer=@Answer,
-                               PostingDate=@PostingDate,
-                               PhotoFileName=@PhotoFileName
+                                Answer=@Answer
                                 where Id=@Id";
+
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -125,8 +142,8 @@ namespace zcportal.Controllers
                     myCommand.Parameters.AddWithValue("@Id", question.Id);
                     myCommand.Parameters.AddWithValue("@QuestionTitle", question.QuestionTitle);
                     myCommand.Parameters.AddWithValue("@Answer", question.Answer);
-                    myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
-                    myCommand.Parameters.AddWithValue("@PhotoFileName", question.PhotoFileName);
+                    //myCommand.Parameters.AddWithValue("@PostingDate", question.PostingDate);
+                    //myCommand.Parameters.AddWithValue("@PhotoFileName", question.PhotoFileName);
 
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader);
@@ -166,32 +183,32 @@ namespace zcportal.Controllers
         }
 
 
-        [Route("SaveFile")]
-        [HttpPost]  
-        public JsonResult SaveFile() {
-            try
-            {
-                var httpRequest = Request.Form;
-                var postedFile= httpRequest.Files[0];
-                string filename = postedFile.FileName;
-                var physicalPath = _env.ContentRootPath + "/Photos/" + filename;
+        //[Route("SaveFile")]
+        //[HttpPost]  
+        //public JsonResult SaveFile() {
+        //    try
+        //    {
+        //        var httpRequest = Request.Form;
+        //        var postedFile= httpRequest.Files[0];
+        //        string filename = postedFile.FileName;
+        //        var physicalPath = _env.ContentRootPath + "/Photos/" + filename;
 
 
-                using (var stream = new FileStream(physicalPath, FileMode.Create))
-                {
-                    postedFile.CopyTo(stream);
+        //        using (var stream = new FileStream(physicalPath, FileMode.Create))
+        //        {
+        //            postedFile.CopyTo(stream);
 
-                }
+        //        }
 
 
-                    return new JsonResult(filename);
+        //            return new JsonResult(filename);
 
-            }
-            catch (Exception ) {
-                return new JsonResult("anonymous.png");
+        //    }
+        //    catch (Exception ) {
+        //        return new JsonResult("anonymous.png");
 
-            }
-        }
+        //    }
+        //}
 
 
     }

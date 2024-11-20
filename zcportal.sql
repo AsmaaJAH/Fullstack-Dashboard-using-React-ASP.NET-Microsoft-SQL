@@ -1,8 +1,10 @@
+/*---------------------- Onboarding internet questions------------------------*/
+
 create table dbo.InternetQuestion(
 QuestionSerialNumber int identity(1,1),
 Instructions nvarchar(500), 
 DeviceType nvarchar(500)
-CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone','troubleshooting', 'Others'))
+CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone','troubleshooting', 'others'))
 )
 /*
 ALTER TABLE dbo.InternetQuestion
@@ -13,7 +15,7 @@ CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone'
 insert into dbo.InternetQuestion values ('How to do connect to the internet??')
 
 INSERT INTO dbo.InternetQuestion (Instructions, DeviceType )
-VALUES ('How to do connect to Wifi??', 'windows');
+VALUES ('How to do ..??', 'troubleshooting');
 
 SET IDENTITY_INSERT dbo.InternetQuestion OFF;
 
@@ -28,16 +30,17 @@ INSERT INTO dbo.InternetQuestion (QuestionSerialNumber,Instructions ,DeviceType 
 VALUES (3, 'How to connect to the internet?' , 'android');
 
 INSERT INTO dbo.InternetQuestion (QuestionSerialNumber,Instructions, DeviceType )
-VALUES (4, 'How to connect to the wifi?' , 'iphone');
+VALUES (4, 'How to do..?' , 'others');
 select * from dbo.InternetQuestion
 
-
+/*----------------------FAQ------------------------*/
 create table dbo.FAQ(
 Id int identity(1,1),
 QuestionTitle nvarchar(500), 
 Answer nvarchar(500),
 PostingDate	 datetime,
-PhotoFileName nvarchar(500)
+PhotoFileName nvarchar(500),
+UrlLink nvarchar(1000)
 )
 
 insert into dbo.FAQ values ('how to do something?', 'IT', GETDATE(), 'anonymous.png')

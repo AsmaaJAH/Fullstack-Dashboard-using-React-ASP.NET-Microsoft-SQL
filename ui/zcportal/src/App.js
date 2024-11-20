@@ -1,8 +1,8 @@
 import './App.css';
 import { Home } from './components/Home';
 import { OnboardingInternet } from './components/OnboardingInternet';
-import { FAQ } from './components/FAQ';
 import { FAQTrail } from './components/FAQTrail';
+import { FAQ } from './components/FAQ';
 import { Announcements} from './components/Announcements';
 
 import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom';

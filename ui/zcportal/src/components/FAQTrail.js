@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { variables } from './Variables.js';
-import { AddButton } from './AddButton';
-import { OptionsCell } from './OptionsCell';
+import { AddButton } from './AddButton.js';
+import { OptionsCell } from './OptionsCell.js';
+
 
 export class FAQTrail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            openIndex: null,
             InternetQuestions: [],
             FAQs: [],
             modalTitle: "",
@@ -17,14 +17,8 @@ export class FAQTrail extends Component {
             PostingDate: "",
             PhotoFileName: "anonymous.PNG",
             PhotoPath: variables.PHOTO_URL,
-        };
+        }
     }
-
-    toggleFAQ = (index) => {
-        this.setState((prevState) => ({
-            openIndex: prevState.openIndex === index ? null : index,
-        }));
-    };
 
     refreshList() {
         fetch(variables.API_URL + 'FAQ')
@@ -78,7 +72,7 @@ export class FAQTrail extends Component {
             PhotoFileName: "anonymous.PNG",
         });
     }
-    editClick = (question) => {
+    editClick=(question)=> {
         this.setState({
             modalTitle: "Edit FAQ",
             Id: question.Id,
@@ -136,7 +130,7 @@ export class FAQTrail extends Component {
             })
     }
 
-    deleteClick = (id) => {
+    deleteClick=(id)=> {
         if (window.confirm('Are you sure you wanna delete this FAQ ?')) {
             fetch(variables.API_URL + 'FAQ/' + id, {
                 method: 'DELETE',
@@ -177,10 +171,9 @@ export class FAQTrail extends Component {
             alert("No file selected. Please select a file and try again.");
         }
     }
-
     render() {
+
         const {
-            openIndex,
             InternetQuestions,
             FAQs,
             modalTitle,
@@ -193,40 +186,47 @@ export class FAQTrail extends Component {
 
         } = this.state;
         return (
-            <div className="container my-5">
+            <div>
                 <AddButton addClick={() => this.addClick()} />
-
                 <h1 className="text-center mb-4">Frequently Asked Questions</h1>
-                <div className="accordion" id="faqAccordion">
-                    {FAQs.map((faq, index) => (
-                        <div className="accordion-item mb-3" key={index}>
-                            <h2 className="accordion-header">
-                                <button
-                                    className={`accordion-button ${openIndex === index ? "" : "collapsed"}`}
-                                    type="button"
-                                    onClick={() => this.toggleFAQ(index)}
-                                    aria-expanded={openIndex === index}
-                                >
-                                    <OptionsCell
-                                        question={faq}
-                                        editClick={this.editClick}
-                                        deleteClick={this.deleteClick}
-                                    />
-                                    <div style={{ width: '50px', display: 'inline-block' }}></div>
 
-                                    <strong>{faq.QuestionTitle}</strong>
-                                </button>
-                            </h2>
-                            <div
-                                className={`accordion-collapse collapse ${openIndex === index ? "show" : ""}`}
-                                aria-labelledby={`faq${index}`}
-                            >
-                                <div className="accordion-body">{faq.Answer}</div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <table className='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th>
+                                No.
+                            </th>
+                            <th>
+                                Question Title
+                            </th>
+                            <th>
+                                Answer
+                            </th>
+                            <th>
+                                FAQ Posting Date
+                            </th>
+                            <th>
+                                Options
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {FAQs.map(question =>
 
+                            <tr key={question.Id}>
+                                <td>{question.Id}</td>
+                                <td>{question.QuestionTitle}</td>
+                                <td>{question.Answer}</td>
+                                <td>{question.PostingDate}</td>
+                                <OptionsCell
+                                    question={question}
+                                    editClick={this.editClick}
+                                    deleteClick={this.deleteClick}
+                                />
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog modal-lg modal-dialog-centered">
                         <div className="modal-content">
@@ -308,8 +308,7 @@ export class FAQTrail extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
-        );
+        )
     }
 }
