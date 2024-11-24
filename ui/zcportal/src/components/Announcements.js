@@ -256,32 +256,28 @@ export class Announcements extends Component {
                                 <div className="d-flex flex-row bd-highlight mb-3" >
                                     <div className="p-2 w-50 bd-highlight">
 
-                                        <div className="input-group mb-3">
-                                            <span className="input-group-text">Title</span>
+                                        <div className="form-group mb-3">
+                                            <span className="form-label fw-bold text-start d-block">Title:</span>
                                             <input type="text" className="form-control"
                                                 value={Title}
                                                 onChange={this.changeTitle} />
                                         </div>
 
 
-                                        <div className="input-group mb-3">
-                                            <span className="input-group-text">Content</span>
+                                        <div className="form-group mb-3">
+                                            <span className="form-label fw-bold text-start d-block">Content:</span>
                                             <textarea
                                                 className="form-control"
                                                 value={Content}
                                                 onChange={this.changeContent}
-                                                rows="3" // Adjust the number of rows for the desired height
+                                                rows="3" 
                                                 placeholder="Enter your content here..."
                                             ></textarea>
                                         </div>
 
 
-
-
-
-
-                                        <div className="input-group mb-3">
-                                            <span className="input-group-text">Posting Date </span>
+                                        <div className="form-group mb-3">
+                                            <span className="form-label fw-bold text-start d-block">Posting Date: </span>
                                             <input type="date" className="form-control"
                                                 value={PostingDate}
                                                 onChange={this.changePostingDate} />
