@@ -54,11 +54,18 @@ select * from dbo.FAQ
 /*---------------------- Announcement ------------------------*/
 create table dbo.Announcement(
 Id int identity(1,1),
-Title nvarchar(500), 
+Title nvarchar(500),
 Content nvarchar(500),
 PostingDate	 datetime,
 PhotoFileName nvarchar(500),
 )
+
+ALTER TABLE Announcement ALTER COLUMN Content NVARCHAR(MAX);
+ALTER TABLE Announcement ADD SubTitle NVARCHAR(500);
+ALTER TABLE Announcement Drop COLUMN  SubTitle;
+
+
+
 
 insert into dbo.Announcement values ('Event1', 'Event content should be here..!', GETDATE(), 'anonymous.png')
 insert into dbo.Announcement values ('Event2', 'Event content should be here', GETDATE(), 'anonymous.png')

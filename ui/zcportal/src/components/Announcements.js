@@ -219,8 +219,8 @@ export class Announcements extends Component {
                                             {new Date(post.PostingDate).toLocaleDateString()}
                                         </h6>
                                         <p className="card-text">
-                                            {post.Content.length > 50
-                                                ? `${post.Content.slice(0, 50)}...`
+                                            {post.Content.length > 33
+                                                ? `${post.Content.slice(0, 30)}...`
                                                 : post.Content}
                                         </p>
                                     </div>
