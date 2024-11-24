@@ -191,8 +191,8 @@ export class FAQ extends Component {
                                 <div className="d-flex flex-column bd-highlight mb-3">
                                     {/* Content Section */}
                                     <div className="w-100">
-                                        <div className="input-group mb-3">
-                                            <span className="input-group-text">Question Title</span>
+                                        <div className="form-group mb-3">
+                                            <span className="form-label fw-bold text-start d-block">Question Title</span>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -201,16 +201,17 @@ export class FAQ extends Component {
                                             />
                                         </div>
 
-                                        <div className="input-group mb-3">
-                                            <span className="input-group-text">Answer</span>
-                                            <input
-                                                type="text"
+
+                                        <div className="form-group mb-3">
+                                            <span className="form-label fw-bold text-start d-block">Answer:</span>
+                                            <textarea
                                                 className="form-control"
                                                 value={Answer}
                                                 onChange={this.changeAnswer}
-                                            />
+                                                rows="3" 
+                                                placeholder="Enter your answer here..."
+                                            ></textarea>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </div>

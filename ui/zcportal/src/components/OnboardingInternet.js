@@ -280,13 +280,16 @@ export class OnboardingInternet extends Component {
                                 ></button>
                             </div>
                             <div className="modal-body">
-                                <div className="input-group mb-3">
-                                    <span className="input-group-text">Instructions</span>
-                                    <input type="text" className="form-control"
-                                        value={Instructions}
+                                <div className="form-group mb-3">
+                                            <span className="form-label fw-bold text-start d-block">Instructions:</span>
+                                            <textarea
+                                                className="form-control"
+                                                value={Instructions}
                                         onChange={this.changeInstructions}
-                                    />
-                                </div>
+                                                rows="3" 
+                                                placeholder="Enter your answer here..."
+                                            ></textarea>
+                                        </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Type</span>
                                     <select className="form-select"

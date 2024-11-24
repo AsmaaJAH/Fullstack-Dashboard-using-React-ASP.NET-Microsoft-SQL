@@ -276,7 +276,7 @@ export class Announcements extends Component {
                                         </div>
 
 
-                                        <div className="form-group mb-3">
+                                        <div className="form-group ">
                                             <span className="form-label fw-bold text-start d-block">Posting Date: </span>
                                             <input type="date" className="form-control"
                                                 value={PostingDate}
@@ -292,6 +292,7 @@ export class Announcements extends Component {
 
                                 </div>
                             </div>
+
                             {
                                 Id === 0 ?
                                     <button type='button'
