@@ -7,9 +7,11 @@ import './Announcements.css';
 
 
 
+
 export class Announcements extends Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             InternetQuestions: [],
             Announcements: [],
@@ -264,13 +266,16 @@ export class Announcements extends Component {
 
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Content</span>
-                                            <input
-                                                type="text"
+                                            <textarea
                                                 className="form-control"
                                                 value={Content}
                                                 onChange={this.changeContent}
-                                            />
+                                                rows="3" // Adjust the number of rows for the desired height
+                                                placeholder="Enter your content here..."
+                                            ></textarea>
                                         </div>
+
+
 
 
 
