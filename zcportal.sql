@@ -66,6 +66,4 @@ insert into dbo.Announcement values ('Event3', 'Event content should be here..!'
 insert into dbo.Announcement values ('Event4', 'Event content should be here', GETDATE(), 'anonymous.png')
 
 
-
-
 select * from dbo.Announcement

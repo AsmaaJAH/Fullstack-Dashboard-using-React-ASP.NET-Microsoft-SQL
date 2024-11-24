@@ -199,5 +199,43 @@ namespace zcportal.Controllers
             }
         }
 
+        //get a specific single announcement: 
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            string query = @"
+                    select Id, Title, Content,
+                    convert(varchar(10), PostingDate, 120) as PostingDate, PhotoFileName
+                    from
+                    dbo.Announcement
+                    where Id = @Id";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
+            SqlDataReader myReader;
+
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    // Add parameter to prevent SQL injection
+                    myCommand.Parameters.AddWithValue("@Id", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            if (table.Rows.Count == 0)
+            {
+                return new JsonResult(new { Message = "Announcement not found." }) { StatusCode = 404 };
+            }
+
+            return new JsonResult(table.Rows[0]);
+        }
+
     }
 }

@@ -3,6 +3,7 @@ import { Home } from './components/Home';
 import { OnboardingInternet } from './components/OnboardingInternet';
 import { FAQ } from './components/FAQ';
 import { Announcements} from './components/Announcements';
+import { SingleAnnouncement } from './components/SingleAnnouncement';
 
 import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom';
 
@@ -31,6 +32,7 @@ function App() {
               <Route path="/" element={<Navigate to="/home" />} />
               <Route path='/home' element={<Home />} />
               <Route path='/announcements' element={<Announcements />} />
+              <Route path="/announcement/:id" element={<SingleAnnouncement />} />
               <Route path='/OnboardingInternet' element={<OnboardingInternet />} />
               <Route path='/faq' element={<FAQ />} />
             </Routes>
