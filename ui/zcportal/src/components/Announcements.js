@@ -194,31 +194,37 @@ export class Announcements extends Component {
                 <h1 className="text-center mb-4">Announcements</h1>
 
                 <div className="row">
-                {Announcements.map((post) => (
+                    {Announcements.map((post) => (
                         <div className="col-md-4 mb-4" key={post.Id}>
                             <div className="card h-100 shadow-sm">
-                                {/* Image */}
-                                {post.PhotoFileName === null || post.PhotoFileName === 'anonymous.PNG' ? (
-                                    <img
-                                        src={`https://via.placeholder.com/300x200?text=${post.Title}`}
-                                        className="card-img-top"
-                                        alt="Announcement"
-                                    />)
-                                    : (
+                                <Link to={`/announcement/${post.Id}`} style={{ textDecoration: "none", color: "inherit", cursor: "pointer" }}>
+                                    {/* Image */}
+                                    {post.PhotoFileName === null || post.PhotoFileName === 'anonymous.PNG' ? (
                                         <img
-                                            src={PhotoPath + post.PhotoFileName}
+                                            src={`https://via.placeholder.com/300x200?text=${post.Title}`}
                                             className="card-img-top"
                                             alt="Announcement"
-                                        />)}
+                                        />)
+                                        : (
+                                            <img
+                                                src={PhotoPath + post.PhotoFileName}
+                                                className="card-img-top"
+                                                alt="Announcement"
+                                            />)}
 
-                                {/* Card Body */}
-                                <div className="card-body">
-                                    <h5 className="card-title">{post.Title}</h5>
-                                    <h6 className="card-subtitle mb-2 text-muted">
-                                        {new Date(post.PostingDate).toLocaleDateString()}
-                                    </h6>
-                                    <p className="card-text">{post.Content}</p>
-                                </div>
+                                    {/* Card Body */}
+                                    <div className="card-body">
+                                        <h5 className="card-title" style={{ color: variables.PRIMARY_COLOR }}>{post.Title}</h5>
+                                        <h6 className="card-subtitle mb-2 text-muted">
+                                            {new Date(post.PostingDate).toLocaleDateString()}
+                                        </h6>
+                                        <p className="card-text">
+                                            {post.Content.length > 50
+                                                ? `${post.Content.slice(0, 50)}...`
+                                                : post.Content}
+                                        </p>
+                                    </div>
+                                </Link>
                                 {/* Card Footer */}
                                 <div className="d-flex justify-content-between align-items-center p-2">
                                     <OptionsCell
@@ -228,10 +234,7 @@ export class Announcements extends Component {
                                         question={post}
                                     />
 
-                                    {/* Link to Single Announcement page */}
-                                    <Link to={`/announcement/${post.Id}`} className="btn btn-primary">
-                                        View Details
-                                    </Link>
+
                                 </div>
 
                             </div>
@@ -258,7 +261,7 @@ export class Announcements extends Component {
                                                 onChange={this.changeTitle} />
                                         </div>
 
-                                        
+
                                         <div className="input-group mb-3">
                                             <span className="input-group-text">Content</span>
                                             <input
