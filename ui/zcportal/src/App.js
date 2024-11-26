@@ -5,6 +5,7 @@ import { FAQ } from './components/FAQ';
 import { Announcements} from './components/Announcements';
 import { SingleAnnouncement } from './components/SingleAnnouncement';
 
+
 import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom';
 
 function App() {
