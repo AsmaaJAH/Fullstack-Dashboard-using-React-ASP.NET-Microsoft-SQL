@@ -22,7 +22,6 @@ function Signup() {
             isAdmin: 0,
         };
 
-        // Add Axios or API logic here
         axios.post(variables.API_URL + 'Authentication/registration', data)
             .then((Result) => {
                 alert(Result.data);
