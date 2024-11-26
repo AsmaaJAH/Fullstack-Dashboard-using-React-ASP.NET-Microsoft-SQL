@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
 import { variables } from "./Variables";
+import "./Login.css";
+
 
 function Login() {
     const [email, setEmail] = useState('');
