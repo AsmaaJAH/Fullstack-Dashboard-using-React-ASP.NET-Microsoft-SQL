@@ -1,4 +1,6 @@
-/*---------------------- Onboarding internet questions------------------------*/
+
+/*=================================== inside app ====================================================*/
+/*---------------------- Onboarding internet questions-----------------------------------------------*/
 
 create table dbo.InternetQuestion(
 QuestionSerialNumber int identity(1,1),
@@ -75,15 +77,36 @@ insert into dbo.Announcement values ('Event4', 'Event content should be here', G
 
 select * from dbo.Announcement
 
-
-/*---------------------- User ------------------------*/
+/*======================================================================================================================================*/
+/*------------------------------------------------------- Person Authentication --------------------------------------------------------*/
 create table dbo.Person(
-Id int identity(1,1),
-UserName nvarchar(500),
-PhoneNo nvarchar(20),
+Id int identity(1,1) primary key,
+Name nvarchar(500),
 Email nvarchar(500),
+Password nvarchar(500),
 isAdmin int,
 )
-
-insert into dbo.Person values ('asmaa', '+201124542122','asmaagamal.nagy@gmail.com', 1)
+insert into dbo.Person values ('asmaa','asmaagamal.nagy@gmail.com','password', 1)
 select * from dbo.Person
+
+CREATE PROCEDURE personlogin (@Email nvarchar(500), @Password nvarchar(500))
+AS
+BEGIN
+		SELECT * from dbo.Person WHERE Email=@Email AND Password=@Password
+END
+
+/*
+CREATE PROCEDURE registration (@Name nvarchar(500) ,@Email nvarchar(500), @Password nvarchar(500), @isAdmin int)
+AS
+BEGIN
+		INSERT INTO dbo.Person(Name, Email, Password, isAdmin) VALUES (@Name, @Email, @Password, @isAdmin)
+END
+*/
+
+
+/* delete from dbo.Person where Id=3 */
+
+
+/* UPDATE dbo.Person
+SET Name = 'asmaa gamal', Email = 'asma@gmail.com', Password='hello world'
+WHERE Id=3; */

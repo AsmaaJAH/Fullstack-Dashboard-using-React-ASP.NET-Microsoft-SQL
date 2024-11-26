@@ -25,7 +25,7 @@ namespace zcportal.Controllers
             string msg = string.Empty;
             try
             {
-                string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+                string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
                 using (SqlConnection conn = new SqlConnection(sqlDataSource))
                 {
                     using (SqlCommand cmd = new SqlCommand("registration", conn))
@@ -53,12 +53,13 @@ namespace zcportal.Controllers
 
         //----------------------------------------------- Login ---------------------------------
         [HttpPost("login")]
+
         public JsonResult Login(Person person)
         {
             string msg = string.Empty;
             try
             {
-                string sqlDataSource = _configuration.GetConnectionString("DefaultConnection");
+                string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
                 using (SqlConnection conn = new SqlConnection(sqlDataSource))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter("personlogin", conn))
