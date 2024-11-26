@@ -29,8 +29,16 @@ function Login() {
 
     return (
         <Fragment>
+            <div className="logo-container">
+                    <img 
+                        src="logo.jpg" 
+                        alt="Zewail Logo" 
+                        className="logo" 
+                    />
+                </div>
+            
             <div className="container">
-                <h1 className="header">Login</h1>
+                <h1 className="header">Sign in</h1>
                 
                 <div className="formGroup">
                     <label htmlFor="loginEmail" className="label">

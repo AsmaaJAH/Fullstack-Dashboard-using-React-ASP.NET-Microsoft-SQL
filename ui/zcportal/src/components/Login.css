@@ -3,7 +3,7 @@
     background-color: #fff; /* White background */
     color: #000; /* Black text */
     max-width: 400px;
-    margin: 50px auto;
+    margin: 20px auto;
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #ddd; /* Light border for better definition */
@@ -62,5 +62,19 @@
   .button:hover {
     background-color: #007a8f; /* Slightly darker on hover */
   }
-  
+  .logo-container {
+    margin-top: 2%;
+    text-align: center;
+}
+
+.logo {
+    width: 200px; /* Make the logo larger */
+    height: auto;
+    border-radius: 15px; /* Curved borders */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Elevation shadow */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation */
+}
+
+
+
   
