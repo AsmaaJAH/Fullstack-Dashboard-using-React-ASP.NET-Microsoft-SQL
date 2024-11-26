@@ -74,3 +74,16 @@ insert into dbo.Announcement values ('Event4', 'Event content should be here', G
 
 
 select * from dbo.Announcement
+
+
+/*---------------------- User ------------------------*/
+create table dbo.Person(
+Id int identity(1,1),
+UserName nvarchar(500),
+PhoneNo nvarchar(20),
+Email nvarchar(500),
+isAdmin int,
+)
+
+insert into dbo.Person values ('asmaa', '+201124542122','asmaagamal.nagy@gmail.com', 1)
+select * from dbo.Person
