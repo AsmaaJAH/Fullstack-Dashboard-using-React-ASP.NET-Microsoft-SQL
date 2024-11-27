@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { variables } from "./Variables";
 import "./Login.css";
-
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Initialize navigate
 
     const handleEmailChange = (value) => setEmail(value);
     const handlePasswordChange = (value) => setPassword(value);
@@ -19,9 +20,14 @@ function Login() {
 
         axios.post(variables.API_URL + 'Authentication/login', data)
             .then((Result) => {
-                alert(Result.data);
-            }).catch((error) => {
-                alert(error.response.data);
+                if (Result.data === "Email and password are correct!") {
+                    navigate("/"); // Navigate to the root route
+                } else {
+                    alert(Result.data);
+                }
+            })
+            .catch((error) => {
+                alert(error.response?.data || "An error occurred");
             });
 
         console.log("Submitted Data:", data);
@@ -29,19 +35,21 @@ function Login() {
 
     return (
         <Fragment>
-            <div className="logo-container">
-                    <img 
-                        src="logo.jpg" 
-                        alt="Zewail Logo" 
-                        className="logo" 
-                    />
-                </div>
+            {/* Logo Section */}
+            <div className="login-logo-container">
+                <img 
+                    src="logo.jpg" 
+                    alt="Zewail Logo" 
+                    className="login-logo" 
+                />
+            </div>
             
-            <div className="container">
-                <h1 className="header">Sign in</h1>
+            {/* Login Form Section */}
+            <div className="login-container">
+                <h1 className="login-header">Sign in</h1>
                 
-                <div className="formGroup">
-                    <label htmlFor="loginEmail" className="label">
+                <div className="login-formGroup">
+                    <label htmlFor="loginEmail" className="login-label">
                         Email:
                     </label>
                     <input
@@ -49,11 +57,11 @@ function Login() {
                         id="loginEmail"
                         placeholder="Enter your email"
                         onChange={(event) => handleEmailChange(event.target.value)}
-                        className="input"
+                        className="login-input"
                     />
                 </div>
-                <div className="formGroup">
-                    <label htmlFor="loginPassword" className="label">
+                <div className="login-formGroup">
+                    <label htmlFor="loginPassword" className="login-label">
                         Password:
                     </label>
                     <input
@@ -61,10 +69,10 @@ function Login() {
                         id="loginPassword"
                         placeholder="Enter your password"
                         onChange={(event) => handlePasswordChange(event.target.value)}
-                        className="input"
+                        className="login-input"
                     />
                 </div>
-                <button onClick={handleSaveClick} className="button">
+                <button onClick={handleSaveClick} className="login-button">
                     Login
                 </button>
             </div>
