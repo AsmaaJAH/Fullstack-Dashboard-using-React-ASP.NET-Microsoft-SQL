@@ -13,7 +13,17 @@ function Login({ onLoginSuccess }) {
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
 
+    const isValidZewailEmail = (email) => {
+        const domain = "@zewailcity.edu.eg";
+        return email.endsWith(domain);
+    };
+
     const handleSaveClick = () => {
+        if (!isValidZewailEmail(email)) {
+            setErrorMessage("Please use a valid Zewail City email address.");
+            return; // Stop execution if email is invalid
+        }
+
         const data = {
             Email: email,
             Password: password,
@@ -49,9 +59,6 @@ function Login({ onLoginSuccess }) {
             <div className="login-container">
                 <h1 className="login-header">Sign In</h1>
 
-                {/* Error Message */}
-                {errorMessage && <p className="login-error">{errorMessage}</p>}
-
                 <div className="login-formGroup">
                     <label htmlFor="loginEmail" className="login-label">
                         Email:
@@ -64,6 +71,12 @@ function Login({ onLoginSuccess }) {
                         onChange={handleEmailChange}
                         className="login-input"
                     />
+                    {/* Error message below the input */}
+                    {errorMessage && (
+                        <p className="login-email-error-message">
+                            {errorMessage}
+                        </p>
+                    )}
                 </div>
                 <div className="login-formGroup">
                     <label htmlFor="loginPassword" className="login-label">
@@ -87,3 +100,5 @@ function Login({ onLoginSuccess }) {
 }
 
 export default Login;
+
+

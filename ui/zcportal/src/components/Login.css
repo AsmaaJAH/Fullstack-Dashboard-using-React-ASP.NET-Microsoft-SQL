@@ -25,7 +25,8 @@
     margin-bottom: 5px;
     font-size: 14px;
     font-weight: bold;
-    color: #333; /* Slightly darker text for labels */
+    color: #333; 
+    text-align: left;
   }
   
   .login-input {
@@ -73,5 +74,9 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Elevation shadow */
     transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation */
 }
-
+.login-email-error-message {
+  color: red;
+  font-size: 0.8rem; /* Small font size */
+  margin-top: 4px;  /* Spacing between input field and error */
+}
 
