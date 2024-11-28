@@ -103,10 +103,8 @@ BEGIN
 END
 */
 
-
-/* delete from dbo.Person where Id=3 */
-
-
-/* UPDATE dbo.Person
-SET Name = 'asmaa gamal', Email = 'asma@gmail.com', Password='hello world'
+/* delete from dbo.Person where Id=3 
+UPDATE dbo.Person
+SET Name = 'asmaa gamal', Email = 'asma@zewailcity.edu.eg', Password='hello world'
 WHERE Id=3; */
+

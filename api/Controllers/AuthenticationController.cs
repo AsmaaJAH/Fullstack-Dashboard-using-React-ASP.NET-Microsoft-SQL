@@ -73,7 +73,7 @@ namespace zcportal.Controllers
 
                         msg = dataTable.Rows.Count > 0
                             ? "Email and password are correct!"
-                            : "Email or password are incorrect!";
+                            : "Email or password are invalid!";
                     }
                 }
             }

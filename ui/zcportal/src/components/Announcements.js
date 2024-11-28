@@ -243,7 +243,6 @@ export class Announcements extends Component {
                         </div>
                     ))}
                 </div>
-
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-hidden="true">
                     <div className="modal-dialog modal-lg modal-dialog-centered">
                         <div className="modal-content">
