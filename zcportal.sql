@@ -86,7 +86,7 @@ Email nvarchar(500),
 Password nvarchar(500),
 isAdmin int,
 )
-insert into dbo.Person values ('asmaa','asmaagamal.nagy@gmail.com','password', 1)
+insert into dbo.Person values ('asmaa','asmaagamal.nagy@zewailcity.edu.eg','password', 0)
 select * from dbo.Person
 
 CREATE PROCEDURE personlogin (@Email nvarchar(500), @Password nvarchar(500))
@@ -95,16 +95,19 @@ BEGIN
 		SELECT * from dbo.Person WHERE Email=@Email AND Password=@Password
 END
 
-/*
+
 CREATE PROCEDURE registration (@Name nvarchar(500) ,@Email nvarchar(500), @Password nvarchar(500), @isAdmin int)
 AS
 BEGIN
 		INSERT INTO dbo.Person(Name, Email, Password, isAdmin) VALUES (@Name, @Email, @Password, @isAdmin)
 END
-*/
 
-/* delete from dbo.Person where Id=3 
+
+/* delete from dbo.Person where Id=3 */
+
+/*
 UPDATE dbo.Person
 SET Name = 'asmaa gamal', Email = 'asma@zewailcity.edu.eg', Password='hello world'
-WHERE Id=3; */
-
+WHERE Id=1; 
+select * from dbo.Person
+*/
