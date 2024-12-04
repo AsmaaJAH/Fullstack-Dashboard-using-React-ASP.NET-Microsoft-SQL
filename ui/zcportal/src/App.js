@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css'; 
 import { Home } from './components/Home';
+import {Attendance}from'./components/Attendance';
+import {HRrequests} from'./components/HRrequests';
 import { OnboardingInternet } from './components/OnboardingInternet';
 import { FAQ } from './components/FAQ';
 import { Announcements } from './components/Announcements';
@@ -31,6 +33,8 @@ function App() {
                 <NavLink className="nav-link" to="/announcements">Announcements</NavLink>
                 <NavLink className="nav-link" to="/OnboardingInternet">Onboarding Internet</NavLink>
                 <NavLink className="nav-link" to="/faq">FAQ</NavLink>
+                <NavLink className="nav-link" to="/attendance">Attendance</NavLink>
+                <NavLink className="nav-link" to="/HRrequests">HR Requests</NavLink>
               </nav>
             </div>
           )}
@@ -53,6 +57,8 @@ function App() {
                   <Route path="/announcement/:id" element={<SingleAnnouncement />} />
                   <Route path="/OnboardingInternet" element={<OnboardingInternet />} />
                   <Route path="/faq" element={<FAQ />} />
+                  <Route path="/attendance" element={<Attendance/>} />
+                  <Route path="/HRrequests" element={< HRrequests/>} />
                 </>
               )}
             </Routes>
