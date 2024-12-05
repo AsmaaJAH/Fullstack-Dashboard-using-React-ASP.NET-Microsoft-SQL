@@ -1,0 +1,70 @@
+:root {
+    --primary-color: #009ab5;
+    --selected-color: #00758a; /* A darker shade of the primary color */
+  }
+  
+  .sidebar {
+    background-color: var(--primary-color);
+    height: 100vh;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    color: white; /* Adjust text color for readability */
+  }
+  
+  .sidebar-logo {
+    width: 100px;
+    height: auto;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: white; /* Title text matches the theme */
+  }
+  
+  .nav {
+    margin-top: 20px;
+  }
+  
+  .main-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: white; /* Main title remains visible on primary background */
+    text-transform: uppercase;
+  }
+  
+  .section {
+    margin-top: 20px;
+  }
+  
+  .title {
+    font-weight: bold;
+    color: white; /* Section titles stand out */
+    margin-bottom: 5px;
+  }
+  
+  .subtitle {
+    margin-left: 20px;
+    font-size: 0.9rem;
+    color: white; /* Ensure contrast */
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline;
+    color: #cce7ef; /* A lighter shade for hover */
+  }
+  
+  .nav-link.active {
+    background-color: var(--selected-color);
+    color: white;
+    font-weight: bold; /* Highlight the active tab */
+  }
+  

@@ -33,7 +33,7 @@ function App() {
                 <NavLink className="nav-link" to="/announcements">Announcements</NavLink>
                 <NavLink className="nav-link" to="/OnboardingInternet">Onboarding Internet</NavLink>
                 <NavLink className="nav-link" to="/faq">FAQ</NavLink>
-                <NavLink className="nav-link" to="/attendance">Attendance</NavLink>
+                <NavLink className="nav-link" to="/attendance">Attendance Tracking</NavLink>
                 <NavLink className="nav-link" to="/HRrequests">HR Requests</NavLink>
               </nav>
             </div>
