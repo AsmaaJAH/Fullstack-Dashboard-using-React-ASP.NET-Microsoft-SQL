@@ -1,0 +1,18 @@
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: start;
+    padding-bottom:2.5%; 
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+
+  
