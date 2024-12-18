@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { variables } from './Variables';
-import AddButton  from './AddButton';
-import  OptionsCell  from './OptionsCell';
+import AddButton from './AddButton';
+import OptionsCell from './OptionsCell';
+
+// Debounce function (to limit how often the filter function is called)
+const useDebounce = (value: string, delay: number) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+
+    return debouncedValue;
+};
 
 interface Question {
     QuestionSerialNumber: number;
     DeviceType: string;
     Instructions: string;
-    Id: string | number;  
-
+    Id: string | number;
 }
 
 export const OnboardingInternet: React.FC = () => {
@@ -21,9 +37,17 @@ export const OnboardingInternet: React.FC = () => {
     const [instructionsFilter, setInstructionsFilter] = useState<string>('');
     const [departmentsWithoutFilter, setDepartmentsWithoutFilter] = useState<Question[]>([]);
 
+    // Use debounce for filters
+    const debouncedSerialNumberFilter = useDebounce(questionSerialNumberFilter, 500);
+    const debouncedInstructionsFilter = useDebounce(instructionsFilter, 500);
+
     useEffect(() => {
         refreshList();
     }, []);
+
+    useEffect(() => {
+        filterFn();
+    }, [debouncedSerialNumberFilter, debouncedInstructionsFilter]);
 
     const refreshList = async () => {
         try {
@@ -39,9 +63,9 @@ export const OnboardingInternet: React.FC = () => {
     const filterFn = () => {
         const filteredData = departmentsWithoutFilter.filter((element) =>
             element.QuestionSerialNumber.toString().toLowerCase().includes(
-                questionSerialNumberFilter.trim().toLowerCase()
+                debouncedSerialNumberFilter.trim().toLowerCase()
             ) &&
-            element.Instructions.toLowerCase().includes(instructionsFilter.trim().toLowerCase())
+            element.Instructions.toLowerCase().includes(debouncedInstructionsFilter.trim().toLowerCase())
         );
         setInternetQuestions(filteredData);
     };
@@ -59,12 +83,10 @@ export const OnboardingInternet: React.FC = () => {
 
     const handleQuestionSerialNumberFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuestionSerialNumberFilter(event.target.value);
-        filterFn();
     };
 
     const handleInstructionsFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInstructionsFilter(event.target.value);
-        filterFn();
     };
 
     const handleInstructionsChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -132,7 +154,7 @@ export const OnboardingInternet: React.FC = () => {
         }
     };
 
-    const handleDeleteClick = async (id: string |number) => {
+    const handleDeleteClick = async (id: string | number) => {
         if (window.confirm('Are you sure you wanna delete this Department?')) {
             try {
                 const response = await fetch(variables.API_URL + 'OnBoardingInternet/' + id, {
@@ -238,40 +260,44 @@ export const OnboardingInternet: React.FC = () => {
                                 <select className="form-select" onChange={handleDeviceTypeChange} value={deviceType}>
                                     <option value="android">Android</option>
                                     <option value="iphone">iPhone</option>
-                                    <option value="windows">Windows</option>
                                     <option value="mac">Mac</option>
+                                    <option value="windows">Windows</option>
+                                    <option value="others">Other</option>
                                     <option value="troubleshooting">Troubleshooting</option>
-                                    <option value="others">Others</option>
                                 </select>
                             </div>
+                        </div>
+                        <div className="modal-footer d-flex justify-content-center mb-3">
+
                             {questionSerialNumber === 0 ? (
-                                <button
-                                    type="button"
-                                    style={{
-                                        backgroundColor: variables.PRIMARY_COLOR,
-                                        borderColor: variables.PRIMARY_COLOR,
-                                        color: 'white',
-                                    }}
-                                    className="btn btn-primary float-start"
-                                    onClick={handleCreateClick}
-                                >
-                                    Create
-                                </button>
-                            ) : null}
-                            {questionSerialNumber !== 0 ? (
-                                <button
-                                    type="button"
-                                    style={{
-                                        backgroundColor: variables.PRIMARY_COLOR,
-                                        borderColor: variables.PRIMARY_COLOR,
-                                        color: 'white',
-                                    }}
-                                    className="btn btn-primary float-start"
-                                    onClick={handleUpdateClick}
-                                >
-                                    Update
-                                </button>
-                            ) : null}
+                                    <button
+                                        type="button"
+                                        style={{
+                                            backgroundColor: variables.PRIMARY_COLOR,
+                                            borderColor: variables.PRIMARY_COLOR,
+                                            color: "white",
+                                            fontWeight: "bold",
+                                        }}
+                                        className="btn btn-primary"
+                                        onClick={handleCreateClick}
+                                    >
+                                        Create
+                                    </button>
+                            ) : (
+                                    <button
+                                        type="button"
+                                        style={{
+                                            backgroundColor: variables.PRIMARY_COLOR,
+                                            borderColor: variables.PRIMARY_COLOR,
+                                            color: "white",
+                                            fontWeight: "bold",
+                                        }}
+                                        className="btn btn-primary"
+                                        onClick={handleUpdateClick}
+                                    >
+                                        Update
+                                    </button>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -1,58 +1,28 @@
+/* Global container for the app */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
+  flex-direction: row;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} 
-
-
 
 /* Left sidebar styling */
 .sidebar {
-  background-color: #00b3d1; /* Background color */
-  color: white; /* Text color */
-  min-height: 100vh;
+  background-color: #00b3d1; /* Sidebar background */
+  color: white;
+  min-height: 100vh; /* Ensure full height */
   padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px; /* Adjust width as per your design */
+  z-index: 1000;
 }
 
 /* Sidebar logo styling */
 .sidebar-logo {
-  width: 150px; 
+  width: 150px;
   height: auto;
 }
-
 
 .sidebar .nav-link {
   color: white; /* Text color for links */
@@ -70,8 +40,31 @@
   border-radius: 5px;
 }
 
-/* Content area */
+/* Content area styling */
 .content {
+  margin-left: 250px; /* Match the sidebar width */
   padding: 20px;
+  flex: 1;
+  overflow-y: auto;
 }
 
+/* Ensuring content does not overlap with sidebar */
+.row {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+}
+
+/* Adding responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}
