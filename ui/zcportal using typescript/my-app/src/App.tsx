@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './App.css'; 
 import Home from './components/Home';
 import Attendance from'./components/Attendance';
@@ -7,14 +6,11 @@ import  { OnboardingInternet } from './components/OnboardingInternet';
 
 import FAQ  from './components/FAQ';
 
-import { Announcements } from './components/Announcements';
-import { SingleAnnouncement } from './components/SingleAnnouncement';
+import Announcements  from './components/Announcements';
+import SingleAnnouncement from './components/SingleAnnouncement';
 import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom';
 
 function App() {
-
-
-
   return (
     <BrowserRouter>
       <div className="App container-fluid">
