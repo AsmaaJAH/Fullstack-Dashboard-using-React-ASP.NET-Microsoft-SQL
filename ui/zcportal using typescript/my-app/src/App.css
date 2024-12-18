@@ -1,0 +1,70 @@
+/* Global container for the app */
+.App {
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+}
+
+/* Left sidebar styling */
+.sidebar {
+  background-color: #00b3d1; /* Sidebar background */
+  color: white;
+  min-height: 100vh; /* Ensure full height */
+  padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px; /* Adjust width as per your design */
+  z-index: 1000;
+}
+
+/* Sidebar logo styling */
+.sidebar-logo {
+  width: 150px;
+  height: auto;
+}
+
+.sidebar .nav-link {
+  color: white; /* Text color for links */
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 10px;
+  margin: 5px 0;
+  text-align: left;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #009ab5;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Content area styling */
+.content {
+  margin-left: 250px; /* Match the sidebar width */
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Ensuring content does not overlap with sidebar */
+.row {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+}
+
+/* Adding responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}

@@ -3,6 +3,16 @@ import { variables } from './Variables.js';
 import { AddButton } from './AddButton.js';
 import { OptionsCell } from './OptionsCell.js';
 
+// const FAQ = () => {
+//     return (
+//         <div>
+        
+//         </div>
+//     );
+// };
+
+// export default FAQ;
+
 export class FAQ extends Component {
     constructor(props) {
         super(props);
