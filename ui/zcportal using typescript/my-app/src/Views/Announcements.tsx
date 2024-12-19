@@ -1,145 +1,111 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { variables } from '../components/Variables.js';
-import AddButton  from '../components/AddButton.js';
-import OptionsCell from '../components/OptionsCell.js';
+import { fetchAnnouncements, createAnnouncement, updateAnnouncement, deleteAnnouncement, uploadImage } from '../API/AnnouncementsAPI';
+import { variables } from '../components/Variables';
+import AddButton from '../components/AddButton';
+import OptionsCell from '../components/OptionsCell';
 import '../Styles/Announcements.css';
 
 const Announcements: React.FC = () => {
-  const [announcements, setAnnouncements] = useState([]);
-  const [internetQuestions, setInternetQuestions] = useState([]);
-  const [modalTitle, setModalTitle] = useState('');
-  const [id, setId] = useState(0);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [postingDate, setPostingDate] = useState('');
-  const [photoFileName, setPhotoFileName] = useState('anonymous.PNG');
-  const photoPath = variables.PHOTO_URL;
+    const [announcements, setAnnouncements] = useState<any[]>([]);
+    const [modalTitle, setModalTitle] = useState('');
+    const [id, setId] = useState(0);
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [postingDate, setPostingDate] = useState('');
+    const [photoFileName, setPhotoFileName] = useState('anonymous.PNG');
+    const photoPath = variables.PHOTO_URL;
 
-  const refreshList = async () => {
-    try {
-      const announcementsResponse = await fetch(variables.API_URL + 'Announcement');
-      const announcementsData = await announcementsResponse.json();
-      setAnnouncements(announcementsData);
+    const refreshList = async () => {
+        try {
+            const announcementsData = await fetchAnnouncements();
+            setAnnouncements(announcementsData);
+        } catch (error: any) {
+            alert('Failed to fetch data: ' + error.message);
+        }
+    };
 
-      const internetQuestionsResponse = await fetch(variables.API_URL + 'OnBoardingInternet');
-      const internetQuestionsData = await internetQuestionsResponse.json();
-      setInternetQuestions(internetQuestionsData);
-    } catch (error: any  ) {
-      alert('Failed to fetch data: ' + error.message);
-    }
-  };
-
-  useEffect(() => {
-    refreshList();
-  }, []);
-
-  const handleAddClick = () => {
-    setModalTitle('Add Announcement');
-    setId(0);
-    setTitle('');
-    setContent('');
-    setPostingDate('');
-    setPhotoFileName('anonymous.PNG');
-  };
-
-  const handleEditClick = (announcement: any) => {
-    setModalTitle('Edit Announcement');
-    setId(announcement.Id);
-    setTitle(announcement.Title);
-    setContent(announcement.Content);
-    setPostingDate(announcement.PostingDate);
-    setPhotoFileName(announcement.PhotoFileName);
-  };
-
-  const handleCreateClick = async () => {
-    try {
-      const response = await fetch(variables.API_URL + 'Announcement', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Title: title,
-          Content: content,
-          PostingDate: postingDate,
-          PhotoFileName: photoFileName,
-        }),
-      });
-      const result = await response.json();
-      alert(result);
-      refreshList();
-    } catch (error : any) {
-      alert('Failed: ' + error.message);
-    }
-  };
-
-  const handleUpdateClick = async () => {
-    try {
-      const response = await fetch(variables.API_URL + 'Announcement', {
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Id: id,
-          Title: title,
-          Content: content,
-          PostingDate: postingDate,
-          PhotoFileName: photoFileName,
-        }),
-      });
-      const result = await response.json();
-      alert(result);
-      refreshList();
-    } catch (error : any) {
-      alert('Failed: ' + error.message);
-    }
-  };
-
-  const handleDeleteClick = async (deleteId: number) => {
-    if (window.confirm('Are you sure you want to delete this announcement?')) {
-      try {
-        const response = await fetch(variables.API_URL + 'Announcement/' + deleteId, {
-          method: 'DELETE',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-        });
-        const result = await response.json();
-        alert(result);
+    useEffect(() => {
         refreshList();
-      } catch (error : any) {
-        alert('Failed: ' + error.message);
-      }
-    }
-  };
+    }, []);
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const formData = new FormData();
-      formData.append('file', event.target.files[0]);
+    const handleAddClick = () => {
+        setModalTitle('Add Announcement');
+        setId(0);
+        setTitle('');
+        setContent('');
+        setPostingDate('');
+        setPhotoFileName('anonymous.PNG');
+    };
 
-      try {
-        const response = await fetch(variables.API_URL + 'Announcement/SaveFile', {
-          method: 'POST',
-          body: formData,
-        });
-        const data = await response.json();
-        setPhotoFileName(data);
-      } catch (error : any) {
-        alert('Failed to upload image: ' + error.message);
-      }
-    } else {
-      alert('No file selected. Please select a file and try again.');
-    }
-  };
+    const handleEditClick = (announcement: any) => {
+        setModalTitle('Edit Announcement');
+        setId(announcement.Id);
+        setTitle(announcement.Title);
+        setContent(announcement.Content);
+        setPostingDate(announcement.PostingDate);
+        setPhotoFileName(announcement.PhotoFileName);
+    };
 
-  return (
-    <div>
+    const handleCreateClick = async () => {
+        try {
+            await createAnnouncement({
+                Title: title,
+                Content: content,
+                PostingDate: postingDate,
+                PhotoFileName: photoFileName,
+            });
+            alert('Announcement added successfully.');
+            refreshList();
+        } catch (error: any) {
+            alert('Failed to add announcement: ' + error.message);
+        }
+    };
+
+    const handleUpdateClick = async () => {
+        try {
+            await updateAnnouncement({
+                Id: id,
+                Title: title,
+                Content: content,
+                PostingDate: postingDate,
+                PhotoFileName: photoFileName,
+            });
+            alert('Announcement updated successfully.');
+            refreshList();
+        } catch (error: any) {
+            alert('Failed to update announcement: ' + error.message);
+        }
+    };
+
+    const handleDeleteClick = async (deleteId: number) => {
+        if (window.confirm('Are you sure you want to delete this announcement?')) {
+            try {
+                await deleteAnnouncement(deleteId);
+                alert('Announcement deleted successfully.');
+                refreshList();
+            } catch (error: any) {
+                alert('Failed to delete announcement: ' + error.message);
+            }
+        }
+    };
+
+    const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            try {
+                const fileName = await uploadImage(event.target.files[0]);
+                setPhotoFileName(fileName);
+            } catch (error: any) {
+                alert('Failed to upload image: ' + error.message);
+            }
+        } else {
+            alert('No file selected. Please select a file and try again.');
+        }
+    };
+
+    return (
+      <div>
       <AddButton addClick={handleAddClick} />
       <h1 className="text-center mb-4">Announcements</h1>
 
@@ -209,7 +175,9 @@ const Announcements: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+
+ 
+    );
 };
 
 export default Announcements;

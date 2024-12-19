@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { variables } from '../components/Variables';
+import { fetchAnnouncementById } from '../API/SingleAnnouncementAPI';
 import '../Styles/SingleAnnouncement.css';
-import {Announcement} from '../Models/Announcement';
-
+import { Announcement } from '../Models/Announcement';
+import { variables } from '../components/Variables';
 
 const SingleAnnouncement: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -11,20 +11,11 @@ const SingleAnnouncement: React.FC = () => {
 
     useEffect(() => {
         const fetchAnnouncement = async () => {
-            try {
-                const response = await fetch(`${variables.API_URL}Announcement/${id}`);
-                const data = await response.json();
-                if (data.Table && data.Table.length > 0) {
-                    setAnnouncement(data.Table[0]);
-                } else {
-                    setAnnouncement(null);
-                }
-            } catch (error) {
-                console.error('Error fetching announcement:', error);
-                setAnnouncement(null);
+            if (id) {
+                const fetchedAnnouncement = await fetchAnnouncementById(id);
+                setAnnouncement(fetchedAnnouncement);
             }
         };
-
         fetchAnnouncement();
     }, [id]);
 
