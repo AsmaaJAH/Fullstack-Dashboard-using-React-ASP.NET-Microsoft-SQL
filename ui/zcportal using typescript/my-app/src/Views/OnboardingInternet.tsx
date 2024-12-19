@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { variables } from './Variables';
-import AddButton from './AddButton';
-import OptionsCell from './OptionsCell';
+import { variables } from '../components/Variables';
+import AddButton from '../components/AddButton';
+import OptionsCell from '../components/OptionsCell';
+import { Question } from '../Models/Question';
 
 // Debounce function (to limit how often the filter function is called)
 const useDebounce = (value: string, delay: number) => {
@@ -20,12 +21,6 @@ const useDebounce = (value: string, delay: number) => {
     return debouncedValue;
 };
 
-interface Question {
-    QuestionSerialNumber: number;
-    DeviceType: string;
-    Instructions: string;
-    Id: string | number;
-}
 
 export const OnboardingInternet: React.FC = () => {
     const [internetQuestions, setInternetQuestions] = useState<Question[]>([]);

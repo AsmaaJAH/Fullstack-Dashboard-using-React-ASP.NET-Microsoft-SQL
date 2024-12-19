@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { variables } from './Variables';
-import './SingleAnnouncement.css';
+import { variables } from '../components/Variables';
+import '../Styles/SingleAnnouncement.css';
+import {Announcement} from '../Models/Announcement';
 
-interface Announcement {
-    Title: string;
-    Content: string;
-    PostingDate: string;
-    PhotoFileName?: string;
-}
 
 const SingleAnnouncement: React.FC = () => {
     const { id } = useParams<{ id: string }>();

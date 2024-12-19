@@ -1,11 +1,11 @@
 import './App.css'; 
-import Home from './components/Home';
-import Attendance from './components/Attendance';
-import HRrequests from './components/HRrequests';
-import { OnboardingInternet } from './components/OnboardingInternet';
-import FAQ from './components/FAQ';
-import Announcements from './components/Announcements';
-import SingleAnnouncement from './components/SingleAnnouncement';
+import Home from './Views/Home';
+import Attendance from './Views/Attendance';
+import HRrequests from './Views/HRrequests';
+import { OnboardingInternet } from './Views/OnboardingInternet';
+import FAQ from './Views/FAQ';
+import Announcements from './Views/Announcements';
+import SingleAnnouncement from './Views/SingleAnnouncement';
 import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom';
 
 function App() {

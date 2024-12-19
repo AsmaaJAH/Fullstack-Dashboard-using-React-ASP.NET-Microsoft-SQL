@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { variables } from './Variables';
-import AddButton  from './AddButton';
-import OptionsCell  from './OptionsCell';
+import { variables } from '../components/Variables';
+import AddButton  from '../components/AddButton';
+import OptionsCell  from '../components/OptionsCell';
 
 const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

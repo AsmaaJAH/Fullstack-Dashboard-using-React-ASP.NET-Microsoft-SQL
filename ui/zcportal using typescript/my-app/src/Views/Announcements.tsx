@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { variables } from './Variables.js';
-import AddButton  from './AddButton.js';
-import OptionsCell from './OptionsCell.js';
-import './Announcements.css';
+import { variables } from '../components/Variables.js';
+import AddButton  from '../components/AddButton.js';
+import OptionsCell from '../components/OptionsCell.js';
+import '../Styles/Announcements.css';
 
 const Announcements: React.FC = () => {
   const [announcements, setAnnouncements] = useState([]);
