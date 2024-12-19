@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { variables } from '../components/Variables';
+import { fetchInternetQuestions, createInternetQuestion, updateInternetQuestion, deleteInternetQuestion } from '../API/OnboardingInternetAPI';
 import AddButton from '../components/AddButton';
 import OptionsCell from '../components/OptionsCell';
 import { Question } from '../Models/Question';
+import { variables } from '../components/Variables';
 
 // Debounce function (to limit how often the filter function is called)
 const useDebounce = (value: string, delay: number) => {
@@ -21,7 +22,6 @@ const useDebounce = (value: string, delay: number) => {
     return debouncedValue;
 };
 
-
 export const OnboardingInternet: React.FC = () => {
     const [internetQuestions, setInternetQuestions] = useState<Question[]>([]);
     const [modalTitle, setModalTitle] = useState<string>('');
@@ -32,7 +32,6 @@ export const OnboardingInternet: React.FC = () => {
     const [instructionsFilter, setInstructionsFilter] = useState<string>('');
     const [departmentsWithoutFilter, setDepartmentsWithoutFilter] = useState<Question[]>([]);
 
-    // Use debounce for filters
     const debouncedSerialNumberFilter = useDebounce(questionSerialNumberFilter, 500);
     const debouncedInstructionsFilter = useDebounce(instructionsFilter, 500);
 
@@ -46,20 +45,17 @@ export const OnboardingInternet: React.FC = () => {
 
     const refreshList = async () => {
         try {
-            const response = await fetch(variables.API_URL + 'OnBoardingInternet');
-            const data: Question[] = await response.json();
+            const data = await fetchInternetQuestions();
             setInternetQuestions(data);
             setDepartmentsWithoutFilter(data);
-        } catch (error) {
-            alert('Failed to fetch data');
+        } catch (error: any) {
+            alert(error.message);
         }
     };
 
     const filterFn = () => {
         const filteredData = departmentsWithoutFilter.filter((element) =>
-            element.QuestionSerialNumber.toString().toLowerCase().includes(
-                debouncedSerialNumberFilter.trim().toLowerCase()
-            ) &&
+            element.QuestionSerialNumber.toString().toLowerCase().includes(debouncedSerialNumberFilter.trim().toLowerCase()) &&
             element.Instructions.toLowerCase().includes(debouncedInstructionsFilter.trim().toLowerCase())
         );
         setInternetQuestions(filteredData);
@@ -75,11 +71,9 @@ export const OnboardingInternet: React.FC = () => {
         });
         setInternetQuestions(sortedData);
     };
-
     const handleQuestionSerialNumberFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuestionSerialNumberFilter(event.target.value);
     };
-
     const handleInstructionsFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInstructionsFilter(event.target.value);
     };
@@ -108,62 +102,32 @@ export const OnboardingInternet: React.FC = () => {
 
     const handleCreateClick = async () => {
         try {
-            const response = await fetch(variables.API_URL + 'OnBoardingInternet', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    Instructions: instructions,
-                    DeviceType: deviceType,
-                }),
-            });
-            const result = await response.json();
+            const result = await createInternetQuestion(instructions, deviceType);
             alert(result);
             refreshList();
-        } catch (error) {
-            alert('Failed to create');
+        } catch (error : any) {
+            alert(error.message);
         }
     };
 
     const handleUpdateClick = async () => {
         try {
-            const response = await fetch(variables.API_URL + 'OnBoardingInternet', {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    QuestionSerialNumber: questionSerialNumber,
-                    Instructions: instructions,
-                    DeviceType: deviceType,
-                }),
-            });
-            const result = await response.json();
+            const result = await updateInternetQuestion(questionSerialNumber, instructions, deviceType);
             alert(result);
             refreshList();
-        } catch (error) {
-            alert('Failed to update');
+        } catch (error: any) {
+            alert(error.message);
         }
     };
 
     const handleDeleteClick = async (id: string | number) => {
         if (window.confirm('Are you sure you wanna delete this Department?')) {
             try {
-                const response = await fetch(variables.API_URL + 'OnBoardingInternet/' + id, {
-                    method: 'DELETE',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const result = await response.json();
+                const result = await deleteInternetQuestion(id);
                 alert(result);
                 refreshList();
-            } catch (error) {
-                alert('Failed to delete');
+            } catch (error: any) {
+                alert(error.message);
             }
         }
     };
