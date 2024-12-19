@@ -1,117 +1,89 @@
 import React, { useState, useEffect } from 'react';
+import { fetchFAQs, createFAQ, updateFAQ, deleteFAQ } from '../API/FaqAPI';
+import AddButton from '../components/AddButton';
+import OptionsCell from '../components/OptionsCell';
 import { variables } from '../components/Variables';
-import AddButton  from '../components/AddButton';
-import OptionsCell  from '../components/OptionsCell';
 
 const FAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [FAQs, setFAQs] = useState<any[]>([]);
-  const [modalTitle, setModalTitle] = useState<string>('');
-  const [Id, setId] = useState<number>(0);
-  const [QuestionTitle, setQuestionTitle] = useState<string>('');
-  const [Answer, setAnswer] = useState<string>('');
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const [FAQs, setFAQs] = useState<any[]>([]);
+    const [modalTitle, setModalTitle] = useState<string>('');
+    const [Id, setId] = useState<number>(0);
+    const [QuestionTitle, setQuestionTitle] = useState<string>('');
+    const [Answer, setAnswer] = useState<string>('');
 
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(prevIndex => (prevIndex === index ? null : index));
-  };
+    const toggleFAQ = (index: number) => {
+        setOpenIndex(prevIndex => (prevIndex === index ? null : index));
+    };
 
-  const refreshList = () => {
-    fetch(variables.API_URL + 'FAQ')
-      .then(response => response.json())
-      .then(data => {
-        setFAQs(data);
-      });
-  };
+    const refreshList = async () => {
+        try {
+            const data = await fetchFAQs();
+            setFAQs(data);
+        } catch (error :any) {
+            alert(error.message);
+        }
+    };
 
-  useEffect(() => {
-    refreshList();
-  }, []);
-
-  const changeQuestionTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestionTitle(event.target.value);
-  };
-
-  const changeAnswer = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setAnswer(event.target.value);
-  };
-
-  const addClick = () => {
-    setModalTitle('Add FAQ');
-    setId(0);
-    setQuestionTitle('');
-    setAnswer('');
-  };
-
-  const editClick = (question: { Id: number, QuestionTitle: string, Answer: string }) => {
-    setModalTitle('Edit FAQ');
-    setId(question.Id);
-    setQuestionTitle(question.QuestionTitle);
-    setAnswer(question.Answer);
-  };
-
-  const createClick = () => {
-    fetch(variables.API_URL + 'FAQ', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        QuestionTitle,
-        Answer,
-      }),
-    })
-      .then(res => res.json())
-      .then(result => {
-        alert(result);
+    useEffect(() => {
         refreshList();
-      }, error => {
-        alert(error.message);
-      });
-  };
+    }, []);
 
-  const updateClick = () => {
-    fetch(variables.API_URL + 'FAQ', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        Id,
-        QuestionTitle,
-        Answer,
-      }),
-    })
-      .then(res => res.json())
-      .then(result => {
-        alert(result);
-        refreshList();
-      }, error => {
-        alert(error.message);
-      });
-  };
+    const changeQuestionTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setQuestionTitle(event.target.value);
+    };
 
-  const deleteClick = (id: string |number) => {
-    if (window.confirm('Are you sure you wanna delete this FAQ?')) {
-      fetch(variables.API_URL + 'FAQ/' + id, {
-        method: 'DELETE',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(res => res.json())
-        .then(result => {
-          alert(result);
-          refreshList();
-        }, error => {
-          alert(error.message);
-        });
-    }
-  };
+    const changeAnswer = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setAnswer(event.target.value);
+    };
 
-  return (
+    const addClick = () => {
+        setModalTitle('Add FAQ');
+        setId(0);
+        setQuestionTitle('');
+        setAnswer('');
+    };
+
+    const editClick = (question: { Id: number; QuestionTitle: string; Answer: string }) => {
+        setModalTitle('Edit FAQ');
+        setId(question.Id);
+        setQuestionTitle(question.QuestionTitle);
+        setAnswer(question.Answer);
+    };
+
+    const createClick = async () => {
+        try {
+            const result = await createFAQ(QuestionTitle, Answer);
+            alert(result);
+            refreshList();
+        } catch (error:any) {
+            alert(error.message);
+        }
+    };
+
+    const updateClick = async () => {
+        try {
+            const result = await updateFAQ(Id, QuestionTitle, Answer);
+            alert(result);
+            refreshList();
+        } catch (error :any) {
+            alert(error.message);
+        }
+    };
+
+    const deleteClick = async (id: string | number) => {
+        if (window.confirm('Are you sure you wanna delete this FAQ?')) {
+            try {
+                const result = await deleteFAQ(id);
+                alert(result);
+                refreshList();
+            } catch (error :any) {
+                alert(error.message);
+            }
+        }
+    };
+
+    return (
     <div className="container my-5">
       <AddButton addClick={addClick} />
       <h1 className="text-center mb-4">Frequently Asked Questions</h1>
