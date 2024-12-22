@@ -37,7 +37,7 @@ namespace zcportal.Controllers
                             select Id, Title,Content,
                             convert(varchar(10),PostingDate,120) as PostingDate, PhotoFileName
                             from
-                            dbo.Announcement
+                            ITPortal.Announcement
                             ";
 
             DataTable table = new DataTable();
@@ -66,7 +66,7 @@ namespace zcportal.Controllers
         public JsonResult Post(Announcement announcement)
         {
             string query = @"
-                           insert into dbo.Announcement
+                           insert into ITPortal.Announcement
                            (Title,Content,PostingDate,PhotoFileName)
                     values (@Title,@Content,@PostingDate,@PhotoFileName)
                             ";
@@ -107,7 +107,7 @@ namespace zcportal.Controllers
 
         {
             // يعني، لما يكون عندك موظف رقمه في قاعدة البيانات هو 5 مثلاً، وتحط @EmployeeId = 5، فالكود هذا راح يروح ويحدث بيانات الموظف اللي رقمه 5 فقط، وما يغير شي في باقي الموظفين.
-            string query = @"update dbo.Announcement
+            string query = @"update ITPortal.Announcement
                                set  Title= @Title,
                                 Content=@Content,
                                PostingDate=@PostingDate,
@@ -147,7 +147,7 @@ namespace zcportal.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                           delete from dbo.Announcement
+                           delete from ITPortal.Announcement
                             where Id=@Id
                             ";
             DataTable table = new DataTable();
@@ -207,7 +207,7 @@ namespace zcportal.Controllers
                     select Id, Title, Content,
                     convert(varchar(10), PostingDate, 120) as PostingDate, PhotoFileName
                     from
-                    dbo.Announcement
+                    ITPortal.Announcement
                     where Id = @Id";
 
             DataTable table = new DataTable();
