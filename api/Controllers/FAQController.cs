@@ -37,7 +37,7 @@ namespace zcportal.Controllers
             string query = @"
                             select Id, QuestionTitle, Answer
                             from
-                            dbo.FAQ
+                            ITPortal.FAQ
                             ";
 
             DataTable table = new DataTable();
@@ -66,7 +66,7 @@ namespace zcportal.Controllers
         public JsonResult Post(FAQ question)
         {
             string query = @"
-                           insert into dbo.FAQ
+                           insert into ITPortal.FAQ
                            (QuestionTitle,Answer)
                     values (@QuestionTitle,@Answer)
                             ";
@@ -100,7 +100,7 @@ namespace zcportal.Controllers
         public JsonResult Put(FAQ question)
 
         {
-            string query = @"update dbo.FAQ
+            string query = @"update ITPortal.FAQ
                                set  QuestionTitle= @QuestionTitle,
                                 Answer=@Answer
                                 where Id=@Id";
@@ -134,7 +134,7 @@ namespace zcportal.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                           delete from dbo.FAQ
+                           delete from ITPortal.FAQ
                             where Id=@Id
                             ";
             DataTable table = new DataTable();

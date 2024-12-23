@@ -26,7 +26,7 @@ namespace zcportal.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select QuestionSerialNumber, DeviceType , Instructions from dbo.InternetQuestion";
+            string query = @"select QuestionSerialNumber, DeviceType , Instructions from ITPortal.InternetQuestion";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
             SqlDataReader myReader;
@@ -53,7 +53,7 @@ namespace zcportal.Controllers
         [HttpPost]
         public JsonResult Post(InternetQuestion question)
         {
-            string query = @"insert into dbo.InternetQuestion (Instructions,DeviceType)
+            string query = @"insert into ITPortal.InternetQuestion (Instructions,DeviceType)
                     values (@Instructions,@DeviceType)";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DefaultConnection")!;
@@ -85,7 +85,7 @@ namespace zcportal.Controllers
         [HttpPut]
         public JsonResult Put(InternetQuestion question)
         {
-            string query = @"update dbo.InternetQuestion 
+            string query = @"update ITPortal.InternetQuestion 
                                set  Instructions= @Instructions,
                                     DeviceType = @DeviceType
                               where QuestionSerialNumber=@QuestionSerialNumber";
@@ -119,7 +119,7 @@ namespace zcportal.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                           delete from dbo.InternetQuestion
+                           delete from ITPortal.InternetQuestion
                             where QuestionSerialNumber=@QuestionSerialNumber
                             ";
             DataTable table = new DataTable();

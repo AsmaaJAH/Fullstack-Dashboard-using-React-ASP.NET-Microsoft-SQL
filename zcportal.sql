@@ -62,11 +62,11 @@ PostingDate	 datetime,
 PhotoFileName nvarchar(500),
 )
 
+/*
 ALTER TABLE Announcement ALTER COLUMN Content NVARCHAR(MAX);
 ALTER TABLE Announcement ADD SubTitle NVARCHAR(500);
 ALTER TABLE Announcement Drop COLUMN  SubTitle;
-
-
+*/
 
 
 insert into dbo.Announcement values ('Event1', 'Event content should be here..!', GETDATE(), 'anonymous.png')
@@ -95,12 +95,13 @@ BEGIN
 		SELECT * from dbo.Person WHERE Email=@Email AND Password=@Password
 END
 
-
+/*
 CREATE PROCEDURE registration (@Name nvarchar(500) ,@Email nvarchar(500), @Password nvarchar(500), @isAdmin int)
 AS
 BEGIN
 		INSERT INTO dbo.Person(Name, Email, Password, isAdmin) VALUES (@Name, @Email, @Password, @isAdmin)
 END
+*/
 
 
 /* delete from dbo.Person where Id=3 */
