@@ -1,6 +1,4 @@
 //-------------------------- Flutter Packages Imports ----------------------------------
-
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
@@ -31,9 +29,6 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ModeThemeManager.lightThemes,
           darkTheme: ModeThemeManager.darkThemes,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
           navigatorKey: kNavigatorKey,
           home: const SafeArea(
             minimum: EdgeInsets.all(Variables.two),

@@ -8,7 +8,6 @@ import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/control_layer/functions/provider_helper_functions.dart';
 import 'package:zcportal/flavors_layer/delete_me.dart';
-import 'package:zcportal/presentation_layer/screens/persist_tab_view.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
 class SplashScreen extends StatefulWidget {
