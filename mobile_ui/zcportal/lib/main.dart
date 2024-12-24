@@ -6,7 +6,6 @@ import 'package:zcportal/control_layer/functions/device_info.dart';
 import 'package:zcportal/my_app.dart';
 
 
-//-------------------------- InStore App Imports ----------------------------------
 
 
 void main() async {
@@ -23,6 +22,6 @@ void main() async {
   DeviceInfo.determineDeviceLanguage();
 
   runApp(
-     MyApp(),
+        const MyApp(),
   );
 }

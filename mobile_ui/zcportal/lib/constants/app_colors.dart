@@ -55,16 +55,18 @@ class AppColors {
   static const Color lightRed = Color.fromRGBO(253, 203, 203, 1);
 
   //-------------------- Orange gradings ------------------------------------
-  static const Color primary = Color.fromRGBO(245, 182, 2, 1);
+  static const Color orangeYellow = Color.fromRGBO(245, 182, 2, 1);
   static const Color orange = Color.fromRGBO(247, 181, 0, 1);
 
-  static const Color secondary = Color.fromRGBO(236, 102, 8, 1);
+  static const Color orangeGradings = Color.fromRGBO(236, 102, 8, 1);
   //-------------------- blue gradings---------------------------------------
   static const Color blue = Color.fromRGBO(34, 37, 152, 1);
   static const Color blueInFlutter = Colors.blue;
 
   //-------------------- Cyan gradings -----------------------------
   static const Color cyanInFlutter = Colors.cyan;
+  static const Color primary = Color.fromRGBO(18, 181, 203, 1);
+  static const Color secondary = Color.fromRGBO(22, 108, 120, 1);
 
   //-------------------- green gradings--------------------------------------
   static const Color greenAcceptDialog = Color.fromRGBO(22, 154, 90, 1);

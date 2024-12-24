@@ -65,7 +65,7 @@ class LinearCircularProgressIndicator extends StatelessWidget {
           semanticsValue: semanticsValue,
           color: AppColors.lightGray,
           minHeight: linearProgressMinHeight,
-          backgroundColor: AppColors.primary,
+          backgroundColor: AppColors.orangeYellow,
           borderRadius: borderRadius ??
               const BorderRadius.horizontal(
                 left: Radius.circular(Variables.double20),
@@ -87,7 +87,7 @@ class LinearCircularProgressIndicator extends StatelessWidget {
           strokeWidth: strokeWidth,
           valueColor: valueColor,
           key: circularKey,
-          backgroundColor: AppColors.primary,
+          backgroundColor: AppColors.orangeYellow,
         ),
       );
     }

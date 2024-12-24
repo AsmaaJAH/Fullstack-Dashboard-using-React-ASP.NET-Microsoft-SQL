@@ -26,14 +26,13 @@ class BottomNavigatorManager {
 
   PersistentBottomNavBarItem get navigatorItem {
     return PersistentBottomNavBarItem(
-      
       contentPadding: contentPadding ?? Variables.five,
       icon: activeIconWidget,
       iconSize: iconSize ?? kScreenWidth * 0.085,
       inactiveIcon: inActiveIconWidget,
       title: title.tr(),
       onPressed: onPressed,
-      activeColorPrimary: AppColors.secondary,
+      activeColorPrimary: AppColors.orangeGradings,
       inactiveColorPrimary: AppColors.gray,
       textStyle: TextThemeManager.regularFont(
         fontSize: Variables.ten,

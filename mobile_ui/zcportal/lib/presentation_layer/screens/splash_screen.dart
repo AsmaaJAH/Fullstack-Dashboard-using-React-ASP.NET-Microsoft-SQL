@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.commonWhite,
+      backgroundColor: AppColors.primary,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -38,9 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: kScreenWidth * 0.02,
             ),
-            CustomLocalizedTextWidget(
+            const CustomLocalizedTextWidget(
               fontSize: Variables.double23,
               stringKey: "ZC Portal",
+              color: AppColors.white,
             ),
           ],
         ),
@@ -81,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const PersistTabView(),
+            builder: (context) => const DeleteMe()//const PersistTabView(),
           ),
         );
       } else {

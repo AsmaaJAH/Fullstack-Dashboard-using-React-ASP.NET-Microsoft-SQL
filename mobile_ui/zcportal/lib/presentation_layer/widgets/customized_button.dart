@@ -62,20 +62,22 @@ class CustomizedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: height ?? 44,//in race app, use ratio
+      height: height ?? 44, //in race app, use ratio
       padding:
           EdgeInsets.symmetric(horizontal: horizontalSpacing ?? Variables.zero),
       child: TextButton(
         //-------- flat buttons are now just a simple text button in flutter as mentioned in the documentaion:
         style: TextButton.styleFrom(
-            backgroundColor: backgroundColor ?? AppColors.primary,
+            backgroundColor: backgroundColor ?? AppColors.orangeYellow,
             elevation: elevation ?? Variables.zero,
             shape: RoundedRectangleBorder(
                 borderRadius:
                     BorderRadius.circular(borderRadius ?? Variables.zero),
                 side: BorderSide(
                     //The meaning here:if borderColor exist put it,else if, it is not exist use the same color of your button. Otherwise,use the primary color:
-                    color: borderColor ?? backgroundColor ?? AppColors.primary,
+                    color: borderColor ??
+                        backgroundColor ??
+                        AppColors.orangeYellow,
                     width: borderWidth ?? Variables.one))),
         onPressed: onPressed,
         child: Row(

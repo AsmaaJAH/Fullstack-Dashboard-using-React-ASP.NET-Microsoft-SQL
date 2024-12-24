@@ -8,7 +8,6 @@ import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/control_layer/managers/themes_manager/text_theme_manager.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
-
 class CustomizedTextFormField extends StatelessWidget {
   const CustomizedTextFormField({
     super.key,
@@ -121,8 +120,7 @@ class CustomizedTextFormField extends StatelessWidget {
 
   bool get isAddingMoreSpace => label != null && isMorePaddingUnderLabel;
   bool get isTranslatedHint => hint != null && isHintTranslated;
-  bool get isHintNotTransled =>
-      hint != null && true;
+  bool get isHintNotTransled => hint != null && true;
   double get height => givenHeight >= Variables.minTextFormFieldHeight
       ? givenHeight
       : Variables.minTextFormFieldHeight;
@@ -152,7 +150,7 @@ class CustomizedTextFormField extends StatelessWidget {
             textCapitalization: textCapitalization,
             //expands: isBigBox ? true : false,
             expands: isObsecuredPasswordForm ? false : true,
-            cursorColor: AppColors.primary,
+            cursorColor: AppColors.orangeYellow,
             cursorHeight: Variables.double20,
             autofocus: isAutoFocus,
             focusNode: focusNode,
@@ -204,7 +202,7 @@ class CustomizedTextFormField extends StatelessWidget {
                       ? OutlineInputBorder(
                           borderRadius: BorderRadius.circular(Variables.zero),
                           borderSide:
-                              const BorderSide(color: AppColors.primary))
+                              const BorderSide(color: AppColors.orangeYellow))
                       : null,
                   focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(Variables.zero),

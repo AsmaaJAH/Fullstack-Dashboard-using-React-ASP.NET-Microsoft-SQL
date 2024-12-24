@@ -23,12 +23,12 @@ class ModeThemeManager {
     colorScheme: colorScheme,
     brightness: Brightness.light,
     fontFamily: AppFonts.fontFamily,
-    primaryColor: AppColors.primary,
+    primaryColor: AppColors.orangeYellow,
     // floatingActionButtonTheme: const FloatingActionButtonThemeData()
     //     .copyWith(backgroundColor: AppColors.primary),
     dialogBackgroundColor: AppColors.offWhiteBackground,
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: AppColors.primary,
+      cursorColor: AppColors.orangeYellow,
     ),
   );
 
@@ -37,10 +37,10 @@ class ModeThemeManager {
     brightness: Brightness.dark,
     colorScheme: darkColorScheme,
     fontFamily: AppFonts.fontFamily,
-    primaryColor: AppColors.primary,
+    primaryColor: AppColors.orangeYellow,
     dialogBackgroundColor: AppColors.offWhiteBackground,
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: AppColors.primary,
+      cursorColor: AppColors.orangeYellow,
     ),
   );
 }

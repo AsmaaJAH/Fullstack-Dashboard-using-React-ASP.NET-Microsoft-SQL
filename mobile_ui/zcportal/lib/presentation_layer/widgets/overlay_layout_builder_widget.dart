@@ -6,6 +6,7 @@ import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
+
 class OverlayLayoutBuilderWidget extends StatelessWidget {
   const OverlayLayoutBuilderWidget({
     super.key,
@@ -143,7 +144,7 @@ class OverlayLayoutBuilderWidget extends StatelessWidget {
                               itemCount: contentItems.length,
                               itemBuilder: (context, index) {
                                 //** in race app , use RadioListTile:
-                                return CheckboxListTile( 
+                                return CheckboxListTile(
                                   selected: _isSelected(index),
                                   secondary: secondary,
                                   mouseCursor: mouseCursor,
@@ -151,8 +152,7 @@ class OverlayLayoutBuilderWidget extends StatelessWidget {
                                   focusNode: focusNode,
                                   autofocus: autofocus,
                                   onFocusChange: onFocusChange,
-                                  overlayColor:
-                                      WidgetStateProperty.resolveWith(
+                                  overlayColor: WidgetStateProperty.resolveWith(
                                     (states) => AppColors.white,
                                   ),
                                   side: WidgetStateBorderSide.resolveWith(
@@ -174,7 +174,7 @@ class OverlayLayoutBuilderWidget extends StatelessWidget {
                                   title: itemRow ??
                                       CustomLocalizedTextWidget(
                                         color: _isSelected(index)
-                                            ? AppColors.primary
+                                            ? AppColors.orangeYellow
                                             : AppColors.grayOverlayItems,
                                         isTranslate: isOverlayContentLocalized,
                                         fontSize: Variables.double14,
