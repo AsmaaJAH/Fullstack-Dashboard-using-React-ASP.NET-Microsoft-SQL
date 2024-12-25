@@ -3,11 +3,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:zcportal/constants/app_colors.dart';
+import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/control_layer/functions/provider_helper_functions.dart';
+import 'package:zcportal/control_layer/functions/user_current_status.dart';
 import 'package:zcportal/flavors_layer/delete_me.dart';
+import 'package:zcportal/presentation_layer/screens/LogInScreen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -55,29 +58,29 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateUser() async {
-    var isLoggedInStatus = true; //await UserCurrentStatus.updateTokenStatus();
+    var isLoggedInStatus = await UserCurrentStatus.updateTokenStatus();
 
     //Un-comment this below line to enforce the app to log out:
     //isLoggedInStatus = 1==2;
     //debugPrint(isLoggedInStatus.toString());
     if (isLoggedInStatus) {
-      var isVerified = true; //await UserCurrentStatus.getIsVerified();
+      var isVerified = await UserCurrentStatus.getIsVerified();
 
       //  ignore: use_build_context_synchronously
       if (!context.mounted) {
         return;
       }
       if (isVerified) {
-        // ProviderHelperFunctions.readCurrentProviderState(
-        //   currentOperation: Variables.accountProvider,
-        // );
-        // ProviderHelperFunctions.readCurrentProviderState(
-        //   currentOperation: Variables.persistTabViewProvider,
-        // );
+        ProviderHelperFunctions.readCurrentProviderState(
+          currentOperation: Variables.accountProvider,
+        );
+        ProviderHelperFunctions.readCurrentProviderState(
+          currentOperation: Variables.persistTabViewProvider,
+        );
 
-        // ProviderHelperFunctions.accountProvider
-        //     .updateAuthMode(AuthMode.authorized);
-        // ProviderHelperFunctions.persistState.updateIsHidden(false);
+        ProviderHelperFunctions.accountProvider
+            .updateAuthMode(AuthMode.authorized);
+        ProviderHelperFunctions.persistState.updateIsHidden(false);
 
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -88,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen> {
         //if the user didn't verify the phone/email contacts then the user should complete the authentication process again:
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => DeleteMe(), //LogInScreen(),
+            builder: (context) => LogInScreen(),
           ),
         );
       }
@@ -99,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-            builder: (context) => DeleteMe() //const LogInScreen(),
+            builder: (context) =>  LogInScreen(),
             ),
       );
     }

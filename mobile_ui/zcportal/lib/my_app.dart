@@ -7,6 +7,7 @@ import 'package:zcportal/control_layer/functions/provider_helper_functions.dart'
 import 'package:zcportal/control_layer/managers/themes_manager/mode_themes_manager.dart';
 import 'package:zcportal/presentation_layer/screens/splash_screen.dart';
 
+import 'package:easy_localization/easy_localization.dart';
 
 
 GlobalKey<NavigatorState> kNavigatorKey = GlobalKey<NavigatorState>();
@@ -25,10 +26,13 @@ class MyApp extends StatelessWidget {
       providers: ProviderHelperFunctions.getProviders(),
       builder: (context, _) {
         return MaterialApp(
-          title: 'E-Commerce',
+          title: 'ZC portal',
           debugShowCheckedModeBanner: false,
           theme: ModeThemeManager.lightThemes,
           darkTheme: ModeThemeManager.darkThemes,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           navigatorKey: kNavigatorKey,
           home: const SafeArea(
             minimum: EdgeInsets.all(Variables.two),

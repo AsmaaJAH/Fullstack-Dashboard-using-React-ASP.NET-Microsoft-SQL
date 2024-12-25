@@ -1,15 +1,26 @@
 //Conventions contains const values or convenant-agreement variables
 //that all the project developers agree on using them in the whole app
 import 'package:zcportal/constants/app_screen_dimensions.dart';
+import 'package:flutter/material.dart';
 
 class Variables {
   //==================================================================
   //----------------------------- Strings-----------------------------
   //==================================================================
-    static const String persistTabViewProvider = "persistTabViewProvider";
+  static const String persistTabViewProvider = "persistTabViewProvider";
   static const String loginProvider = "login";
-    static const String enLangCode = "en";
+  static const String accountProvider = "accountProvider";
+
+  
+  static const String enLangCode = "en";
   static const String arLangCode = "ar";
+  static const String enCountryCode = "US";
+  static const String arCountryCode = "SA";
+  
+  static const enUsLocale =
+      Locale(Variables.enLangCode, Variables.enCountryCode);
+  static const arSaLocale =
+      Locale(Variables.arLangCode, Variables.arCountryCode);
 
 //-----------------------------------Presentation layer strings:
   static const String dummyOTPcode = 'I am a cute awesome code, write me here';

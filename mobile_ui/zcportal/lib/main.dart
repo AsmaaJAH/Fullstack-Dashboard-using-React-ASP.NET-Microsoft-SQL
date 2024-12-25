@@ -1,7 +1,9 @@
 //-------------------------- Flutter Packages Imports ----------------------------------
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/control_layer/functions/device_info.dart';
 import 'package:zcportal/my_app.dart';
 
@@ -11,6 +13,7 @@ import 'package:zcportal/my_app.dart';
 void main() async {
   //Ensure Initialization:
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
 
   //lock the landscape mode, and allow only the portrait mode:
@@ -22,6 +25,11 @@ void main() async {
   DeviceInfo.determineDeviceLanguage();
 
   runApp(
-        const MyApp(),
+      EasyLocalization(
+      supportedLocales: const [Variables.enUsLocale, Variables.arSaLocale],
+      path: 'assets/translations',
+      fallbackLocale: Variables.enUsLocale,
+      child: const MyApp(),
+    ),
   );
 }

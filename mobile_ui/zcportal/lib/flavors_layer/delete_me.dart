@@ -31,32 +31,7 @@ class _DeleteMeState extends State<DeleteMe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomizedAppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: IconButton(
-              onPressed: () {
-                AppSnackBar(
-                  context: context,
-                  message: "hello world",
-                  isError: true,
-                ).showAppSnackBar();
-              },
-              icon: const Icon(
-                Icons.add,
-                size: Variables.double35,
-              ),
-            ),
-          ),
-        ],
-        title: widget.title,
-        isBackIcon: false,
-        //Primary Test for the base files:
-        leadingLogoPath:
-            "https://t3.ftcdn.net/jpg/01/77/04/76/360_F_177047696_cggAxHsB1gOAL5eyr292ta6dabHAJxCl.jpg",
-        isBottomLine: true,
-      ),
+      appBar: CustomizedAppBar(),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
