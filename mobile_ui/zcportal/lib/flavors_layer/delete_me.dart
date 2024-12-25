@@ -31,7 +31,7 @@ class _DeleteMeState extends State<DeleteMe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomizedAppBar(),
+      appBar: const CustomizedAppBar(),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -90,7 +90,7 @@ class _DeleteMeState extends State<DeleteMe> {
             const SizedBox(
               height: Variables.double24,
             ),
-             LinearCircularProgressIndicator(
+            const  LinearCircularProgressIndicator(
                 isLinearProgressIndicator: false),
           ],
         ),

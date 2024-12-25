@@ -10,7 +10,7 @@ import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/control_layer/functions/provider_helper_functions.dart';
 import 'package:zcportal/control_layer/functions/user_current_status.dart';
 import 'package:zcportal/flavors_layer/delete_me.dart';
-import 'package:zcportal/presentation_layer/screens/LogInScreen.dart';
+import 'package:zcportal/presentation_layer/screens/login_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -82,6 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
             .updateAuthMode(AuthMode.authorized);
         ProviderHelperFunctions.persistState.updateIsHidden(false);
 
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => const DeleteMe()//const PersistTabView(),
@@ -89,9 +90,10 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       } else {
         //if the user didn't verify the phone/email contacts then the user should complete the authentication process again:
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => LogInScreen(),
+            builder: (context) => const LogInScreen(),
           ),
         );
       }
@@ -100,9 +102,10 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!context.mounted) {
         return;
       }
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-            builder: (context) =>  LogInScreen(),
+            builder: (context) =>  const LogInScreen(),
             ),
       );
     }

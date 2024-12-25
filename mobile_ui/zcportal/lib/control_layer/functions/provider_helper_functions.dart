@@ -21,6 +21,7 @@ class ProviderHelperFunctions {
     return [
       //authentication
       ChangeNotifierProvider(create: (_) => LoginProviderState()),
+      ChangeNotifierProvider(create: (_) => AccountProviderState()),
 
       //Home:
       ChangeNotifierProvider(create: (_) => SliderWithIndicatorProviderState()),

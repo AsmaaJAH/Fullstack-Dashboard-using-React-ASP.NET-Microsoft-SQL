@@ -5,6 +5,7 @@ import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/flavors_layer/delete_me.dart';
+import 'package:zcportal/presentation_layer/screens/persist_tab_view.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_button.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_textform_field.dart';
@@ -89,7 +90,7 @@ class LogInScreen extends StatelessWidget {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                             builder: (context) =>
-                                const DeleteMe() //const PersistTabView(),
+                                const PersistTabView(),
                             ),
                       );
                     },
