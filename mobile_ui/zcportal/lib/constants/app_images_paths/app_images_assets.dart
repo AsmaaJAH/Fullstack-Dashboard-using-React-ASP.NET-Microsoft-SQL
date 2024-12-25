@@ -5,5 +5,6 @@ class AppImagesAssets {
 
   //------------------------  Splash Screen ---------------------------------------
   static const String splachScreenLogoPath = '$imagesAssets/splash_screen.png';
+  static const String whiteLogo = '$imagesAssets/white_logo.png';
 
 }

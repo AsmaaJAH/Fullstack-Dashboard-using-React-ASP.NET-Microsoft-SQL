@@ -1,20 +1,16 @@
 //-------------------------- Flutter Packages Imports ----------------------------------
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zcportal/constants/app_colors.dart';
 import 'package:zcportal/constants/app_enum.dart';
+import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/control_layer/functions/provider_helper_functions.dart';
 import 'package:zcportal/control_layer/managers/bottom_navigator_manager.dart';
 import 'package:zcportal/data_layer/providers/screens_providers/persist_tab_provider.dart';
 import 'package:zcportal/flavors_layer/delete_me.dart';
-import 'package:zcportal/presentation_layer/screens/login_screen.dart';
-import 'package:zcportal/translations/locale_keys.g.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
 
 PersistentTabController kController =
     PersistentTabController(initialIndex: Variables.zeroInt);
@@ -29,10 +25,11 @@ List<Widget> _navScreens() {
       DeleteMe(),
       DeleteMe(),
       DeleteMe(),
-
+      DeleteMe(),
     ];
   } else {
     return const [
+      DeleteMe(),
       DeleteMe(),
       DeleteMe(),
       DeleteMe(),
@@ -50,6 +47,7 @@ class PersistTabView extends StatefulWidget {
 
 class _PersistTabViewState extends State<PersistTabView> {
   late bool isAuth;
+
   @override
   void initState() {
     super.initState();
@@ -60,30 +58,44 @@ class _PersistTabViewState extends State<PersistTabView> {
         ProviderHelperFunctions.accountProvider.authMode == AuthMode.authorized;
   }
 
-
   List<PersistentBottomNavBarItem> get navBarsItems {
     return [
-       const BottomNavigatorManager(
+      const BottomNavigatorManager(
         title: "HOME",
         activeIconWidget: Icon(Icons.home_filled),
         inActiveIconWidget: Icon(Icons.home_outlined),
       ).navigatorItem,
       const BottomNavigatorManager(
         title: "INFO",
-        activeIconWidget: const Icon(Icons.grid_view_rounded),
-        inActiveIconWidget: const Icon(Icons.grid_view_outlined),
+        activeIconWidget: Icon(
+          Icons.info,
+        ),
+        inActiveIconWidget: Icon(
+          Icons.info_outline,
+        ),
       ).navigatorItem,
-     const BottomNavigatorManager(
+      PersistentBottomNavBarItem(
+        icon: Center(
+          child: CircleAvatar(
+            radius: kScreenHeight * 0.05,
+            child: Image.asset(
+              AppImagesAssets.whiteLogo,
+              height: kScreenHeight * 0.1,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+      const BottomNavigatorManager(
         title: "SERVICES",
-        activeIconWidget: const Icon(CupertinoIcons.heart_fill),
-        inActiveIconWidget: const Icon(CupertinoIcons.heart),
+        activeIconWidget: Icon(Icons.dashboard_customize),
+        inActiveIconWidget: Icon(Icons.dashboard_customize_outlined),
       ).navigatorItem,
       const BottomNavigatorManager(
-        title: "HR REQUEST",
-        activeIconWidget: const Icon(CupertinoIcons.cart_fill),
-        inActiveIconWidget: const Icon(CupertinoIcons.cart),
+        title: "HR REQUESTS",
+        activeIconWidget: Icon(Icons.description_rounded),
+        inActiveIconWidget: Icon(Icons.description_outlined),
       ).navigatorItem,
-    
     ];
   }
 
@@ -96,19 +108,22 @@ class _PersistTabViewState extends State<PersistTabView> {
           context,
           controller: kController,
           screens: _navScreens(),
-        
+          padding: const EdgeInsets.only(top: Variables.ten),
           items: navBarsItems,
           navBarHeight: kScreenHeight * 0.1,
-          backgroundColor: AppColors.commonWhite,
+          backgroundColor: AppColors.white,
           handleAndroidBackButtonPress: true,
           resizeToAvoidBottomInset: true,
           stateManagement: true,
+          hideNavigationBarWhenKeyboardAppears: true,
           decoration: NavBarDecoration(
-            borderRadius: BorderRadius.circular(Variables.zero),
-            colorBehindNavBar: AppColors.commonWhite,
+            borderRadius: kScreenWidth > 500
+                ? const BorderRadius.vertical(top: Radius.circular(35))
+                : const BorderRadius.vertical(top: Radius.circular(25)),
+            colorBehindNavBar: AppColors.white,
             boxShadow: <BoxShadow>[
               const BoxShadow(
-                color: AppColors.blackBorder,
+                color: Color.fromARGB(140, 0, 10, 53),
                 blurRadius: Variables.five,
               ),
             ],
