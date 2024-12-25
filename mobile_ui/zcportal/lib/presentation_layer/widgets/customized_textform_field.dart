@@ -150,7 +150,7 @@ class CustomizedTextFormField extends StatelessWidget {
             textCapitalization: textCapitalization,
             //expands: isBigBox ? true : false,
             expands: isObsecuredPasswordForm ? false : true,
-            cursorColor: AppColors.orangeYellow,
+            cursorColor: AppColors.primary,
             cursorHeight: Variables.double20,
             autofocus: isAutoFocus,
             focusNode: focusNode,
@@ -202,7 +202,7 @@ class CustomizedTextFormField extends StatelessWidget {
                       ? OutlineInputBorder(
                           borderRadius: BorderRadius.circular(Variables.zero),
                           borderSide:
-                              const BorderSide(color: AppColors.orangeYellow))
+                              const BorderSide(color: AppColors.primary))
                       : null,
                   focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(Variables.zero),

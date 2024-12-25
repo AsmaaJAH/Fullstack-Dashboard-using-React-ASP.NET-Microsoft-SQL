@@ -174,7 +174,7 @@ class OverlayLayoutBuilderWidget extends StatelessWidget {
                                   title: itemRow ??
                                       CustomLocalizedTextWidget(
                                         color: _isSelected(index)
-                                            ? AppColors.orangeYellow
+                                            ? AppColors.primary
                                             : AppColors.grayOverlayItems,
                                         isTranslate: isOverlayContentLocalized,
                                         fontSize: Variables.double14,

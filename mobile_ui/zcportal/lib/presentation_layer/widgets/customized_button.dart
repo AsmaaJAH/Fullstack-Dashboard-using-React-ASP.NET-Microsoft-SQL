@@ -68,7 +68,7 @@ class CustomizedButton extends StatelessWidget {
       child: TextButton(
         //-------- flat buttons are now just a simple text button in flutter as mentioned in the documentaion:
         style: TextButton.styleFrom(
-            backgroundColor: backgroundColor ?? AppColors.orangeYellow,
+            backgroundColor: backgroundColor ?? AppColors.primary,
             elevation: elevation ?? Variables.zero,
             shape: RoundedRectangleBorder(
                 borderRadius:
@@ -77,7 +77,7 @@ class CustomizedButton extends StatelessWidget {
                     //The meaning here:if borderColor exist put it,else if, it is not exist use the same color of your button. Otherwise,use the primary color:
                     color: borderColor ??
                         backgroundColor ??
-                        AppColors.orangeYellow,
+                        AppColors.primary,
                     width: borderWidth ?? Variables.one))),
         onPressed: onPressed,
         child: Row(
