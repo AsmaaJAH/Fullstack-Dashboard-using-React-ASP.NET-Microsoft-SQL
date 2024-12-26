@@ -8,7 +8,7 @@ import 'package:zcportal/data_layer/providers/screens_providers/authentication_p
 import 'package:zcportal/data_layer/providers/screens_providers/home_providers/home_provider.dart';
 import 'package:zcportal/data_layer/providers/screens_providers/home_providers/notifications_provider.dart';
 import 'package:zcportal/data_layer/providers/screens_providers/persist_tab_provider.dart';
-import 'package:zcportal/data_layer/providers/widgets_providers/home_page_widgets_providers/slider_with_indicator_provider.dart';
+import 'package:zcportal/data_layer/providers/widgets_providers/slider_with_indicator_provider.dart';
 import 'package:zcportal/my_app.dart';
 
 class ProviderHelperFunctions {

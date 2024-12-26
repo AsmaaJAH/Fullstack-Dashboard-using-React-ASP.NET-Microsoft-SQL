@@ -45,7 +45,7 @@ class _SliderWithIndicatorState extends State<SliderWithIndicator> {
               readProvider.updateCurrentActiveIndex(index);
               //just to make sure
               if (index == widget.mediaItems.length) {
-              readProvider.updateCurrentActiveIndex(0);
+                readProvider.updateCurrentActiveIndex(0);
               }
             },
           ),
@@ -56,10 +56,10 @@ class _SliderWithIndicatorState extends State<SliderWithIndicator> {
                   width: kScreenWidth,
                   height: kScreenHeight * 0.4,
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: const BoxDecoration(color:AppColors.white),
+                  decoration: const BoxDecoration(color: AppColors.white),
                   child: FadeInImage(
                     placeholder: MemoryImage(kTransparentImage),
-                    image: NetworkImage(imageURL),
+                    image: AssetImage(imageURL),
                     fit: BoxFit.fill,
                   ),
                 );
@@ -84,14 +84,14 @@ class _SliderWithIndicatorState extends State<SliderWithIndicator> {
                 count: widget.mediaItems.length,
                 effect: CustomizableEffect(
                   activeDotDecoration: DotDecoration(
-                    width: 32,
+                    width: 12,
                     color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(0),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   dotDecoration: DotDecoration(
-                    width: 32,
+                    width: 6,
                     color: AppColors.gray,
-                    borderRadius: BorderRadius.circular(0),
+                    borderRadius: BorderRadius.circular(20),
                     verticalOffset: 0,
                   ),
                   spacing: 10.0,

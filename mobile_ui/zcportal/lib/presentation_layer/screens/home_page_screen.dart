@@ -1,9 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_appbar.dart';
+import 'package:zcportal/presentation_layer/widgets/slider_with_indicator.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
@@ -15,44 +15,15 @@ class HomePageScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 400,
-                aspectRatio: 16 / 9,
-                viewportFraction: 0.8,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                reverse: false,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enlargeCenterPage: true,
-                enlargeFactor: 0.3,
-                scrollDirection: Axis.horizontal,
-              ),
-              items: [1, 2, 3, 4, 5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(color: Colors.amber),
-                        child: Text(
-                          'text $i',
-                          style: TextStyle(fontSize: 16.0),
-                        ));
-                  },
-                );
-              }).toList(),
-            ),
-            Image.asset(
-              AppImagesAssets
-                  .splachScreenLogoPath, // Replace with your image path
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+                        const SizedBox(height: 10),
+
+            const SliderWithIndicator(mediaItems: [
+              AppImagesAssets.zewail,
+              AppImagesAssets.cyanLogo,
+              AppImagesAssets.it,
+              AppImagesAssets.whiteLogo,
+            ]),
+
             const SizedBox(height: 10),
             // IT Utilities Grid
             Padding(
