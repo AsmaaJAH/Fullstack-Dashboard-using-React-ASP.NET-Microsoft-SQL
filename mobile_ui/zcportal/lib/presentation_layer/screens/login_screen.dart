@@ -9,8 +9,15 @@ import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget
 import 'package:zcportal/presentation_layer/widgets/customized_button.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_textform_field.dart';
 
-class LogInScreen extends StatelessWidget {
+class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
+
+  @override
+  State<LogInScreen> createState() => _LogInScreenState();
+}
+
+class _LogInScreenState extends State<LogInScreen> {
+    bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +76,23 @@ class LogInScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   // Password Input
                   CustomizedTextFormField(
+                    obscureText: !_isPasswordVisible,
+                    isObsecuredPasswordForm: true,
                     label: 'Password*',
                     labelColor: AppColors.white,
                     decoration: InputDecoration(
+                       suffixIcon: IconButton(
+                        icon: Icon(
+                          _isPasswordVisible
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                      ),
                       filled: true,
                       fillColor: AppColors.white,
                       hintText: "Password...",
@@ -88,9 +109,8 @@ class LogInScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const PersistTabView(),
-                            ),
+                          builder: (context) => const PersistTabView(),
+                        ),
                       );
                     },
                     borderRadius: 30,

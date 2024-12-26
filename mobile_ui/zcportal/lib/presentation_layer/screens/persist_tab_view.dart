@@ -11,6 +11,7 @@ import 'package:zcportal/control_layer/managers/bottom_navigator_manager.dart';
 import 'package:zcportal/data_layer/providers/screens_providers/persist_tab_provider.dart';
 import 'package:zcportal/flavors_layer/delete_me.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:zcportal/presentation_layer/screens/home_page_screen.dart';
 
 PersistentTabController kController =
     PersistentTabController(initialIndex: Variables.zeroInt);
@@ -29,7 +30,7 @@ List<Widget> _navScreens() {
     ];
   } else {
     return const [
-      DeleteMe(),
+      HomePageScreen(),
       DeleteMe(),
       DeleteMe(),
       DeleteMe(),
