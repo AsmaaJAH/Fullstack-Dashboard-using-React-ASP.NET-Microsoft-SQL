@@ -8,6 +8,7 @@ class AppImagesAssets {
   static const String whiteLogo = '$imagesAssets/white_logo.png';
   static const String cyanLogo = '$imagesAssets/cyan_logo.jpg';
   static const String it = '$imagesAssets/IT.PNG';
+  static const String itSupport = '$imagesAssets/it_support.png';
   static const String zewail = '$imagesAssets/zewail.PNG';
   static const String icon = '$imagesAssets/favicon.ico';
   static const String cardBackground = '$imagesAssets/card.png';

@@ -5,8 +5,9 @@ import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 import 'package:zcportal/presentation_layer/widgets/inside_app_widgets/announcement_card.dart';
-import 'package:zcportal/presentation_layer/widgets/inside_app_widgets/onboarding_card.dart';
 import 'package:zcportal/presentation_layer/widgets/inside_app_widgets/section_header.dart';
+import 'package:zcportal/presentation_layer/widgets/inside_app_widgets/single_onboarding_row.dart';
+import 'package:zcportal/presentation_layer/widgets/slider_with_indicator.dart';
 
 class InfoScreen extends StatelessWidget {
   const InfoScreen({Key? key}) : super(key: key);
@@ -27,10 +28,27 @@ class InfoScreen extends StatelessWidget {
               },
             ),
             const SizedBox(height: 8.0),
-            AnnouncementCard(
-              imagePath: AppImagesAssets.it,
-              title: 'IT Announcement',
+            const SliderWithIndicator(
+              items: [
+                AnnouncementCard(
+                  imagePath: AppImagesAssets.itSupport,
+                  title: 'IT Announcement',
+                ),
+                AnnouncementCard(
+                  imagePath: AppImagesAssets.it,
+                  title: 'IT Event',
+                ),
+                AnnouncementCard(
+                  imagePath: AppImagesAssets.zewail,
+                  title: 'HR Bazaar',
+                ),
+                AnnouncementCard(
+                  imagePath: AppImagesAssets.cyanLogo,
+                  title: 'Quick Announcement',
+                ),
+              ],
             ),
+
             const SizedBox(height: 16.0),
 
             // OnBoarding Internet Section
@@ -41,19 +59,31 @@ class InfoScreen extends StatelessWidget {
               },
             ),
             const SizedBox(height: 8.0),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                OnboardingCard(
-                  imagePath: AppImagesAssets.onboardingInternetCard,
-                  title: 'Windows',
+            const SliderWithIndicator(
+              isSmallCard: true,
+              items:[
+                SingleOnboardingRow(
+                  imagePath1: AppImagesAssets.onboardingInternetCard,
+                  title1: 'Windows',
+                  imagePath2: AppImagesAssets.onboardingInternetCard,
+                  title2: 'Android',
                 ),
-                OnboardingCard(
-                  imagePath: AppImagesAssets.onboardingInternetCard,
-                  title: 'Android',
+                SingleOnboardingRow(
+                  imagePath1: AppImagesAssets.onboardingInternetCard,
+                  title1: 'Mac',
+                  imagePath2: AppImagesAssets.onboardingInternetCard,
+                  title2: 'iPhone',
                 ),
+                SingleOnboardingRow(
+                  imagePath1: AppImagesAssets.onboardingInternetCard,
+                  title1: 'Troubleshooting',
+                  imagePath2: AppImagesAssets.onboardingInternetCard,
+                  title2: 'Others'
+                ),
+
               ],
             ),
+           
             const SizedBox(height: 16.0),
 
             // FAQ Section
