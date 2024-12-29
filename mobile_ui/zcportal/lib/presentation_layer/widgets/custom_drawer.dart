@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/constants/app_colors.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
+import 'package:zcportal/constants/variables.dart';
+import 'package:zcportal/control_layer/functions/handle_logout.dart';
+import 'package:zcportal/control_layer/functions/provider_helper_functions.dart';
+import 'package:zcportal/presentation_layer/screens/profile_screen.dart';
+import 'package:zcportal/presentation_layer/screens/settings_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/drawer_item.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -63,6 +69,13 @@ class CustomDrawer extends StatelessWidget {
                     title: 'Profile',
                     onTap: () {
                       // Handle Profile navigation
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: const  ProfileScreen(),
+                        withNavBar: true,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
+                      );
                     },
                   ),
                   DrawerItem(
@@ -94,15 +107,24 @@ class CustomDrawer extends StatelessWidget {
                     icon: Icons.settings,
                     title: 'Settings',
                     onTap: () {
-                      // Handle Settings navigation
+                      ProviderHelperFunctions.readCurrentProviderState(
+                        currentOperation: Variables.persistTabViewProvider,
+                      );
+                      ProviderHelperFunctions.persistState.updateIsHidden(true);
+
+                      PersistentNavBarNavigator.pushNewScreen(
+                        context,
+                        screen: const  SettingsScreen(),
+                        withNavBar: true,
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino,
+                      );
                     },
                   ),
-                  DrawerItem(
+                 const  DrawerItem(
                     icon: Icons.logout,
                     title: 'Log out',
-                    onTap: () {
-                      // Handle Logout
-                    },
+                    onTap:handleLogout,
                   ),
                 ],
               ),

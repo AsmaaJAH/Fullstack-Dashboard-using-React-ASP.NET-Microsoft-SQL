@@ -4,6 +4,7 @@ import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/constants/variables.dart';
+import 'package:zcportal/control_layer/functions/provider_helper_functions.dart';
 import 'package:zcportal/presentation_layer/screens/persist_tab_view.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_button.dart';
@@ -17,7 +18,7 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-    bool _isPasswordVisible = false;
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     label: 'Password*',
                     labelColor: AppColors.white,
                     decoration: InputDecoration(
-                       suffixIcon: IconButton(
+                      suffixIcon: IconButton(
                         icon: Icon(
                           _isPasswordVisible
                               ? Icons.visibility_outlined
@@ -107,6 +108,18 @@ class _LogInScreenState extends State<LogInScreen> {
                     width: kScreenWidth * 0.25,
                     buttonText: "Login",
                     onPressed: () {
+                      ProviderHelperFunctions.readCurrentProviderState(
+                        currentOperation: Variables.accountProvider,
+                      );
+                      ProviderHelperFunctions.readCurrentProviderState(
+                        currentOperation: Variables.persistTabViewProvider,
+                      );
+
+                      ProviderHelperFunctions.accountProvider
+                          .updateAuthMode(AuthMode.authorized);
+                      ProviderHelperFunctions.persistState
+                          .updateIsHidden(false);
+
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const PersistTabView(),

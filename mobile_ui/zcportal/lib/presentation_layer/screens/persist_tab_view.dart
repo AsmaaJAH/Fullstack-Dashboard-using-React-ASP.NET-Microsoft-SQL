@@ -24,7 +24,7 @@ List<Widget> _navScreens() {
   );
   if (ProviderHelperFunctions.accountProvider.authMode == AuthMode.authorized) {
     return const [
-      DeleteMe(),
+      HomePageScreen(),
       DeleteMe(),
       DeleteMe(),
       DeleteMe(),
@@ -32,7 +32,7 @@ List<Widget> _navScreens() {
     ];
   } else {
     return const [
-      HomePageScreen(),
+      DeleteMe(),
       DeleteMe(),
       DeleteMe(),
       DeleteMe(),
@@ -104,13 +104,13 @@ class _PersistTabViewState extends State<PersistTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomizedAppBar(),
-      drawer: const CustomDrawer(),
-      body: Selector<PersistTabProviderState, bool>(
-        selector: (_, provider) => provider.isHidden,
-        builder: (context, isHidden, child) {
-          return PersistentTabView(
+    return Selector<PersistTabProviderState, bool>(
+      selector: (_, provider) => provider.isHidden,
+      builder: (context, isHidden, child) {
+        return Scaffold(
+          appBar: isHidden?null: const CustomizedAppBar(),
+          drawer:isHidden?null: const CustomDrawer(),
+          body: PersistentTabView(
             context,
             controller: kController,
             screens: _navScreens(),
@@ -135,9 +135,9 @@ class _PersistTabViewState extends State<PersistTabView> {
               ],
             ),
             navBarStyle: NavBarStyle.simple,
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
