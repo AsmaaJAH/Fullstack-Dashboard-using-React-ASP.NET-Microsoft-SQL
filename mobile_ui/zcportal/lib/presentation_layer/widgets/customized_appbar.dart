@@ -21,6 +21,8 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         onPressed: () {
           // menu and drawer
+          Scaffold.of(context).openDrawer();
+
         },
       ),
       title: const CustomLocalizedTextWidget(

@@ -10,6 +10,12 @@ class AppImagesAssets {
   static const String it = '$imagesAssets/IT.PNG';
   static const String zewail = '$imagesAssets/zewail.PNG';
   static const String icon = '$imagesAssets/favicon.ico';
+  static const String cardBackground = '$imagesAssets/card.png';
+  static const String profileImage = '$imagesAssets/profile_image.jpg';
+  static const String announcementIcon= '$imagesAssets/announcements_icon.svg';
+  static const String attendanceIcon= '$imagesAssets/attendance_icon.svg';
+
+
 
 
 

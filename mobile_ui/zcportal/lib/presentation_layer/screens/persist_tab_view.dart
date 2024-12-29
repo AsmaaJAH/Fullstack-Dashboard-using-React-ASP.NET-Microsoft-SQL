@@ -12,6 +12,8 @@ import 'package:zcportal/data_layer/providers/screens_providers/persist_tab_prov
 import 'package:zcportal/flavors_layer/delete_me.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/presentation_layer/screens/home_page_screen.dart';
+import 'package:zcportal/presentation_layer/widgets/custom_drawer.dart';
+import 'package:zcportal/presentation_layer/widgets/customized_appbar.dart';
 
 PersistentTabController kController =
     PersistentTabController(initialIndex: Variables.zeroInt);
@@ -102,36 +104,40 @@ class _PersistTabViewState extends State<PersistTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<PersistTabProviderState, bool>(
-      selector: (_, provider) => provider.isHidden,
-      builder: (context, isHidden, child) {
-        return PersistentTabView(
-          context,
-          controller: kController,
-          screens: _navScreens(),
-          padding: const EdgeInsets.only(top: Variables.ten),
-          items: navBarsItems,
-          navBarHeight: kScreenHeight * 0.1,
-          backgroundColor: AppColors.white,
-          handleAndroidBackButtonPress: true,
-          resizeToAvoidBottomInset: true,
-          stateManagement: true,
-          hideNavigationBarWhenKeyboardAppears: true,
-          decoration: NavBarDecoration(
-            borderRadius: kScreenWidth > 500
-                ? const BorderRadius.vertical(top: Radius.circular(35))
-                : const BorderRadius.vertical(top: Radius.circular(25)),
-            colorBehindNavBar: AppColors.white,
-            boxShadow: <BoxShadow>[
-              const BoxShadow(
-                color: Color.fromARGB(140, 0, 10, 53),
-                blurRadius: Variables.five,
-              ),
-            ],
-          ),
-          navBarStyle: NavBarStyle.simple,
-        );
-      },
+    return Scaffold(
+      appBar: const CustomizedAppBar(),
+      drawer: const CustomDrawer(),
+      body: Selector<PersistTabProviderState, bool>(
+        selector: (_, provider) => provider.isHidden,
+        builder: (context, isHidden, child) {
+          return PersistentTabView(
+            context,
+            controller: kController,
+            screens: _navScreens(),
+            padding: const EdgeInsets.only(top: Variables.ten),
+            items: navBarsItems,
+            navBarHeight: kScreenHeight * 0.1,
+            backgroundColor: AppColors.white,
+            handleAndroidBackButtonPress: true,
+            resizeToAvoidBottomInset: true,
+            stateManagement: true,
+            hideNavigationBarWhenKeyboardAppears: true,
+            decoration: NavBarDecoration(
+              borderRadius: kScreenWidth > 500
+                  ? const BorderRadius.vertical(top: Radius.circular(35))
+                  : const BorderRadius.vertical(top: Radius.circular(25)),
+              colorBehindNavBar: AppColors.white,
+              boxShadow: <BoxShadow>[
+                const BoxShadow(
+                  color: Color.fromARGB(140, 0, 10, 53),
+                  blurRadius: Variables.five,
+                ),
+              ],
+            ),
+            navBarStyle: NavBarStyle.simple,
+          );
+        },
+      ),
     );
   }
 }

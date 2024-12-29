@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
-import 'package:zcportal/presentation_layer/widgets/customized_appbar.dart';
+import 'package:zcportal/presentation_layer/widgets/it_utilities_card.dart';
 import 'package:zcportal/presentation_layer/widgets/slider_with_indicator.dart';
 
 class HomePageScreen extends StatelessWidget {
@@ -11,12 +11,10 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomizedAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-                        const SizedBox(height: 10),
-
+            const SizedBox(height: 15),
             const SliderWithIndicator(mediaItems: [
               AppImagesAssets.zewail,
               AppImagesAssets.cyanLogo,
@@ -37,48 +35,45 @@ class HomePageScreen extends StatelessWidget {
                     fontWeight: CustomTextWeight.boldFont,
                   ),
                   const SizedBox(height: 10),
+                  
                   GridView.count(
+                      primary: false,
                     shrinkWrap: true,
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                     physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      _buildUtilityCard('Support Services'),
-                      _buildUtilityCard('Network Services'),
-                      _buildUtilityCard('Self-Service'),
-                      _buildUtilityCard('Light-Current'),
-                      _buildUtilityCard('System Administration'),
-                      _buildUtilityCard('Administration Office'),
+                    children: const [
+                      ItUtilitiesCard(
+                        title: "Support Services",
+                        subtitle: "Get IT support for any technical issue.",
+                      ),
+                       ItUtilitiesCard(
+                        title: "Network Services",
+                        subtitle: "Manage and monitor your IT network.",
+                      ),
+                       ItUtilitiesCard(
+                        title: "Self-Service",
+                        subtitle: "Academic support & Google classroom services.",
+                      ),
+                       ItUtilitiesCard(
+                        title: "Light-Current Services",
+                        subtitle: "Install and manage hardware solutions.",
+                      ),
+                       ItUtilitiesCard(
+                        title: "System Administration Services",
+                        subtitle: "Reach the admin to monitor and manage systems.",
+                      ),
+                       ItUtilitiesCard(
+                        title: "Administration Office Services",
+                        subtitle: "Get in touch with your IT coordinators.",
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildUtilityCard(String title) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      color: const Color(0xFF009ab5),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
         ),
       ),
     );

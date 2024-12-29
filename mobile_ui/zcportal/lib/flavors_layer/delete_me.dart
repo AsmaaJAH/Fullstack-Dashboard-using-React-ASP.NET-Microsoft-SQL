@@ -7,7 +7,6 @@ import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/presentation_layer/app_dialog.dart';
 import 'package:zcportal/presentation_layer/app_overlay_builder.dart';
 import 'package:zcportal/presentation_layer/app_snack_bar.dart';
-import 'package:zcportal/presentation_layer/widgets/customized_appbar.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_button.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_textform_field.dart';
 import 'package:zcportal/presentation_layer/widgets/linear_circular_progress_indicator.dart';
@@ -31,7 +30,6 @@ class _DeleteMeState extends State<DeleteMe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomizedAppBar(),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
