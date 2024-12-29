@@ -14,6 +14,8 @@ class AppImagesAssets {
   static const String profileImage = '$imagesAssets/profile_image.jpg';
   static const String announcementIcon= '$imagesAssets/announcements_icon.svg';
   static const String attendanceIcon= '$imagesAssets/attendance_icon.svg';
+  static const String password= '$imagesAssets/password.png';
+  static const String onboardingInternetCard= '$imagesAssets/onboarding_internet_card.png';
 
 
 

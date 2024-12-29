@@ -12,6 +12,7 @@ import 'package:zcportal/data_layer/providers/screens_providers/persist_tab_prov
 import 'package:zcportal/flavors_layer/delete_me.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/presentation_layer/screens/home_page_screen.dart';
+import 'package:zcportal/presentation_layer/screens/info_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_drawer.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_appbar.dart';
 
@@ -25,8 +26,8 @@ List<Widget> _navScreens() {
   if (ProviderHelperFunctions.accountProvider.authMode == AuthMode.authorized) {
     return const [
       HomePageScreen(),
-      DeleteMe(),
-      DeleteMe(),
+      InfoScreen(),
+      HomePageScreen(),
       DeleteMe(),
       DeleteMe(),
     ];

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/constants/app_colors.dart';
 import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
-import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/control_layer/functions/handle_logout.dart';
-import 'package:zcportal/control_layer/functions/provider_helper_functions.dart';
-import 'package:zcportal/presentation_layer/screens/login_screen.dart';
+import 'package:zcportal/presentation_layer/screens/password_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -64,8 +63,8 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const Padding(
-              padding:  EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
-              child:  CustomLocalizedTextWidget(
+              padding: EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: CustomLocalizedTextWidget(
                 stringKey: 'Welcome Back!',
                 style: TextStyle(
                   fontSize: 14,
@@ -82,6 +81,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               onTap: () {
                 // Navigate to password settings
+                PersistentNavBarNavigator.pushNewScreen(
+                  context,
+                  screen: const PasswordScreen(),
+                  withNavBar: true, // OPTIONAL VALUE. True by default.
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                );
               },
             ),
             _profileItem(
@@ -95,9 +100,6 @@ class ProfileScreen extends StatelessWidget {
                   fontWeight: CustomTextWeight.boldFont,
                 ),
               ),
-              onTap: () {
-                // Handle email actions
-              },
             ),
             _profileItem(
               icon: Icons.logout,
@@ -114,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
       {required IconData icon,
       required String title,
       Widget? trailing,
-      required VoidCallback onTap}) {
+      VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(icon, color: AppColors.black),
       title: CustomLocalizedTextWidget(

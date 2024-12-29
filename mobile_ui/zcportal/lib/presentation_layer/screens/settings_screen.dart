@@ -4,7 +4,6 @@ import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/constants/variables.dart';
 import 'package:zcportal/control_layer/functions/handle_logout.dart';
 import 'package:zcportal/control_layer/functions/provider_helper_functions.dart';
-import 'package:zcportal/presentation_layer/screens/login_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
