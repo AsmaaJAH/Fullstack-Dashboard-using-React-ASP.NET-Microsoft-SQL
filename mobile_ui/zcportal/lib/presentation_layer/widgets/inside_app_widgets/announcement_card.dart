@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:zcportal/constants/app_colors.dart';
 
 class AnnouncementCard extends StatelessWidget {
   final String imagePath;
@@ -14,6 +15,7 @@ class AnnouncementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppColors.white,
       elevation: 3,
       child: Column(
         children: [

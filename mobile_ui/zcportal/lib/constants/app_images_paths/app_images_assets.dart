@@ -17,6 +17,12 @@ class AppImagesAssets {
   static const String attendanceIcon= '$imagesAssets/attendance_icon.svg';
   static const String password= '$imagesAssets/password.png';
   static const String onboardingInternetCard= '$imagesAssets/onboarding_internet_card.png';
+  //services screen:
+  static const String attendance= '$imagesAssets/attendance.png';
+  static const String clearance= '$imagesAssets/clearance.png';
+  static const String hiringRequests= '$imagesAssets/hiring_requests.png';
+  static const String itTicket= '$imagesAssets/it_ticket.png';
+
 
 
 

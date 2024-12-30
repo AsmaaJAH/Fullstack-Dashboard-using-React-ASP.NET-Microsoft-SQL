@@ -13,6 +13,7 @@ import 'package:zcportal/flavors_layer/delete_me.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/presentation_layer/screens/home_page_screen.dart';
 import 'package:zcportal/presentation_layer/screens/info_screen.dart';
+import 'package:zcportal/presentation_layer/screens/services_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_drawer.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_appbar.dart';
 
@@ -28,7 +29,7 @@ List<Widget> _navScreens() {
       HomePageScreen(),
       InfoScreen(),
       HomePageScreen(),
-      DeleteMe(),
+      ServicesScreen(),
       DeleteMe(),
     ];
   } else {
@@ -109,8 +110,8 @@ class _PersistTabViewState extends State<PersistTabView> {
       selector: (_, provider) => provider.isHidden,
       builder: (context, isHidden, child) {
         return Scaffold(
-          appBar: isHidden?null: const CustomizedAppBar(),
-          drawer:isHidden?null: const CustomDrawer(),
+          appBar: isHidden ? null : const CustomizedAppBar(),
+          drawer: isHidden ? null : const CustomDrawer(),
           body: PersistentTabView(
             context,
             controller: kController,
