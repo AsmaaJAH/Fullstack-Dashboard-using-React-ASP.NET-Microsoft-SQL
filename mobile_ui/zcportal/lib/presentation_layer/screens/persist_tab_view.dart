@@ -12,6 +12,7 @@ import 'package:zcportal/data_layer/providers/screens_providers/persist_tab_prov
 import 'package:zcportal/flavors_layer/delete_me.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/presentation_layer/screens/home_page_screen.dart';
+import 'package:zcportal/presentation_layer/screens/hr_requests_screen.dart';
 import 'package:zcportal/presentation_layer/screens/info_screen.dart';
 import 'package:zcportal/presentation_layer/screens/services_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_drawer.dart';
@@ -30,7 +31,7 @@ List<Widget> _navScreens() {
       InfoScreen(),
       HomePageScreen(),
       ServicesScreen(),
-      DeleteMe(),
+      HRRequestsScreen(),
     ];
   } else {
     return const [

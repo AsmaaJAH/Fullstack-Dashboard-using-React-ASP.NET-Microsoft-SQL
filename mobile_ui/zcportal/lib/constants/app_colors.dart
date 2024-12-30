@@ -67,6 +67,7 @@ class AppColors {
   static const Color cyanInFlutter = Colors.cyan;
   static const Color primary = Color.fromRGBO(18, 181, 203, 1);
   static const Color secondary = Color.fromRGBO(22, 108, 120, 1);
+  static const Color lightCyan = Color.fromRGBO(234, 242, 255, 1);
 
   //-------------------- green gradings--------------------------------------
   static const Color greenAcceptDialog = Color.fromRGBO(22, 154, 90, 1);
