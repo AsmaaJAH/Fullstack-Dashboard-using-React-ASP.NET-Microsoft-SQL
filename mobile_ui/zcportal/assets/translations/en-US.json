@@ -1,0 +1,30 @@
+{
+
+    "__________________________comment": "Developer,Please delete these comming few lines after debug-testing:",
+    "two_options_dialog": "Two Options Dialog",
+    "enter_your_data_here": "Enter your Data here",
+    "place_holder_tester":"PlaceHolder Tester",
+    "travel_bol4":"travelBOL4 is best korean song",
+    "snack_bar":"Snack Bar",
+    "overlay":"App OverLay",
+    "notify_snack_bar":"Hello, test I'm here.",
+    "app_trail_title":"InStore App Trail",
+    "hello" : "I love code <3 ",
+    "dialogContent":"I am a cute awesome engineering student^^",
+
+
+    "_________________________comment": "Developer,Please Don't Delete the below lines:",
+    "text": "English",
+    "Accept":"Accept",
+    "Cancel":"Cancel",
+ 
+   "welcome":"Welcome!",
+ 
+   "someThingWentWrong":"Something went wrong. Please try again later!",
+   
+   "notifications":"Notifications",
+   "emptyNotifications":"Empty Notifications",
+   "emptyNotificationsBody":"You don't have any notifications yet!",
+   "notificationTime": "{currentDate}"
+
+}

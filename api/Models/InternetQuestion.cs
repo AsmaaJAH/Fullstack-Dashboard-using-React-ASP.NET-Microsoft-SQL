@@ -12,5 +12,7 @@ namespace zcportal.Models
         public string DeviceType { get; set; }
 
         public string Instructions { get; set; }
+        public string instructionTitle { get; set; }
+
     }
 }
