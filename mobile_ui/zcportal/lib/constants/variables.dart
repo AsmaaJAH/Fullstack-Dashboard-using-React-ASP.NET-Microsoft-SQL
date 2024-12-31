@@ -11,12 +11,11 @@ class Variables {
   static const String loginProvider = "login";
   static const String accountProvider = "accountProvider";
 
-  
   static const String enLangCode = "en";
   static const String arLangCode = "ar";
   static const String enCountryCode = "US";
   static const String arCountryCode = "SA";
-  
+
   static const enUsLocale =
       Locale(Variables.enLangCode, Variables.enCountryCode);
   static const arSaLocale =
@@ -43,8 +42,29 @@ class Variables {
 
   //--- Linear-circular indicator:
   static const double strokeAlignCenter = 0.0;
-  //---------------------------------------------Data layer strings:
 
+  static const List<String> departments = [
+    "HR",
+    "BMS",
+    "LTS",
+    "IT",
+    "Finance",
+    "Warehouses",
+    "Library",
+    "Legal Affairs",
+    "Safety & Security",
+    "Dorms",
+    "Academic",
+    "Research",
+    "Admission & Registrar",
+    "Administrative Affairs",
+    "Student Affairs",
+    "Marketing & Communications",
+    "Procurement",
+    "Transportation",
+    "Medical",
+    "Engineering"
+  ];
 //-----------------------------------------------------------------------------------------------
   //---------------------------- Authentication:
   //Regex expressions:
@@ -55,7 +75,6 @@ class Variables {
       r"(?=.*?[0-9])(?=.*[A-Za-z])(?=.*?[!@)#-$=.%؟,-;:'&%>^+<~])(?=.*)(?=.*\W+)");
   // password checker will return a match if and only if the password contains : // Minimum 1 letter // Minimum 1 Numeric Number // Minimum 1 Special Character: ex---> Common Allow Character ( ! @ # $ & * ~ )
 
-
   //==================================================================
   //----------------------------- const doubles ---------------------------
   //==================================================================
@@ -64,7 +83,6 @@ class Variables {
 
   static const double double0_5 = 0.5;
   static const double double0_7 = 0.7;
-
 
   static const double zero = 0.0;
   static const double one = 1.0;
@@ -153,9 +171,8 @@ class Variables {
   static const int int60 = 60;
 
   static const int int70 = 70;
-  
-  static const int int76 = 76;
 
+  static const int int76 = 76;
 
   static const int int92 = 92;
 
@@ -171,5 +188,4 @@ class Variables {
   static const int int2200 = 2200;
   static const int int2500 = 2500;
   static const int int3500 = 3500;
-
 }

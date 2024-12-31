@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AppFormsKeys {
-  AppFormsKeys();
-  final loginFormKey = GlobalKey<FormState>();
+  AppFormsKeys._();
+
+  static final loginFormKey = GlobalKey<FormState>();
+  static final resignationFormKey = GlobalKey<FormState>();
+
 
 }

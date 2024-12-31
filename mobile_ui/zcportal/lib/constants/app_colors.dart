@@ -30,7 +30,7 @@ class AppColors {
   static const Color commonGray = Color.fromRGBO(84, 84, 84, 1);
   static const Color grayBorder = Color.fromRGBO(151, 151, 151, 1);
   static const Color grayFilling = Color.fromRGBO(157, 157, 157, 1);
-  static const Color grayHintPhoneForm = Color.fromRGBO(189, 189, 189, 1);
+  static const Color grayHintFormField = Color.fromRGBO(189, 189, 189, 1);
   static const Color grayOverlayItems = Color.fromRGBO(90, 90, 90, 1);
   static const Color darkGray = Color.fromRGBO(151, 151, 151, 0.1);
   static const Color lightGray = Color.fromARGB(255, 214, 214, 214);

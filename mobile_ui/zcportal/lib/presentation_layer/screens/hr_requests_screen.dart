@@ -3,6 +3,7 @@ import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/constants/app_colors.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/presentation_layer/screens/requests%20forms/hr_letter_screen.dart';
+import 'package:zcportal/presentation_layer/screens/requests%20forms/resignation_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 import 'package:zcportal/presentation_layer/widgets/inside_app_widgets/request_tile.dart';
 
@@ -19,13 +20,13 @@ class HRRequestsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              AppImagesAssets.hr, 
+              AppImagesAssets.hr,
             ),
             const SizedBox(height: 16.0),
 
             const Center(
-              child:  CustomLocalizedTextWidget(
-                stringKey:  'REQUESTS',
+              child: CustomLocalizedTextWidget(
+                stringKey: 'REQUESTS',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -47,6 +48,12 @@ class HRRequestsScreen extends StatelessWidget {
               title: 'Resignation',
               onTap: () {
                 // Handle Resignation action
+                 PersistentNavBarNavigator.pushNewScreen(
+                  context,
+                  screen: const ResignationScreen(),
+                  withNavBar: true, // OPTIONAL VALUE. True by default.
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                );
               },
             ),
             RequestTile(
@@ -54,12 +61,12 @@ class HRRequestsScreen extends StatelessWidget {
               title: 'HR Letter',
               onTap: () {
                 // Handle HR Letter action
-                  PersistentNavBarNavigator.pushNewScreen(
-        context,
-        screen: const HRLetterScreen(),
-        withNavBar: true, // OPTIONAL VALUE. True by default.
-        pageTransitionAnimation: PageTransitionAnimation.cupertino,
-    );
+                PersistentNavBarNavigator.pushNewScreen(
+                  context,
+                  screen: const HRLetterScreen(),
+                  withNavBar: true, // OPTIONAL VALUE. True by default.
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                );
               },
             ),
           ],

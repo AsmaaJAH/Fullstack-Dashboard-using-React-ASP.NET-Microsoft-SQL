@@ -6,7 +6,6 @@ import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/presentation_layer/app_snack_bar.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_button.dart';
-import 'package:zcportal/presentation_layer/widgets/customized_textform_field.dart';
 
 class HRLetterScreen extends StatefulWidget {
   const HRLetterScreen({Key? key}) : super(key: key);
@@ -17,8 +16,8 @@ class HRLetterScreen extends StatefulWidget {
 
 class _HRLetterScreenState extends State<HRLetterScreen> {
   final TextEditingController _organizationController = TextEditingController();
-  String salaryType="";
-  String organizationName="";
+  String salaryType = "";
+  String organizationName = "";
   String _selectedSalaryType = 'Gross'; // Default selected salary type
 
   @override
@@ -51,11 +50,13 @@ class _HRLetterScreenState extends State<HRLetterScreen> {
               fontWeight: CustomTextWeight.boldFont,
             ),
             const SizedBox(height: 8.0),
-            CustomizedTextFormField(
-              width: double.infinity,
+            TextFormField(
+              //width: double.infinity,
               controller: _organizationController,
               decoration: InputDecoration(
                 hintText: 'The party to whom this is addressed',
+                hintStyle: const TextStyle(
+                    color: AppColors.grayHintFormField, fontSize: 14),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
@@ -71,6 +72,7 @@ class _HRLetterScreenState extends State<HRLetterScreen> {
             const CustomLocalizedTextWidget(
               stringKey: 'Desired Salary Type:',
               fontSize: 16,
+              fontWeight: CustomTextWeight.boldFont,
             ),
             const SizedBox(height: 8.0),
             Column(
@@ -184,7 +186,7 @@ class _HRLetterScreenState extends State<HRLetterScreen> {
                     children: [
                       Icon(
                         Icons.check_circle_outline,
-                        color:AppColors.primary,
+                        color: AppColors.primary,
                         size: 20.0,
                       ),
                       SizedBox(width: 8.0),
@@ -200,7 +202,7 @@ class _HRLetterScreenState extends State<HRLetterScreen> {
                     children: [
                       Icon(
                         Icons.check_circle_outline,
-                        color:AppColors.primary,
+                        color: AppColors.primary,
                         size: 20.0,
                       ),
                       SizedBox(width: 8.0),
