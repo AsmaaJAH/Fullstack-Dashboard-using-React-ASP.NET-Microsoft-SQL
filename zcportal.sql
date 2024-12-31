@@ -9,8 +9,8 @@ DeviceType nvarchar(500)
 CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone','troubleshooting', 'others'))
 )
 /*
-ALTER TABLE dbo.InternetQuestion
-ADD DeviceType nvarchar(500)
+ALTER TABLE ITPortal.InternetQuestion
+ADD instructionTitle nvarchar(500)
 CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone'));
 */
 
@@ -19,7 +19,7 @@ insert into dbo.InternetQuestion values ('How to do connect to the internet??')
 INSERT INTO dbo.InternetQuestion (Instructions, DeviceType )
 VALUES ('How to do ..??', 'troubleshooting');
 
-SET IDENTITY_INSERT dbo.InternetQuestion OFF;
+SET IDENTITY_INSERT ITPortal.InternetQuestion ON;
 
 INSERT INTO dbo.InternetQuestion (QuestionSerialNumber,Instructions ,DeviceType )
 VALUES (1, 'How to connect to the internet?' , 'mac');
@@ -33,7 +33,10 @@ VALUES (3, 'How to connect to the internet?' , 'android');
 
 INSERT INTO dbo.InternetQuestion (QuestionSerialNumber,Instructions, DeviceType )
 VALUES (4, 'How to do..?' , 'others');
-select * from dbo.InternetQuestion
+
+INSERT INTO ITPortal.InternetQuestion (QuestionSerialNumber,Instructions, DeviceType )
+VALUES (5, 'https://drive.google.com/file/d/1BypNeKI-phxYUjOtvaE0c3oBQyNudMYd/view' , 'android');
+select * from ITPortal.InternetQuestion
 
 /*----------------------FAQ------------------------*/
 create table dbo.FAQ(
