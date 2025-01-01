@@ -275,9 +275,23 @@ class _ResignationScreenState extends State<ResignationScreen> {
                   width: kScreenWidth * 0.9,
                   onPressed: () {
                     if (_validateForm()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Resignation Submitted')),
-                      );
+                      setState(() {
+                        AppFormsKeys.resignationFormKey.currentState!.reset();
+                        //Clear all controllers
+                        _nationalIdController.clear();
+                        _reasonController.clear();
+                        _dateController.clear();
+
+                        // Reset dropdown, switches, and checkbox
+                        _selectedDepartment = null;
+                        _approvalSwitch = false;
+                        _agreeToTerms = false;
+                      });
+                      AppSnackBar(
+                        context: context,
+                        message: 'Resignation Submitted',
+                        isError: false,
+                      ).showAppSnackBar();
                     }
                   },
                 ),
