@@ -65,6 +65,39 @@ class Variables {
     "Medical",
     "Engineering"
   ];
+  static const List<String> leaveTypes = [
+    "Sick Leave",
+    "Sick Leave 75% Paid",
+    "Sick Leave Half Paid",
+    "Emergancy Leave",
+    "Annual Leave",
+    "Haj Vacation",
+    "Maternity",
+    "Unpaid Leave",
+    "Marriage Vacation",
+    "Paternity Leave",
+    "Military Vacation",
+    "Consolation Leave",
+    "Attend training course full day",
+    "Attend training course half day",
+    "Mission during day with return to work",
+    "Mission during day without return to work",
+    "Development Leave",
+    "TimeOFF in Lieu",
+    "Work remotly",
+    "Execuse",
+    "Research Day",
+    "Mission beginning of day with return to work",
+    "Mission full day",
+    "Missing Punch",
+    "Record working hours",
+    "Sabbatical",
+    "Local",
+    "International",
+    "Bus Lateness",
+    "Lost ID Attendance"
+
+  ];
 //-----------------------------------------------------------------------------------------------
   //---------------------------- Authentication:
   //Regex expressions:

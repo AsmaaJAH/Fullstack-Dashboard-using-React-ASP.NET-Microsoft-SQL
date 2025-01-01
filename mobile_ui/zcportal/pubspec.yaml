@@ -48,6 +48,8 @@ dependencies:
   easy_localization: ^3.0.7
   persistent_bottom_nav_bar: any
   flutter_svg: ^2.0.9
+  dotted_border: ^2.1.0
+  file_picker: ^8.1.7
 
 
 dev_dependencies:
