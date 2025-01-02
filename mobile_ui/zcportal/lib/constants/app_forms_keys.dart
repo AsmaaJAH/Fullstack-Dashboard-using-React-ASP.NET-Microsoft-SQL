@@ -6,6 +6,8 @@ class AppFormsKeys {
   static final loginFormKey = GlobalKey<FormState>();
   static final resignationFormKey = GlobalKey<FormState>();
   static final leaveRequestFormKey = GlobalKey<FormState>();
+  static final ticketRequestFormKey = GlobalKey<FormState>();
+
 
 
 

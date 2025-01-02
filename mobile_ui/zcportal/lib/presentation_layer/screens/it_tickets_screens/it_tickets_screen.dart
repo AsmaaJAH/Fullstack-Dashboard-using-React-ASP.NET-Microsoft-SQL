@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/constants/app_colors.dart';
 import 'package:zcportal/constants/app_enum.dart';
+import 'package:zcportal/presentation_layer/screens/it_tickets_screens/ticket_request_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
 class ItTicketsScreen extends StatelessWidget {
   const ItTicketsScreen({Key? key}) : super(key: key);
+ void _onPressedAddTicket(context) {
+                    // Add new ticket action
 
+                    PersistentNavBarNavigator.pushNewScreen(
+                      context,
+                      screen: const TicketRequestScreen(),
+                      withNavBar: true, // OPTIONAL VALUE. True by default.
+                      pageTransitionAnimation:
+                          PageTransitionAnimation.cupertino,
+                    );
+                  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,21 +31,19 @@ class ItTicketsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const 
-                  CustomLocalizedTextWidget( stringKey: 
-                  "IT Tickets:",
+                const CustomLocalizedTextWidget(
+                  stringKey: "IT Tickets:",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-                    // Add new ticket action
-                  },
-                  child: const 
-                  CustomLocalizedTextWidget( stringKey: 
-                    "+ add new..",
+                  onPressed:(){
+                    _onPressedAddTicket(context);
+                  } ,
+                  child: const CustomLocalizedTextWidget(
+                    stringKey: "+ add new..",
                     style: TextStyle(
                       color: AppColors.primary,
                       fontWeight: FontWeight.bold,
@@ -84,7 +94,7 @@ class ItTicketsScreen extends StatelessWidget {
                     issue: "SW Issue",
                     time: "1:00 PM",
                   ),
-                   _buildTicketCard(
+                  _buildTicketCard(
                     date: "8",
                     month: "Jun",
                     department: "Finance Department-Room1",
@@ -186,8 +196,8 @@ class ItTicketsScreen extends StatelessWidget {
                     stringKey: department,
                     isSoftWrapped: true,
                     isThreeDotsInOverFlow: true,
-                     color: const Color.fromARGB(255, 100, 100, 100),
-                      fontSize: 16,
+                    color: const Color.fromARGB(255, 100, 100, 100),
+                    fontSize: 16,
                     fontWeight: CustomTextWeight.boldFont,
                   ),
                   const SizedBox(height: 4.0),

@@ -96,7 +96,15 @@ class Variables {
     "International",
     "Bus Lateness",
     "Lost ID Attendance"
+  ];
 
+  static const List<String> ticketTypes = [
+"Hardware issue",
+"Software issue",
+"Internet issue",
+"Windows issue",
+"Info Support",
+"Other"
   ];
 //-----------------------------------------------------------------------------------------------
   //---------------------------- Authentication:
