@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zcportal/constants/app_colors.dart';
+import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
 class ItTicketsScreen extends StatelessWidget {
@@ -8,7 +9,7 @@ class ItTicketsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -18,7 +19,8 @@ class ItTicketsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                const 
+                  CustomLocalizedTextWidget( stringKey: 
                   "IT Tickets:",
                   style: TextStyle(
                     fontSize: 20,
@@ -29,7 +31,8 @@ class ItTicketsScreen extends StatelessWidget {
                   onPressed: () {
                     // Add new ticket action
                   },
-                  child: const Text(
+                  child: const 
+                  CustomLocalizedTextWidget( stringKey: 
                     "+ add new..",
                     style: TextStyle(
                       color: AppColors.primary,
@@ -39,7 +42,7 @@ class ItTicketsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 6.0),
 
             // List of Tickets
             Expanded(
@@ -47,6 +50,41 @@ class ItTicketsScreen extends StatelessWidget {
                 children: [
                   // Ticket Items
                   _buildTicketCard(
+                    date: "8",
+                    month: "Jun",
+                    department: "Finance Department-Room1",
+                    issue: "Internet Issue",
+                    time: "9:00 AM",
+                  ),
+                  _buildTicketCard(
+                    date: "12",
+                    month: "Dec",
+                    department: "HR Department - Room 2",
+                    issue: "Windows Issue",
+                    time: "10:00 AM",
+                  ),
+                  _buildTicketCard(
+                    date: "18",
+                    month: "Jun",
+                    department: "Admission Department - Room 1",
+                    issue: "IT Support",
+                    time: "11:30 AM",
+                  ),
+                  _buildTicketCard(
+                    date: "5",
+                    month: "Jan",
+                    department: "Libraries Department - Room 2",
+                    issue: "HW Issue",
+                    time: "12:50 PM",
+                  ),
+                  _buildTicketCard(
+                    date: "14",
+                    month: "Jul",
+                    department: "Academic Department - Room 3",
+                    issue: "SW Issue",
+                    time: "1:00 PM",
+                  ),
+                   _buildTicketCard(
                     date: "8",
                     month: "Jun",
                     department: "Finance Department-Room1",
@@ -146,11 +184,11 @@ class ItTicketsScreen extends StatelessWidget {
                 children: [
                   CustomLocalizedTextWidget(
                     stringKey: department,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 100, 100, 100),
+                    isSoftWrapped: true,
+                    isThreeDotsInOverFlow: true,
+                     color: const Color.fromARGB(255, 100, 100, 100),
                       fontSize: 16,
-                    ),
+                    fontWeight: CustomTextWeight.boldFont,
                   ),
                   const SizedBox(height: 4.0),
                   CustomLocalizedTextWidget(
