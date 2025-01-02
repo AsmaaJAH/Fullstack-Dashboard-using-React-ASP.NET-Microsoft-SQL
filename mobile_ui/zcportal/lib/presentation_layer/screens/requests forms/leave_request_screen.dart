@@ -8,6 +8,7 @@ import 'package:zcportal/constants/app_forms_keys.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/constants/variables.dart';
+import 'package:zcportal/presentation_layer/app_snack_bar.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 import 'package:zcportal/presentation_layer/widgets/customized_button.dart';
 import 'package:file_picker/file_picker.dart';
@@ -24,10 +25,13 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
   final TextEditingController _fromDateController = TextEditingController();
   final TextEditingController _toDateController = TextEditingController();
   final TextEditingController _delegatedController = TextEditingController();
+    final TextEditingController _fileURLController = TextEditingController();
+
   String? _selectedLeaveType;
   var _fromDate = '';
   var _toDate = '';
   var _employeeName = "";
+  var _enteredURL = "";
 
   final List<String> _leaveTypes = Variables.leaveTypes;
   bool _isRepetitive = false;
@@ -44,6 +48,37 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
       setState(() {
         controller.text = DateFormat('EEE, MMM d, yyyy').format(pickedDate);
       });
+    }
+  }
+
+  void _submitForm() {
+    if (AppFormsKeys.leaveRequestFormKey.currentState?.validate() ?? false) {
+      // Save the form fields
+      AppFormsKeys.leaveRequestFormKey.currentState?.save();
+
+      // Reset the form fields
+      AppFormsKeys.leaveRequestFormKey.currentState?.reset();
+      _fromDateController.clear();
+      _toDateController.clear();
+      _delegatedController.clear();
+      _fileURLController.clear();
+
+
+      setState(() {
+        _selectedLeaveType = null;
+        _isRepetitive = false;
+      });
+      AppSnackBar(
+        context: context,
+        message: 'Form Submitted Successfully!',
+        isError: false,
+      ).showAppSnackBar();
+    } else {
+      AppSnackBar(
+        context: context,
+        message: 'Please correct the errors in the form',
+        isError: true,
+      ).showAppSnackBar();
     }
   }
 
@@ -180,6 +215,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                 ),
                 const SizedBox(height: 8.0),
                 TextFormField(
+                  cursorColor: AppColors.secondary,
                   onSaved: (newValue) {
                     _employeeName = newValue!;
                   },
@@ -274,13 +310,35 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                     ),
                   ),
                 ),
+                                const SizedBox(height: 8.0),
+
+                const CustomLocalizedTextWidget(
+                  stringKey: 'File URL',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 8.0),
+                TextFormField(
+                  cursorColor: AppColors.secondary,
+                  onSaved: (newValue) {
+                    _enteredURL = newValue!;
+                  },
+                  controller: _fileURLController,
+                  decoration: const InputDecoration(
+                    hintStyle: TextStyle(color: AppColors.grayBorder),
+                    hintText: "The attachments google drive link",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
                 const SizedBox(height: 16),
                 Center(
                   child: CustomizedButton(
                     borderRadius: 10,
                     width: kScreenWidth * 0.85,
                     buttonText: "Submit",
-                    onPressed: () {},
+                    onPressed: _submitForm,
                   ),
                 )
               ],
