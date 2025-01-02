@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:zcportal/constants/app_colors.dart';
 import 'package:zcportal/constants/app_enum.dart';
 import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
+import 'package:zcportal/presentation_layer/screens/inside_app_screens/single_announcement_screen.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 import 'package:zcportal/presentation_layer/widgets/inside_app_widgets/announcement_card.dart';
 import 'package:zcportal/presentation_layer/widgets/inside_app_widgets/section_header.dart';
@@ -11,6 +13,14 @@ import 'package:zcportal/presentation_layer/widgets/slider_with_indicator.dart';
 
 class InfoScreen extends StatelessWidget {
   const InfoScreen({Key? key}) : super(key: key);
+  void _onTap(context) {
+    PersistentNavBarNavigator.pushNewScreen(
+      context,
+      screen: const SingleAnnouncementScreen(),
+      withNavBar: true, // OPTIONAL VALUE. True by default.
+      pageTransitionAnimation: PageTransitionAnimation.cupertino,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +39,35 @@ class InfoScreen extends StatelessWidget {
               },
             ),
             const SizedBox(height: 8.0),
-            const SliderWithIndicator(
+            SliderWithIndicator(
               items: [
                 AnnouncementCard(
                   imagePath: AppImagesAssets.itSupport,
                   title: 'IT Announcement',
+                  onTap: () {
+                    _onTap(context);
+                  },
                 ),
                 AnnouncementCard(
                   imagePath: AppImagesAssets.it,
                   title: 'IT Event',
+                  onTap: () {
+                    _onTap(context);
+                  },
                 ),
                 AnnouncementCard(
                   imagePath: AppImagesAssets.zewail,
                   title: 'HR Bazaar',
+                  onTap: () {
+                    _onTap(context);
+                  },
                 ),
                 AnnouncementCard(
                   imagePath: AppImagesAssets.cyanLogo,
                   title: 'Quick Announcement',
+                  onTap: () {
+                    _onTap(context);
+                  },
                 ),
               ],
             ),
@@ -62,7 +84,7 @@ class InfoScreen extends StatelessWidget {
             const SizedBox(height: 8.0),
             const SliderWithIndicator(
               isSmallCard: true,
-              items:[
+              items: [
                 SingleOnboardingRow(
                   imagePath1: AppImagesAssets.onboardingInternetCard,
                   title1: 'Windows',
@@ -76,15 +98,13 @@ class InfoScreen extends StatelessWidget {
                   title2: 'iPhone',
                 ),
                 SingleOnboardingRow(
-                  imagePath1: AppImagesAssets.onboardingInternetCard,
-                  title1: 'Troubleshooting',
-                  imagePath2: AppImagesAssets.onboardingInternetCard,
-                  title2: 'Others'
-                ),
-
+                    imagePath1: AppImagesAssets.onboardingInternetCard,
+                    title1: 'Troubleshooting',
+                    imagePath2: AppImagesAssets.onboardingInternetCard,
+                    title2: 'Others'),
               ],
             ),
-           
+
             const SizedBox(height: 16.0),
 
             // FAQ Section

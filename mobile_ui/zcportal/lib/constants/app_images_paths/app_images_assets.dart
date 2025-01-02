@@ -27,5 +27,7 @@ class AppImagesAssets {
 
   //requests:
     static const String progressBar = '$imagesAssets/progress_bar.png';
+    static const String singleAnnouncement = '$imagesAssets/single_announcement.png';
+    static const String chaty = '$imagesAssets/chaty.png';
 
 }
