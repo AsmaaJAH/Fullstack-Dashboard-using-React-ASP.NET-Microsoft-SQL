@@ -32,5 +32,6 @@ class AppImagesAssets {
     static const String chaty = '$imagesAssets/chaty.png';
   //ticket:
       static const String ticketRequest = '$imagesAssets/ticket_request.png';
+      static const String singleTicket = '$imagesAssets/single_ticket.png';
 
 }
