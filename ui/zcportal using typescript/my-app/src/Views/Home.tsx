@@ -1,7 +1,11 @@
 import React from 'react';
 import '../Styles/Home.css';
+import { useNavigate } from "react-router-dom";
+
 
 const Home: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="container">
             {/* Banner Section */}
@@ -68,52 +72,46 @@ const Home: React.FC = () => {
                 </button>
             </div>
 
-            {/* Services Section */}
-            <div className="services">
-                <h2 className="text-center mb-4 fw-bold">IT Services</h2>
-                <div className="row text-center">
-                    <div className="col-md-4">
-                        <div className="service-card p-4 border shadow-sm">
-                            <h4>Support Services</h4>
-                            <p>Get IT support for any technical issue.</p>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="service-card p-4 border shadow-sm">
-                            <h4>Network Services</h4>
-                            <p>Manage and monitor your IT network.</p>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="service-card p-4 border shadow-sm">
-                            <h4>Self-Service</h4>
-                            <p>Academic support & Google classroom services.</p>
-                        </div>
-                    </div>
-
-                    {/* Add vertical spacing between the sections */}
-                    <div className="w-100 my-2"></div>
-
-                    <div className="col-md-4">
-                        <div className="service-card p-4 border shadow-sm">
-                            <h4>Light-Current Services</h4>
-                            <p>Install and manage hardware solutions.</p>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="service-card p-4 border shadow-sm">
-                            <h4>System Administration Services</h4>
-                            <p>Reach the admin to monitor and manage systems.</p>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="service-card p-4 border shadow-sm">
-                            <h4>Administration Office Services</h4>
-                            <p>Get in touch with your IT coordinators.</p>
-                        </div>
-                    </div>
-                </div>
+            {/* Departments Section */}
+            <div className="departments">
+      <h2 className="text-center mb-4 fw-bold">ZC Departments</h2>
+      <div className="row justify-content-center">
+        {[
+          "HR",
+          "BMS",
+          "LTS",
+          "IT",
+          "Finance",
+          "Warehouses",
+          "Library",
+          "Legal Affairs",
+          "Safety & Security",
+          "Dorms",
+          "Academic",
+          "Research",
+          "Admission & Registrar",
+          "Administrative Affairs",
+          "Student Affairs",
+          "Marketing & Communications",
+          "Procurement",
+          "Transportation",
+          "Medical",
+          "Engineering",
+        ].map((department, index) => (
+          <div
+            className="col-md-3 col-sm-4 col-6 mb-3"
+            key={index}
+            onClick={() => navigate(`/department/${department}`)} // Navigate to department page
+          >
+            <div className="department-card d-flex align-items-center justify-content-center">
+              <span className="department-name">{department}</span>
             </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+
         </div>
     );
 };

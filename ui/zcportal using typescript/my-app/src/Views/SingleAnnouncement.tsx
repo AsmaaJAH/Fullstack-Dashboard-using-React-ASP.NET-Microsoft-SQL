@@ -5,6 +5,7 @@ import '../Styles/SingleAnnouncement.css';
 import { Announcement } from '../Models/Announcement';
 import { variables } from '../components/Variables';
 
+
 const SingleAnnouncement: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [announcement, setAnnouncement] = useState<Announcement | null>(null);
@@ -48,7 +49,11 @@ const SingleAnnouncement: React.FC = () => {
                             <h5 className="card-subtitle text-muted text-center mb-4">
                                 {new Date(announcement.PostingDate).toLocaleDateString()}
                             </h5>
-                            <p className="card-text text-left">{announcement.Content}</p>
+                            {/* <p className="card-text text-left">{announcement.Content}</p> */}
+                            <div
+                                className="card-text text-left"
+                                dangerouslySetInnerHTML={{ __html: announcement.Content }}
+                            />
                         </div>
                     </div>
                 </div>

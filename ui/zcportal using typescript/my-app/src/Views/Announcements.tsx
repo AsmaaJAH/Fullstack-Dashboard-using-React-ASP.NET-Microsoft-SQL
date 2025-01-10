@@ -6,108 +6,114 @@ import { variables } from '../components/Variables';
 import AddButton from '../components/AddButton';
 import OptionsCell from '../components/OptionsCell';
 import '../Styles/Announcements.css';
+import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
+
+
 
 const Announcements: React.FC = () => {
-    const [announcements, setAnnouncements] = useState<any[]>([]);
-    const [modalTitle, setModalTitle] = useState('');
-    const [id, setId] = useState(0);
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [postingDate, setPostingDate] = useState('');
-    const [photoFileName, setPhotoFileName] = useState('anonymous.PNG');
-    const photoPath = variables.PHOTO_URL;
+  const [announcements, setAnnouncements] = useState<any[]>([]);
+  const [modalTitle, setModalTitle] = useState('');
+  const [id, setId] = useState(0);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [postingDate, setPostingDate] = useState('');
+  const [photoFileName, setPhotoFileName] = useState('anonymous.PNG');
+  const photoPath = variables.PHOTO_URL;
 
-    const refreshList = async () => {
-        try {
-            const announcementsData = await fetchAnnouncements();
-            setAnnouncements(announcementsData);
-        } catch (error: any) {
-            alert('Failed to fetch data: ' + error.message);
-        }
-    };
+  const refreshList = async () => {
+    try {
+      const announcementsData = await fetchAnnouncements();
+      setAnnouncements(announcementsData);
+    } catch (error: any) {
+      alert('Failed to fetch data: ' + error.message);
+    }
+  };
 
-    useEffect(() => {
+  useEffect(() => {
+    refreshList();
+  }, []);
+
+  const handleAddClick = () => {
+    setModalTitle('Add Announcement');
+    setId(0);
+    setTitle('');
+    setContent('');
+    setPostingDate('');
+    setPhotoFileName('anonymous.PNG');
+  };
+
+  const handleEditClick = (announcement: any) => {
+    setModalTitle('Edit Announcement');
+    setId(announcement.Id);
+    setTitle(announcement.Title);
+    setContent(announcement.Content);
+    setPostingDate(announcement.PostingDate);
+    setPhotoFileName(announcement.PhotoFileName);
+  };
+
+  const handleCreateClick = async () => {
+    try {
+      await createAnnouncement({
+        Title: title,
+        Content: content,
+        PostingDate: postingDate,
+        PhotoFileName: photoFileName,
+      });
+      alert('Announcement added successfully.');
+      refreshList();
+    } catch (error: any) {
+      alert('Failed to add announcement: ' + error.message);
+    }
+  };
+
+  const handleUpdateClick = async () => {
+    try {
+      await updateAnnouncement({
+        Id: id,
+        Title: title,
+        Content: content,
+        PostingDate: postingDate,
+        PhotoFileName: photoFileName,
+      });
+      alert('Announcement updated successfully.');
+      refreshList();
+    } catch (error: any) {
+      alert('Failed to update announcement: ' + error.message);
+    }
+  };
+
+  const handleDeleteClick = async (deleteId: number) => {
+    if (window.confirm('Are you sure you want to delete this announcement?')) {
+      try {
+        await deleteAnnouncement(deleteId);
+        alert('Announcement deleted successfully.');
         refreshList();
-    }, []);
+      } catch (error: any) {
+        alert('Failed to delete announcement: ' + error.message);
+      }
+    }
+  };
 
-    const handleAddClick = () => {
-        setModalTitle('Add Announcement');
-        setId(0);
-        setTitle('');
-        setContent('');
-        setPostingDate('');
-        setPhotoFileName('anonymous.PNG');
-    };
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      try {
+        const fileName = await uploadImage(event.target.files[0]);
+        setPhotoFileName(fileName);
+      } catch (error: any) {
+        alert('Failed to upload image: ' + error.message);
+      }
+    } else {
+      alert('No file selected. Please select a file and try again.');
+    }
+  };
 
-    const handleEditClick = (announcement: any) => {
-        setModalTitle('Edit Announcement');
-        setId(announcement.Id);
-        setTitle(announcement.Title);
-        setContent(announcement.Content);
-        setPostingDate(announcement.PostingDate);
-        setPhotoFileName(announcement.PhotoFileName);
-    };
-
-    const handleCreateClick = async () => {
-        try {
-            await createAnnouncement({
-                Title: title,
-                Content: content,
-                PostingDate: postingDate,
-                PhotoFileName: photoFileName,
-            });
-            alert('Announcement added successfully.');
-            refreshList();
-        } catch (error: any) {
-            alert('Failed to add announcement: ' + error.message);
-        }
-    };
-
-    const handleUpdateClick = async () => {
-        try {
-            await updateAnnouncement({
-                Id: id,
-                Title: title,
-                Content: content,
-                PostingDate: postingDate,
-                PhotoFileName: photoFileName,
-            });
-            alert('Announcement updated successfully.');
-            refreshList();
-        } catch (error: any) {
-            alert('Failed to update announcement: ' + error.message);
-        }
-    };
-
-    const handleDeleteClick = async (deleteId: number) => {
-        if (window.confirm('Are you sure you want to delete this announcement?')) {
-            try {
-                await deleteAnnouncement(deleteId);
-                alert('Announcement deleted successfully.');
-                refreshList();
-            } catch (error: any) {
-                alert('Failed to delete announcement: ' + error.message);
-            }
-        }
-    };
-
-    const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files[0]) {
-            try {
-                const fileName = await uploadImage(event.target.files[0]);
-                setPhotoFileName(fileName);
-            } catch (error: any) {
-                alert('Failed to upload image: ' + error.message);
-            }
-        } else {
-            alert('No file selected. Please select a file and try again.');
-        }
-    };
-
-    return (
-      <div>
+  return (
+    <div>
       <AddButton addClick={handleAddClick} />
-      <h1 className="text-center mb-4">Announcements</h1>
+      <h1 className="text-center mb-4 fw-bold" style={{
+        color: 'black'
+      }}>Announcements</h1>
 
       <div className="row">
         {announcements.map((post: any) => (
@@ -122,7 +128,21 @@ const Announcements: React.FC = () => {
                 <div className="card-body">
                   <h5 className="card-title" style={{ color: variables.PRIMARY_COLOR }}>{post.Title}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">{new Date(post.PostingDate).toLocaleDateString()}</h6>
-                  <p className="card-text">{post.Content.length > 33 ? `${post.Content.slice(0, 30)}...` : post.Content}</p>
+                  {/* <p className="card-text">{post.Content.length > 33 ? `${post.Content.slice(0, 30)}...` : post.Content}</p> */}
+                  <div
+                    className="card-text"
+                    dangerouslySetInnerHTML={{
+                      __html: post.Content,
+                    }}
+                    style={{
+                      display: '-webkit-box',
+                      WebkitBoxOrient: 'vertical',
+                      WebkitLineClamp: 1,
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                  />
+
                 </div>
               </Link>
               <div className="d-flex justify-content-between align-items-center p-2">
@@ -149,7 +169,21 @@ const Announcements: React.FC = () => {
                   </div>
                   <div className="form-group mb-3">
                     <span className="form-label fw-bold text-start d-block">Content:</span>
-                    <textarea className="form-control" value={content} onChange={(e) => setContent(e.target.value)} rows={3} placeholder="Enter your content here..." />
+                    {/* <textarea className="form-control" value={content} onChange={(e) => setContent(e.target.value)} rows={3} placeholder="Enter your content here..." /> */}
+                    <ReactQuill
+                      value={content}
+                      onChange={setContent}
+                      placeholder="Enter your content here..."
+                      modules={{
+                        toolbar: [
+                          ['bold', 'italic', 'underline', 'strike'], // Text styling
+                          [{ header: [1, 2, 3, false] }], // Headers
+                          [{ list: 'ordered' }, { list: 'bullet' }], // Lists
+                          ['link'], // Links
+                          ['clean'], // Remove formatting
+                        ],
+                      }}
+                    />
                   </div>
                   <div className="form-group">
                     <span className="form-label fw-bold text-start d-block">Posting Date:</span>
@@ -175,9 +209,7 @@ const Announcements: React.FC = () => {
         </div>
       </div>
     </div>
-
- 
-    );
+  );
 };
 
 export default Announcements;

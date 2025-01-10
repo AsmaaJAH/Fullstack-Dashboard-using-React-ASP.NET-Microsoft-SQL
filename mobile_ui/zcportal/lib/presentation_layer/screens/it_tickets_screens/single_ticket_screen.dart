@@ -5,8 +5,17 @@ import 'package:zcportal/constants/app_images_paths/app_images_assets.dart';
 import 'package:zcportal/constants/app_screen_dimensions.dart';
 import 'package:zcportal/presentation_layer/widgets/custom_localized_text_widget.dart';
 
-class SingleTicketScreen extends StatelessWidget {
+class SingleTicketScreen extends StatefulWidget {
   const SingleTicketScreen({super.key});
+
+  @override
+  State<SingleTicketScreen> createState() => _SingleTicketScreenState();
+}
+
+class _SingleTicketScreenState extends State<SingleTicketScreen> {
+  bool _isExpanded = false; // Tracks whether the text is expanded or not
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,14 +49,37 @@ class SingleTicketScreen extends StatelessWidget {
                       color: AppColors.white,
                       fontSize: 14,
                     ),
-                    SizedBox(
+                    
+                   SizedBox(
                       width: kScreenWidth * 0.8,
-                      child: const CustomLocalizedTextWidget(
-                        stringKey:
-                            'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry\'s standard dummy text.',
-                        color: AppColors.black,
-                        fontWeight: CustomTextWeight.boldFont,
-                        fontSize: 14,
+                      child: Text.rich(
+                        TextSpan(
+                          text: _isExpanded
+                              ? 'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry\'s standard dummy text for centuries. '
+                              : 'Lorem ipsum is simply dummy text of the printing and typesetting industry...',
+                          style: const TextStyle(
+                            color: AppColors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                          children: [
+                            WidgetSpan(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _isExpanded = !_isExpanded;
+                                  });
+                                },
+                                child: Text(
+                                  _isExpanded ? " Read less" : " Read more",
+                                  style: const TextStyle(
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(

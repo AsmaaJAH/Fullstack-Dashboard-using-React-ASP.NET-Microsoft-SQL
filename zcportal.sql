@@ -9,8 +9,8 @@ DeviceType nvarchar(500)
 CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone','troubleshooting', 'others'))
 )
 /*
-ALTER TABLE ITPortal.InternetQuestion
-ADD instructionTitle nvarchar(500)
+ALTER TABLE dbo.InternetQuestion
+ADD instructionTitle nvarchar(500);
 CONSTRAINT chk_device CHECK (DeviceType IN ('windows', 'mac', 'android','iphone'));
 */
 
@@ -19,7 +19,7 @@ insert into dbo.InternetQuestion values ('How to do connect to the internet??')
 INSERT INTO dbo.InternetQuestion (Instructions, DeviceType )
 VALUES ('How to do ..??', 'troubleshooting');
 
-SET IDENTITY_INSERT ITPortal.InternetQuestion ON;
+SET IDENTITY_INSERT dbo.InternetQuestion OFF;
 
 INSERT INTO dbo.InternetQuestion (QuestionSerialNumber,Instructions ,DeviceType )
 VALUES (1, 'How to connect to the internet?' , 'mac');
@@ -34,9 +34,9 @@ VALUES (3, 'How to connect to the internet?' , 'android');
 INSERT INTO dbo.InternetQuestion (QuestionSerialNumber,Instructions, DeviceType )
 VALUES (4, 'How to do..?' , 'others');
 
-INSERT INTO ITPortal.InternetQuestion (QuestionSerialNumber,Instructions, DeviceType )
-VALUES (5, 'https://drive.google.com/file/d/1BypNeKI-phxYUjOtvaE0c3oBQyNudMYd/view' , 'android');
-select * from ITPortal.InternetQuestion
+INSERT INTO dbo.InternetQuestion (QuestionSerialNumber,Instructions, instructionTitle,DeviceType )
+VALUES (5, 'https://drive.google.com/file/d/1FpIDK-cj_pkq1vo4FzYQd8PxAWUMpRCr/view?usp=drive_link',	'iPhone Onboarding Guide' , 'iphone');
+select * from dbo.InternetQuestion
 
 /*----------------------FAQ------------------------*/
 create table dbo.FAQ(
@@ -115,3 +115,10 @@ SET Name = 'asmaa gamal', Email = 'asma@zewailcity.edu.eg', Password='hello worl
 WHERE Id=1; 
 select * from dbo.Person
 */
+
+/*------------------------------------------------------------------------*/
+CREATE TABLE dbo.SelfServiceVideo (
+    QuestionSerialNumber INT PRIMARY KEY IDENTITY,
+    Instructions NVARCHAR(255),
+    instructionTitle NVARCHAR(255) ,
+);

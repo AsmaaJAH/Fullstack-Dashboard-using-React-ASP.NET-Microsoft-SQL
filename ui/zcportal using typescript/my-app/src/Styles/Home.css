@@ -1,14 +1,36 @@
 .banner {
-    background-color: #009ab5;
-    color: white;
-    padding: 20px;
-  }
-  
-  .service-card {
-    transition: transform 0.3s;
-  }
-  
-  .service-card:hover {
-    transform: scale(1.05);
-  }
+  background-color: #009ab5;
+  color: white;
+  padding: 20px;
+}
+
+.department-card {
+  width: 300px; /* Fixed width */
+  height: 250px; /* Fixed height */
+  background-color: #f7f6f6;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.department-card:hover {
+  transform: scale(1.1);
+  background-color: #e9ecef;
+}
+
+.department-name {
+  font-size: calc(1.5rem - 0.1vw); /* Dynamically adjusts font size */
+  font-weight: bold;
+ 
+  max-width: 90%; /* Prevent text overflow */
+}
+
+
+
+
   
