@@ -8,9 +8,7 @@ const ITServicesPage: React.FC = () => {
     const handleCardClick = (service: string) => {
         navigate(`/services/${service}`);
     };
-    const handleSelfServiceCardClick = (service: string) => {
-        navigate(`/services/${service}`);
-    };
+    
     const handleSupportCardClick = (service: string) => {
         navigate(`/services/${service}/OnboardingInternet/`);
     };
@@ -41,7 +39,7 @@ const ITServicesPage: React.FC = () => {
                     <div className="col-md-4">
                         <div
                             className="service-card p-4 border shadow-sm"
-                            onClick={() => handleSelfServiceCardClick("self-service")}
+                            onClick={() => handleCardClick("self-service")}
                         >
                             <h4>Self-Service</h4>
                             <p>Academic support & Google classroom services.</p>
