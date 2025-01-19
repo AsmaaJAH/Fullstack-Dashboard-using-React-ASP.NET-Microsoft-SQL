@@ -82,6 +82,7 @@ select * from dbo.Announcement
 
 /*======================================================================================================================================*/
 /*------------------------------------------------------- Person Authentication --------------------------------------------------------*/
+/*
 create table dbo.Person(
 Id int identity(1,1) primary key,
 Name nvarchar(500),
@@ -97,7 +98,7 @@ AS
 BEGIN
 		SELECT * from dbo.Person WHERE Email=@Email AND Password=@Password
 END
-
+*/
 /*
 CREATE PROCEDURE registration (@Name nvarchar(500) ,@Email nvarchar(500), @Password nvarchar(500), @isAdmin int)
 AS
@@ -116,9 +117,11 @@ WHERE Id=1;
 select * from dbo.Person
 */
 
-/*------------------------------------------------------------------------*/
+/*---------------------------------SelfServiceVideo---------------------------------------*/
+/*
 CREATE TABLE dbo.SelfServiceVideo (
     QuestionSerialNumber INT PRIMARY KEY IDENTITY,
     Instructions NVARCHAR(255),
     instructionTitle NVARCHAR(255) ,
 );
+*/
